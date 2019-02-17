@@ -2,6 +2,11 @@
 
 #include <aether/aether.h>
 
+#include <TmxColor.h>
+
+#include "../assets.h"
+
+#include "../ecs/gameworld.h"
 
 class PlatformerJam;
 
@@ -17,7 +22,9 @@ public:
 
 private:
     PlatformerJam* m_game;
-    aether::collision::Tilemap m_collisionTilemap;
-    aether::math::Rect<int> m_playerRect;
+    aether::tilemap::TileMap m_tileMap;
+    aether::tilemap::CollisionTilemap m_collisionTilemap;
+    aether::tilemap::TileMapRenderer m_tileMapRenderer;
+    GameWorld m_gameWorld;
 
 };

@@ -1,5 +1,6 @@
 
 #include "platformerjam.h"
+#include <Tmx.h.in>
 
 PlatformerJam::PlatformerJam(int w, int h)
     : aether::core::Application(w, h),
@@ -12,6 +13,7 @@ int PlatformerJam::ready(int argc, char **argv)
 {
     assets.load();
     setScreen(&gameplayScreen);
+    Tmx::Color color;
     return 0;
 }
 

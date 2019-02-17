@@ -7,3 +7,6 @@
 [submodule "module/rztl"]
 	path = module/rztl
 	url = git@github.com:alesegdia/rztl.git
+[submodule "module/secs"]
+	path = module/secs
+	url = git@github.com:alesegdia/secs.git
