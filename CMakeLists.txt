@@ -18,6 +18,9 @@ target_include_directories(platformerjam PUBLIC "module/hadron/src/lib")
 target_link_libraries(platformerjam secs)
 target_include_directories(platformerjam PUBLIC "module/secs/src/lib")
 
+target_link_libraries(platformerjam tmxparser)
+target_include_directories(platformerjam PUBLIC "module/aether/module/tmxparser/include")
+
 
 target_include_directories(platformerjam PUBLIC "module/aether/module/tmxparser/include")
 set_target_properties(platformerjam PROPERTIES LINK_SEARCH_START_STATIC 1)

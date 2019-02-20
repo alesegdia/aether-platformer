@@ -22,9 +22,8 @@ public:
 
 private:
     PlatformerJam* m_game;
-    aether::tilemap::TileMap m_tileMap;
-    aether::tilemap::CollisionTilemap m_collisionTilemap;
-    aether::tilemap::TileMapRenderer m_tileMapRenderer;
+    std::shared_ptr<aether::tilemap::TileMap> m_tileMap;
+    std::shared_ptr<aether::tilemap::CollisionTilemap> m_collisionTilemap;
     GameWorld m_gameWorld;
 
 };

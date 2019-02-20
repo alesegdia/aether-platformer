@@ -8,7 +8,7 @@ class GameWorld
 {
 public:
 
-    GameWorld(aether::tilemap::CollisionTilemap& ct, Assets& assets);
+    GameWorld(std::shared_ptr<aether::tilemap::CollisionTilemap> ct, Assets& assets);
 
     void step(double delta );
 

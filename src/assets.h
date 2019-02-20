@@ -2,6 +2,8 @@
 
 #include <aether/aether.h>
 
+#include <TmxMap.h>
+
 
 class Assets
 {
@@ -23,6 +25,8 @@ public:
         playerAirAnim.addFrame(playerSheet.getFrame(1, 1));
         playerAirAnim.addFrame(playerSheet.getFrame(2, 0));
         playerAirAnim.addFrame(playerSheet.getFrame(2, 1));
+
+        leMap.ParseFile("assets/untitled.tmx");
     }
 
     void cleanup()
@@ -39,5 +43,6 @@ public:
     aether::graphics::Animation playerStandAnim;
     aether::graphics::Animation playerWalkAnim;
     aether::graphics::Animation playerAirAnim;
+    Tmx::Map leMap;
 
 };

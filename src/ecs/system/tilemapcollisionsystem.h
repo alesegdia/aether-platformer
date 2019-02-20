@@ -6,7 +6,7 @@
 class TilemapCollisionSystem : public secs::TypedEntitySystem<AABBComponent, TransformComponent, TilemapCollisionComponent>
 {
 public:
-    TilemapCollisionSystem(aether::tilemap::CollisionTilemap& ct)
+    TilemapCollisionSystem(std::shared_ptr<aether::tilemap::CollisionTilemap> ct)
         : m_collisionTilemap(ct)
     {
         setStepConfiguration(true, false);
@@ -20,6 +20,7 @@ public:
         SECS_UNUSED(delta);
         SECS_UNUSED(e);
         SECS_UNUSED(tcc);
+        /*
 
         auto& current_position = transformcomponent.position;
 
@@ -27,7 +28,7 @@ public:
         auto previous_position = aabbcomponent.aabb.position();
 
         // try to move the AABB in the tilemap to the dirty_position
-        auto ci = m_collisionTilemap.realmove( aabbcomponent.aabb, int(current_position.x()), ceil(current_position.y()) );
+        auto ci = m_collisionTilemap->realmove( aabbcomponent.aabb, int(current_position.x()), ceil(current_position.y()) );
 
         if( ci.collision_x )
         {
@@ -40,6 +41,7 @@ public:
         }
 
         tcc.lastCollisionInfo = ci;
+        */
     }
 
     void render ( const secs::Entity& e ) override
@@ -49,7 +51,7 @@ public:
     }
 
 private:
-    aether::tilemap::CollisionTilemap& m_collisionTilemap;
+    std::shared_ptr<aether::tilemap::CollisionTilemap> m_collisionTilemap;
 
 };	
 

@@ -1,7 +1,7 @@
 #include "gameworld.h"
 
 
-GameWorld::GameWorld(aether::tilemap::CollisionTilemap& ct, Assets& assets)
+GameWorld::GameWorld(std::shared_ptr<aether::tilemap::CollisionTilemap> ct, Assets& assets)
     : m_factory(m_world, assets),
       m_tilemapCollisionSystem(ct)
 {
