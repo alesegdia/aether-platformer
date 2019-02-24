@@ -19,6 +19,7 @@ secs::Entity EntityFactory::makePlayer(float x, float y)
     render_comp.render_offset.set(0, 0);
     render_comp.texture = m_assets.playerSheet.getFrame(0);
     render_comp.render_offset.set(-5, -8);
+    render_comp.renderOrder = 1;
 
     auto& animation_comp = addComponent<AnimationComponent>(player);
     animation_comp.animation = &m_assets.playerWalkAnim;

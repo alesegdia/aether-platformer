@@ -5,12 +5,13 @@
 #include "../components.h"
 
 
-
 class HadronCollisionSystem
         : public secs::TypedEntitySystem<HadronCollisionComponent, TransformComponent>,
           public hadron::ICollisionListener
 {
 public:
+
+
 
     HadronCollisionSystem()
     {
@@ -76,18 +77,41 @@ public:
     {
         auto e1 = getEntityFromBody(b1);
         auto e2 = getEntityFromBody(b2);
-        handleCollision( e1, e2 );
+        handleCollisionEnter( e1, e2 );
     }
 
     void onCollisionExit(hadron::Body &b1, hadron::Body &b2) override
     {
-        SECS_UNUSED(b1);
-        SECS_UNUSED(b2);
+        auto e1 = getEntityFromBody(b1);
+        auto e2 = getEntityFromBody(b2);
+        handleCollisionExit( e1, e2 );
     }
 
-    void handleCollision( const secs::Entity& e1, const secs::Entity& e2 )
+    void handleCollisionEnter( const secs::Entity& e1, const secs::Entity& e2 )
     {
+        secs::Entity ref1, ref2;
+        if( entitiesHaveComponents<DoorComponent, PlayerComponent>(e1, e2, &ref1, &ref2) ) {
+            m_hitDoor = e1;
+            m_isHittingDoor = true;
+        }
+    }
 
+    void handleCollisionExit( const secs::Entity& e1, const secs::Entity& e2 )
+    {
+        secs::Entity ref1, ref2;
+        if( entitiesHaveComponents<DoorComponent, PlayerComponent>(e1, e2, &ref1, &ref2) ) {
+            m_isHittingDoor = false;
+        }
+    }
+
+    bool isHittingDoor()
+    {
+        return m_isHittingDoor;
+    }
+
+    secs::Entity hittingDoor()
+    {
+        return m_hitDoor;
     }
 
 private:
@@ -117,5 +141,8 @@ private:
     hadron::collision::World m_physicsWorld;
 
     bool enabled = false;
+
+    secs::Entity m_hitDoor;
+    bool m_isHittingDoor = false;
 
 };

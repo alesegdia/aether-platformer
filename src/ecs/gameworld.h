@@ -4,11 +4,11 @@
 #include "systems.h"
 #include "entityfactory.h"
 
-class GameWorld
+class ECSWorld
 {
 public:
 
-    GameWorld(std::shared_ptr<aether::tilemap::CollisionTilemap> ct, Assets& assets);
+    ECSWorld(std::shared_ptr<aether::tilemap::CollisionTilemap> ct, Assets& assets);
 
     void step(double delta );
 
@@ -17,6 +17,11 @@ public:
     EntityFactory& factory();
 
     secs::Engine& engine();
+
+    HadronCollisionSystem& hadron()
+    {
+        return m_hadronCollisionSystem;
+    }
 
 private:
 

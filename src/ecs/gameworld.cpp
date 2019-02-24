@@ -1,7 +1,7 @@
 #include "gameworld.h"
 
 
-GameWorld::GameWorld(std::shared_ptr<aether::tilemap::CollisionTilemap> ct, Assets& assets)
+ECSWorld::ECSWorld(std::shared_ptr<aether::tilemap::CollisionTilemap> ct, Assets& assets)
     : m_factory(m_world, assets),
       m_tilemapCollisionSystem(ct)
 {
@@ -18,22 +18,22 @@ GameWorld::GameWorld(std::shared_ptr<aether::tilemap::CollisionTilemap> ct, Asse
 
 }
 
-void GameWorld::step(double delta)
+void ECSWorld::step(double delta)
 {
     m_world.step( delta );
 }
 
-void GameWorld::render()
+void ECSWorld::render()
 {
     m_world.render();
 }
 
-EntityFactory& GameWorld::factory()
+EntityFactory& ECSWorld::factory()
 {
     return m_factory;
 }
 
-secs::Engine &GameWorld::engine()
+secs::Engine &ECSWorld::engine()
 {
     return m_world;
 }

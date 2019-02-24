@@ -8,6 +8,8 @@
 
 #include "../ecs/gameworld.h"
 
+#include "../core/stage.h"
+
 class PlatformerJam;
 
 class GameplayScreen : public aether::core::IScreen
@@ -22,8 +24,6 @@ public:
 
 private:
     PlatformerJam* m_game;
-    std::shared_ptr<aether::tilemap::TileMap> m_tileMap;
-    std::shared_ptr<aether::tilemap::CollisionTilemap> m_collisionTilemap;
-    GameWorld m_gameWorld;
+    std::shared_ptr<GameWorld> m_gameWorld;
 
 };
