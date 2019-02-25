@@ -22,6 +22,16 @@ public:
 
     void update(double delta);
 
+    const secs::Entity& playerEntity()
+    {
+        return m_playerEntity;
+    }
+
+    const std::shared_ptr<ECSWorld>& ecsWorld()
+    {
+        return m_ecsWorld;
+    }
+
 
 private:
 
@@ -34,6 +44,7 @@ private:
     std::shared_ptr<ECSWorld> m_ecsWorld;
     std::shared_ptr<aether::tilemap::CollisionTilemap> m_collisionTilemap;
     std::shared_ptr<Room> m_currentRoom;
+    secs::Entity m_playerEntity;
 
 };
 

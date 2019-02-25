@@ -25,10 +25,10 @@ secs::Entity EntityFactory::makePlayer(float x, float y)
     animation_comp.animation = &m_assets.playerWalkAnim;
 
     auto& aabb_comp = addComponent<AABBComponent>(player);
-    aabb_comp.aabb = aether::math::Recti(0, 0, 7, 12);
+    aabb_comp.aabb = aether::math::Recti(0, 0, 200, 200);
 
     auto& hcc = addComponent<HadronCollisionComponent>(player);
-    hcc.body = new hadron::Body(x, y, 7, 12);
+    hcc.body = new hadron::Body(x, y, 200, 200);
     hcc.offset.set(0, 0);
 
     auto& vc = addComponent<VelocityComponent>(player);

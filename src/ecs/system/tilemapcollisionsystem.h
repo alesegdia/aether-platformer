@@ -20,7 +20,6 @@ public:
         SECS_UNUSED(delta);
         SECS_UNUSED(e);
         SECS_UNUSED(tcc);
-        /*
 
         auto& current_position = transformcomponent.position;
 
@@ -41,7 +40,6 @@ public:
         }
 
         tcc.lastCollisionInfo = ci;
-        */
     }
 
     void render ( const secs::Entity& e ) override

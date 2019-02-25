@@ -140,7 +140,7 @@ private:
 
     hadron::collision::World m_physicsWorld;
 
-    bool enabled = false;
+    bool enabled = true;
 
     secs::Entity m_hitDoor;
     bool m_isHittingDoor = false;

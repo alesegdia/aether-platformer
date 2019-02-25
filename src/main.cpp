@@ -5,5 +5,5 @@
 
 int main( int argc, char** argv )
 {
-    PlatformerJam(1024, 768).exec(argc, argv);
+    PlatformerJam(1920, 1080).exec(argc, argv);
 }

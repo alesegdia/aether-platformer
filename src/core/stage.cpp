@@ -50,5 +50,5 @@ void GameWorld::goToRoom(Room::Shared room)
         m_ecsWorld->engine().processor().addComponent<TransformComponent>(layerEntity).position.set(0, 0);
     }
 
-    m_ecsWorld->factory().makePlayer(300, 300);
+    m_playerEntity = m_ecsWorld->factory().makePlayer(300, 300);
 }
