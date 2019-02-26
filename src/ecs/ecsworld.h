@@ -8,13 +8,11 @@ class ECSWorld
 {
 public:
 
-    ECSWorld(std::shared_ptr<aether::tilemap::CollisionTilemap> ct, Assets& assets);
+    ECSWorld(std::shared_ptr<aether::tilemap::CollisionTilemap> ct);
 
     void step(double delta );
 
     void render();
-
-    EntityFactory& factory();
 
     secs::Engine& engine();
 
@@ -26,7 +24,6 @@ public:
 private:
 
     secs::Engine m_world;
-    EntityFactory m_factory;
 
     RenderingSystem                 m_renderingSystem;
     AnimationSystem                 m_animationSystem;
@@ -39,5 +36,16 @@ private:
     FlipFacingSystem                m_flipFacingSystem;
     AnimatorSystem                  m_animatorSystem;
 
+
+};
+
+class DemuxECSWorld : public ECSWorld
+{
+public:
+    DemuxECSWorld(std::shared_ptr<aether::tilemap::CollisionTilemap> ct)
+        : ECSWorld(ct)
+    {
+
+    }
 
 };

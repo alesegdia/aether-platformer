@@ -1,9 +1,8 @@
-#include "gameworld.h"
+#include "ecsworld.h"
 
 
-ECSWorld::ECSWorld(std::shared_ptr<aether::tilemap::CollisionTilemap> ct, Assets& assets)
-    : m_factory(m_world, assets),
-      m_tilemapCollisionSystem(ct)
+ECSWorld::ECSWorld(std::shared_ptr<aether::tilemap::CollisionTilemap> ct)
+    : m_tilemapCollisionSystem(ct)
 {
     m_world.pushSystem(&m_renderingSystem);
     m_world.pushSystem(&m_hadronCollisionSystem);
@@ -25,11 +24,6 @@ void ECSWorld::step(double delta)
 void ECSWorld::render()
 {
     m_world.render();
-}
-
-EntityFactory& ECSWorld::factory()
-{
-    return m_factory;
 }
 
 secs::Engine &ECSWorld::engine()

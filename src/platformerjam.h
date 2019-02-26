@@ -16,7 +16,7 @@ public:
 
     GameplayScreen gameplayScreen;
 
-    Assets assets;
+    std::shared_ptr<Assets> assets;
 
     int level = 1;
 };

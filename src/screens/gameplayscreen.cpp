@@ -14,8 +14,8 @@ void GameplayScreen::show()
     Tmx::Map map;
     map.ParseFile("assets/maps/main/layout.tmx");
     auto leMap = aether::tilemap::buildMap(map);
-    m_gameWorld.reset(new GameWorld(m_game->assets, parseLayout(leMap), SaveData()));
-    m_gameWorld->goToRoom("medical-labs");
+    m_gameWorld.reset(new DemuxGameWorld( parseLayout(leMap), m_game->assets ));
+    m_gameWorld->goToRoom("medical-labs", 300, 300);
 }
 
 void GameplayScreen::hide()
@@ -25,14 +25,6 @@ void GameplayScreen::hide()
 
 void GameplayScreen::render()
 {
-    auto player = m_gameWorld->playerEntity();
-    auto& tc = m_gameWorld->ecsWorld()->engine().component<TransformComponent>(player);
-
-    ALLEGRO_TRANSFORM tr;
-    al_identity_transform(&tr);
-    al_build_transform(&tr, 1024/2 -tc.position.x(), 768/2-tc.position.y(), 1.0f, 1.0f, 0);
-    al_use_transform(&tr);
-
     aether::graphics::clear(1, 0, 0);
     m_gameWorld->render();
 

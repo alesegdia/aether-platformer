@@ -11,7 +11,8 @@ PlatformerJam::PlatformerJam(int w, int h)
 
 int PlatformerJam::ready(int argc, char **argv)
 {
-    assets.load();
+    assets = std::make_shared<Assets>();
+    assets->load();
     setScreen(&gameplayScreen);
     Tmx::Color color;
     return 0;
@@ -28,5 +29,5 @@ void PlatformerJam::update(uint64_t delta)
 
 void PlatformerJam::dispose()
 {
-    assets.cleanup();
+    assets->cleanup();
 }

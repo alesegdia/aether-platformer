@@ -6,9 +6,9 @@
 
 #include "../assets.h"
 
-#include "../ecs/gameworld.h"
+#include "../ecs/ecsworld.h"
 
-#include "../core/stage.h"
+#include "../core/gameworld.h"
 
 class PlatformerJam;
 

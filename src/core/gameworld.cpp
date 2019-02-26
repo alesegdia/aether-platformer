@@ -1,24 +1,38 @@
-#include "stage.h"
+#include "gameworld.h"
 
-GameWorld::GameWorld(Assets &assets, std::shared_ptr<MapLayout> layout, const SaveData &saveData)
-    : m_assets(assets),
-      m_layout(layout)
+GameWorld::GameWorld()
 {
+
 }
 
-void GameWorld::goToRoom(const std::string &name)
+GameWorld::~GameWorld()
 {
+
+}
+
+void GameWorld::goToRoom(const std::string &name, int x, int y)
+{
+    checkStatus();
     assert(m_layout->count(name) == 1 && "Trying to go to unknown room");
-    goToRoom((*m_layout)[name]);
+    goToRoom((*m_layout)[name], x, y);
 }
 
 void GameWorld::render()
 {
+    checkStatus();
+    auto tc = playerPosition();
+
+    ALLEGRO_TRANSFORM tr;
+    al_identity_transform(&tr);
+    al_build_transform(&tr, 1024/2 -tc.x(), 768/2 - tc.y(), 1.0f, 1.0f, 0);
+    al_use_transform(&tr);
+
     m_ecsWorld->render();
 }
 
 void GameWorld::update(double delta)
 {
+    checkStatus();
     m_ecsWorld->step(delta);
     if( m_ecsWorld->hadron().isHittingDoor() ) {
         auto doorEntity = m_ecsWorld->hadron().hittingDoor();
@@ -29,17 +43,20 @@ void GameWorld::update(double delta)
 
 void GameWorld::travelThroughDoor(const Door &door)
 {
+    checkStatus();
     auto name = door.otherRoom();
     assert(m_layout->count(name) == 1);
-    goToRoom((*m_layout)[name]);
+#warning change 300 300 to door position
+    goToRoom((*m_layout)[name], 300, 300);
 }
 
-void GameWorld::goToRoom(Room::Shared room)
+void GameWorld::goToRoom(Room::Shared room, int x, int y)
 {
+    checkStatus();
     m_currentRoom = room;
     auto collisionLayer = m_currentRoom->tilemap()->getTileLayer("collision");
-    m_collisionTilemap.reset(new aether::tilemap::CollisionTilemap(collisionLayer));
-    m_ecsWorld.reset(new ECSWorld(m_collisionTilemap, m_assets));
+    auto collisionTilemap = std::make_shared<aether::tilemap::CollisionTilemap>(collisionLayer);
+    m_ecsWorld = createECSWorld(collisionTilemap);
 
     for( auto& layer : m_currentRoom->tilemap()->getTileLayers() )
     {
@@ -50,5 +67,11 @@ void GameWorld::goToRoom(Room::Shared room)
         m_ecsWorld->engine().processor().addComponent<TransformComponent>(layerEntity).position.set(0, 0);
     }
 
-    m_playerEntity = m_ecsWorld->factory().makePlayer(300, 300);
+    m_playerEntity = makePlayer(x, y);
+    onRoomCreated(room);
+}
+
+DemuxGameWorld::~DemuxGameWorld()
+{
+
 }
