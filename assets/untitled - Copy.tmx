@@ -83,8 +83,42 @@
    </properties>
   </tile>
  </tileset>
- <layer id="1" name="collision" width="20" height="20">
+ <tileset firstgid="17" name="asdasd" tilewidth="16" tileheight="16" tilecount="6" columns="3">
+  <image source="playersheet.png" width="48" height="40"/>
+  <tile id="0">
+   <properties>
+    <property name="wewe" value=""/>
+   </properties>
+  </tile>
+  <tile id="1">
+   <properties>
+    <property name="wewe" value=""/>
+   </properties>
+  </tile>
+  <tile id="2">
+   <properties>
+    <property name="wewe" value=""/>
+   </properties>
+  </tile>
+  <tile id="3">
+   <properties>
+    <property name="wewe" value=""/>
+   </properties>
+  </tile>
+  <tile id="4">
+   <properties>
+    <property name="wewe" value=""/>
+   </properties>
+  </tile>
+  <tile id="5">
+   <properties>
+    <property name="wewe" value=""/>
+   </properties>
+  </tile>
+ </tileset>
+ <layer id="1" name="Tile Layer 1" width="20" height="20">
   <data encoding="csv">
+1,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,
 4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,
 4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,
 4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,
@@ -93,8 +127,7 @@
 4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,
 4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,
 4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,
-4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,
-4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,
+4,4,4,4,4,4,4,4,22,22,22,22,4,4,4,4,4,4,4,4,
 4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,
 4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,
 4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,
