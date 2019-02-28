@@ -46,7 +46,7 @@ protected:
         return m_currentRoom;
     }
 
-    virtual std::shared_ptr<ECSWorld> createECSWorld(std::shared_ptr<aether::tilemap::CollisionTilemap> ct) = 0;
+    virtual std::shared_ptr<ECSWorld> createECSWorld(std::shared_ptr<aether::tilemap::CollisionTilemap> ct, int playerIndex) = 0;
 
 private:
 
@@ -55,7 +55,7 @@ private:
         assert(m_layout != nullptr);
     }
 
-    void travelThroughDoor(const Door& door);
+    void travelThroughDoor(const Door::Shared& door);
 
     void goToRoom(Room::Shared room, int x, int y);
 
@@ -82,6 +82,11 @@ public:
     virtual void onRoomCreated ( Room::Shared room ) override
     {
         // create enemies and stuff game specific here with factory
+        for( auto& doorEntry : room->doorsMap() )
+        {
+            auto& door = doorEntry.second;
+            m_factory->makeDoor(door);
+        }
     }
 
     virtual secs::Entity makePlayer( float x, float y ) override
@@ -89,10 +94,10 @@ public:
         return m_factory->makePlayer(x, y);
     }
 
-    virtual std::shared_ptr<ECSWorld> createECSWorld(std::shared_ptr<aether::tilemap::CollisionTilemap> ct) override
+    virtual std::shared_ptr<ECSWorld> createECSWorld(std::shared_ptr<aether::tilemap::CollisionTilemap> ct, int playerIndex) override
     {
         auto ecsworld = std::make_shared<DemuxECSWorld>(ct);
-        m_factory.reset(new DemuxEntityFactory(ecsworld->engine(), m_assets));
+        m_factory.reset(new DemuxEntityFactory(ecsworld->engine(), m_assets, playerIndex));
         return std::static_pointer_cast<ECSWorld>(ecsworld);
     }
 

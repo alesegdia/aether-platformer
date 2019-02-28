@@ -5,7 +5,6 @@ ECSWorld::ECSWorld(std::shared_ptr<aether::tilemap::CollisionTilemap> ct)
     : m_tilemapCollisionSystem(ct)
 {
     m_world.pushSystem(&m_renderingSystem);
-    m_world.pushSystem(&m_hadronCollisionSystem);
     m_world.pushSystem(&m_movementSystem);
     m_world.pushSystem(&m_playerControllerSystem);
     m_world.pushSystem(&m_gravitySystem);
@@ -14,6 +13,7 @@ ECSWorld::ECSWorld(std::shared_ptr<aether::tilemap::CollisionTilemap> ct)
     m_world.pushSystem(&m_animationSystem);
     m_world.pushSystem(&m_jumperControllerSystem);
     m_world.pushSystem(&m_flipFacingSystem);
+    m_world.pushSystem(&m_hadronCollisionSystem);
 }
 
 void ECSWorld::step(double delta)

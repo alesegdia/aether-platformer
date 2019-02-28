@@ -15,7 +15,7 @@ void GameplayScreen::show()
     map.ParseFile("assets/maps/main/layout.tmx");
     auto leMap = aether::tilemap::buildMap(map);
     m_gameWorld.reset(new DemuxGameWorld( parseLayout(leMap), m_game->assets ));
-    m_gameWorld->goToRoom("medical-labs", 300, 300);
+    m_gameWorld->goToRoom("medical-supplies", 300, 300);
 }
 
 void GameplayScreen::hide()

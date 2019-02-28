@@ -3,6 +3,7 @@
 #include <secs/secs.h>
 #include "components.h"
 #include "../assets.h"
+#include "../constants.h"
 
 
 class EntityFactory {
@@ -23,23 +24,8 @@ protected:
         return m_ecsEngine.processor().addComponent<ComponentType>(e);
     }
 
-    void addBasicTilemapEntity(secs::Entity e, float x, float y, float w, float h)
-    {
-        auto& transform_comp = addComponent<TransformComponent>(e);
-        transform_comp.position.set( x, y );
-        transform_comp.position.set( x, y );
-
-        auto& aabb_comp = addComponent<AABBComponent>(e);
-        aabb_comp.aabb = aether::math::Recti(0, 0, w, h);
-
-        auto& hcc = addComponent<HadronCollisionComponent>(e);
-        hcc.body = new hadron::Body(x, y, w, h);
-        hcc.offset.set(0, 0);
-
-        addComponent<VelocityComponent>(e);
-
-        addComponent<TilemapCollisionComponent>(e);
-    }
+    void addBasicTilemapEntity(secs::Entity e, float x, float y, float w, float h, float dx, float dy)
+    ;
 
 private:
     secs::Engine& m_ecsEngine;
@@ -48,12 +34,14 @@ private:
 class DemuxEntityFactory : public EntityFactory
 {
 public:
-    DemuxEntityFactory( secs::Engine& world, std::shared_ptr<Assets>assets );
+    DemuxEntityFactory( secs::Engine& world, std::shared_ptr<Assets> assets, int playerIndex );
 
     secs::Entity makePlayer( float x, float y );
+    secs::Entity makeDoor( const Door::Shared& door );
 
 private:
 
     std::shared_ptr<Assets> m_assets = nullptr;
+    int m_playerIndex = 0;
 
 };

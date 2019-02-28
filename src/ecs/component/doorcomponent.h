@@ -4,5 +4,5 @@
 
 struct DoorComponent
 {
-    Door door;
+    Door::Shared door;
 };

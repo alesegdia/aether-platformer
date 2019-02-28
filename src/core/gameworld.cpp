@@ -1,4 +1,5 @@
 #include "gameworld.h"
+#include "../constants.h"
 
 GameWorld::GameWorld()
 {
@@ -24,7 +25,7 @@ void GameWorld::render()
 
     ALLEGRO_TRANSFORM tr;
     al_identity_transform(&tr);
-    al_build_transform(&tr, 1024/2 -tc.x(), 768/2 - tc.y(), 1.0f, 1.0f, 0);
+    al_build_transform(&tr, (Config::instance().windowWidth / 2 - 256 / 2) - tc.x(), (Config::instance().windowHeight / 2 - 256 / 2) - tc.y(), 1.0f, 1.0f, 0);
     al_use_transform(&tr);
 
     m_ecsWorld->render();
@@ -36,15 +37,16 @@ void GameWorld::update(double delta)
     m_ecsWorld->step(delta);
     if( m_ecsWorld->hadron().isHittingDoor() ) {
         auto doorEntity = m_ecsWorld->hadron().hittingDoor();
-        auto door = m_ecsWorld->engine().component<DoorComponent>(doorEntity);
-        travelThroughDoor(door.door);
+        auto door = m_ecsWorld->engine().component<DoorComponent>(doorEntity).door;
+        assert(door != nullptr);
+        travelThroughDoor(door);
     }
 }
 
-void GameWorld::travelThroughDoor(const Door &door)
+void GameWorld::travelThroughDoor(const Door::Shared &door)
 {
     checkStatus();
-    auto name = door.otherRoom();
+    auto name = door->otherRoom();
     assert(m_layout->count(name) == 1);
 #warning change 300 300 to door position
     goToRoom((*m_layout)[name], 300, 300);
@@ -55,8 +57,9 @@ void GameWorld::goToRoom(Room::Shared room, int x, int y)
     checkStatus();
     m_currentRoom = room;
     auto collisionLayer = m_currentRoom->tilemap()->getTileLayer("collision");
+    auto playerIndex = m_currentRoom->tilemap()->getObjectLayer("player")->zOrder();
     auto collisionTilemap = std::make_shared<aether::tilemap::CollisionTilemap>(collisionLayer);
-    m_ecsWorld = createECSWorld(collisionTilemap);
+    m_ecsWorld = createECSWorld(collisionTilemap, playerIndex);
 
     for( auto& layer : m_currentRoom->tilemap()->getTileLayers() )
     {

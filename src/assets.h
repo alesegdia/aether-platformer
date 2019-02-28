@@ -11,20 +11,11 @@ public:
     void load()
     {
         font.load("assets/Alkhemikal.ttf", 16);
-        tilesetTexture.load("assets/tileset.png");
-        playerTexture.load("assets/playersheet.png");
-        tilesetSheet.load(4, 2, tilesetTexture);
-        playerSheet.load(3, 2, playerTexture);
+        playerTexture.load("assets/character-placeholder.png");
+        playerSheet.load(1, 1, playerTexture);
         playerStandAnim.addFrame(playerSheet.getFrame(0));
-
-        playerWalkAnim.addFrame(playerSheet.getFrame(0, 0));
-        playerWalkAnim.addFrame(playerSheet.getFrame(0, 1));
-        playerWalkAnim.addFrame(playerSheet.getFrame(1, 0));
-        playerWalkAnim.addFrame(playerSheet.getFrame(0, 1));
-
-        playerAirAnim.addFrame(playerSheet.getFrame(1, 1));
-        playerAirAnim.addFrame(playerSheet.getFrame(2, 0));
-        playerAirAnim.addFrame(playerSheet.getFrame(2, 1));
+        playerWalkAnim.addFrame(playerSheet.getFrame(0));
+        playerAirAnim.addFrame(playerSheet.getFrame(0));
 
         leMap.ParseFile("assets/untitled.tmx");
     }

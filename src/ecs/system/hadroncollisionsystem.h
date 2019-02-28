@@ -11,8 +11,6 @@ class HadronCollisionSystem
 {
 public:
 
-
-
     HadronCollisionSystem()
     {
         setStepConfiguration(true, true);
@@ -47,10 +45,7 @@ public:
         x2 = x1 + aabb.width;
         y1 = aabb.y;
         y2 = y1 + aabb.height;
-        if( enabled )
-        {
-            aether::graphics::draw_rectangle(x1, y1, x2, y2, aether::graphics::Color(uint8_t(255), uint8_t(0), uint8_t(255)), 2.f );
-        }
+        aether::graphics::draw_rectangle(x1, y1, x2, y2, aether::graphics::Color(uint8_t(255), uint8_t(0), uint8_t(255)), 2.f );
     }
 
     void onAdded( const secs::Entity& e ) override
@@ -91,7 +86,7 @@ public:
     {
         secs::Entity ref1, ref2;
         if( entitiesHaveComponents<DoorComponent, PlayerComponent>(e1, e2, &ref1, &ref2) ) {
-            m_hitDoor = e1;
+            m_hitDoor = ref1;
             m_isHittingDoor = true;
         }
     }
@@ -139,8 +134,6 @@ private:
     }
 
     hadron::collision::World m_physicsWorld;
-
-    bool enabled = true;
 
     secs::Entity m_hitDoor;
     bool m_isHittingDoor = false;
