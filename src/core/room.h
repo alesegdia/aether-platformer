@@ -7,6 +7,10 @@ class Door
 {
 public:
     using Shared = std::shared_ptr<Door>;
+    
+    enum Orientation {
+        None, Left, Right, Top, Bottom
+    };
 
     Door(const std::string& name)
         : m_name(name)
@@ -46,6 +50,16 @@ public:
         return m_rect;
     }
 
+    void setOrientation(const Orientation& o)
+    {
+        m_orientation = o;
+    }
+
+    const Orientation& getOrientation() const
+    {
+        return m_orientation;
+    }
+
     const std::string& otherRoom() const
     {
         return m_otherRoom;
@@ -63,6 +77,7 @@ private:
     std::string m_otherDoor;
     bool m_isConnected = false;
     aether::math::Recti m_rect;
+    Orientation m_orientation = Orientation::None;
 
 };
 
@@ -88,6 +103,16 @@ public:
             auto doorName = door.name;
             assert(m_doorsMap.count(doorName) == 1 && "There MUST be ONE door already");
             m_doorsMap[doorName]->setRect(door.aabb);
+            assert(door.props.count("orientation") == 1 && "NEEDED orientation PROPERTY WITH VALUES right, left, top OR bot IN ALL FUCKING DOORS, YOU BASTARD!");
+            auto orientationText = door.props["orientation"];
+            
+            Door::Orientation o;
+            if( orientationText == "left" ) o = Door::Left;
+            else if( orientationText == "right" ) o = Door::Right;
+            else if( orientationText == "top" ) o = Door::Top;
+            else if( orientationText == "bottom" ) o = Door::Bottom;
+            
+            m_doorsMap[doorName]->setOrientation(o);
         }
     }
 

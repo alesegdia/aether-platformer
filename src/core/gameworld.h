@@ -34,6 +34,8 @@ public:
 
     virtual void onRoomCreated(Room::Shared room) = 0 ;
     virtual secs::Entity makePlayer(float x, float y) = 0 ;
+    
+    const Door& getDoorFromRoom(const std::string& room, const std::string& door);
 
 protected:
     void setLayout(std::shared_ptr<MapLayout> layout)
@@ -55,9 +57,10 @@ private:
         assert(m_layout != nullptr);
     }
 
-    void travelThroughDoor(const Door::Shared& door);
+    void travelThroughDoor(const Door::Shared& door, hadron::CollisionResult& result);
 
     void goToRoom(Room::Shared room, int x, int y);
+    void goToRoom(Room::Shared room, const Door::Shared& door, hadron::CollisionResult& result);
 
     std::shared_ptr<MapLayout> m_layout = nullptr;
     std::shared_ptr<ECSWorld> m_ecsWorld = nullptr;

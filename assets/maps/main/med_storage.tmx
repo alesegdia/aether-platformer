@@ -109,7 +109,15 @@
  </layer>
  <objectgroup id="3" name="player"/>
  <objectgroup id="2" name="doors">
-  <object id="1" name="left" x="0" y="1920" width="128" height="256"/>
-  <object id="2" name="right" x="2432" y="1920" width="128" height="256"/>
+  <object id="1" name="left" x="0" y="1920" width="128" height="256">
+   <properties>
+    <property name="orientation" value="left"/>
+   </properties>
+  </object>
+  <object id="2" name="right" x="2432" y="1920" width="128" height="256">
+   <properties>
+    <property name="orientation" value="right"/>
+   </properties>
+  </object>
  </objectgroup>
 </map>

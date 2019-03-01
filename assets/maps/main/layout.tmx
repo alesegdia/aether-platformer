@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.2" tiledversion="1.2.2" orientation="orthogonal" renderorder="right-down" width="20" height="20" tilewidth="10" tileheight="10" infinite="0" nextlayerid="3" nextobjectid="7">
  <objectgroup id="2" name="layout" offsetx="-0.5" offsety="-0.5">
-  <object id="4" name="medical-labs" x="30" y="60" width="20" height="20">
+  <object id="4" name="medical-labs" x="30.0909" y="60" width="20" height="20">
    <properties>
     <property name="connection_1" value="medical-supplies left right"/>
     <property name="path" value="med_lab.tmx"/>
@@ -11,7 +11,7 @@
    <properties>
     <property name="connection_1" value="medical-labs right left"/>
     <property name="connection_2" value="med-waiting-room left right"/>
-    <property name="path" value="med_lab.tmx"/>
+    <property name="path" value="med_storage.tmx"/>
    </properties>
   </object>
   <object id="6" name="med-waiting-room" x="70" y="50" width="40" height="30">

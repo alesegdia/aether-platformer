@@ -37,24 +37,56 @@ void GameWorld::update(double delta)
     m_ecsWorld->step(delta);
     if( m_ecsWorld->hadron().isHittingDoor() ) {
         auto doorEntity = m_ecsWorld->hadron().hittingDoor();
+        auto collisionResult = m_ecsWorld->hadron().doorCollisionResult();
         auto door = m_ecsWorld->engine().component<DoorComponent>(doorEntity).door;
         assert(door != nullptr);
-        travelThroughDoor(door);
+        travelThroughDoor(door, collisionResult);
     }
 }
 
-void GameWorld::travelThroughDoor(const Door::Shared &door)
+void GameWorld::travelThroughDoor(const Door::Shared &door, hadron::CollisionResult& result)
 {
     checkStatus();
     auto name = door->otherRoom();
     assert(m_layout->count(name) == 1);
-#warning change 300 300 to door position
-    goToRoom((*m_layout)[name], 300, 300);
+    goToRoom((*m_layout)[name], door, result);
+}
+
+const Door& GameWorld::getDoorFromRoom(const std::string& room, const std::string& door)
+{
+    return *(*m_layout)[room]->getDoor(door);
+}
+
+void GameWorld::goToRoom(Room::Shared room, const Door::Shared& door, hadron::CollisionResult& result)
+{
+    // not using auto cause codelite sucks at guessing shared_ptr's contents
+    
+    const Door& otherDoor = getDoorFromRoom(door->otherRoom(), door->otherDoor());
+    aether::math::Recti doorRect = otherDoor.getRect();
+    aether::math::Vec2i spawnPos(0, 0);
+    int dy = 25;
+    switch(otherDoor.getOrientation()) {
+        case Door::Left: 
+            spawnPos.set(doorRect.x() + 195, doorRect.y() + dy);
+            break;
+        case Door::Right:
+            spawnPos.set(doorRect.x() - 50, doorRect.y() + dy);
+            break;
+        case Door::Top:
+            spawnPos.set(doorRect.x(), doorRect.y() + 200 + dy);
+            break;
+        case Door::Bottom:
+            spawnPos.set(doorRect.x(), doorRect.y() - 200 + dy);
+            break;
+    }
+
+    goToRoom(room, spawnPos.x(), spawnPos.y());
 }
 
 void GameWorld::goToRoom(Room::Shared room, int x, int y)
 {
     checkStatus();
+
     m_currentRoom = room;
     auto collisionLayer = m_currentRoom->tilemap()->getTileLayer("collision");
     auto playerIndex = m_currentRoom->tilemap()->getObjectLayer("player")->zOrder();
