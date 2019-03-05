@@ -12,7 +12,6 @@ public:
 	{
         SECS_UNUSED(delta);
         const auto& v = transformcomponent.position;
-        std::cout << "POS: " << v.x() << ", " << v.y() << std::endl;
         transformcomponent.position.translate( velocitycomponent.velocity );
 	}
 };

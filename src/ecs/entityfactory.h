@@ -24,8 +24,7 @@ protected:
         return m_ecsEngine.processor().addComponent<ComponentType>(e);
     }
 
-    void addBasicTilemapEntity(secs::Entity e, float x, float y, float w, float h, float dx, float dy)
-    ;
+    void addBasicTilemapEntity(secs::Entity e, float x, float y, float w, float h, float dx, float dy);
 
 private:
     secs::Engine& m_ecsEngine;
@@ -42,6 +41,7 @@ public:
 private:
 
     std::shared_ptr<Assets> m_assets = nullptr;
+    aether::graphics::LoadedAnimationData m_playerAnim;
     int m_playerIndex = 0;
 
 };

@@ -11,10 +11,10 @@ public:
         auto& atrc = component<AnimationComponent>(e);
         auto& ac = component<AnimatorComponent>(e);
         atrc.animation = ac.groundStandAnimation;
-        atrc.animationData.currentFrame = &(atrc.animation->getFrame(0));
+        atrc.animation->reset(atrc.animationData);
         atrc.animation->updateData(atrc.animationData);
     }
-    void process( double delta, const secs::Entity& e, AnimationComponent& animationcomponent, AnimatorComponent& atrc )
+    void process( double delta, const secs::Entity& e, AnimationComponent& animationcomponent, AnimatorComponent& atrc ) override
     {
         if( atrc.onAir && atrc.airAnimation != nullptr )
         {

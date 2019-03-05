@@ -45,7 +45,9 @@ public:
         } else {
             const auto& p = transformcomponent.position;
             const auto& o = rendercomponent.render_offset;
-            rendercomponent.texture->draw( p.x() + o.x() , p.y() + o.y() /*, rendercomponent.flip*/ );
+            auto w = rendercomponent.texture->clip().w();
+            auto h = rendercomponent.texture->clip().h();
+            rendercomponent.texture->draw( p.x() - w/2 , p.y() - h/2 /*, rendercomponent.flip*/ );
         }
     }
 

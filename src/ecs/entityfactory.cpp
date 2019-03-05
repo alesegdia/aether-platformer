@@ -17,18 +17,26 @@ secs::Engine& EntityFactory::world()
 }
 
 void EntityFactory::addBasicTilemapEntity(secs::Entity e, float x, float y, float w, float h, float dx, float dy)
-{    auto& transform_comp = addComponent<TransformComponent>(e);    transform_comp.position.set( x, y );    transform_comp.position.set( x, y );
-    //transform_comp.offset.set(dx, dy);    auto& aabb_comp = addComponent<AABBComponent>(e);    aabb_comp.aabb = aether::math::Recti(0, 0, w, h);
-    auto& hcc = addComponent<HadronCollisionComponent>(e);    hcc.body = new hadron::Body(x, y, w, h);    hcc.offset.set(dx, dy);    addComponent<VelocityComponent>(e);    addComponent<TilemapCollisionComponent>(e);}
+{
+    auto& transform_comp = addComponent<TransformComponent>(e);
+    transform_comp.position.set( x, y );
+    auto& aabb_comp = addComponent<AABBComponent>(e);
+    aabb_comp.aabb = aether::math::Recti(0, 0, w, h);
+    auto& hcc = addComponent<HadronCollisionComponent>(e);
+    hcc.body = new hadron::Body(x, y, w, h);
+    hcc.offset.set(-w/2, -h/2);
+    addComponent<VelocityComponent>(e);
+    addComponent<TilemapCollisionComponent>(e);
+}
 
 DemuxEntityFactory::DemuxEntityFactory(secs::Engine &world, std::shared_ptr<Assets> assets, int playerIndex)
     : EntityFactory(world),
       m_assets(assets),
       m_playerIndex(playerIndex)
 {
-
+    aether::graphics::AsepriteAnimationLoader animloader;
+    m_playerAnim = animloader.load("assets/sampleanim.json");
 }
-
 
 secs::Entity DemuxEntityFactory::makePlayer(float x, float y)
 {
@@ -43,6 +51,7 @@ secs::Entity DemuxEntityFactory::makePlayer(float x, float y)
 
     auto& animation_comp = addComponent<AnimationComponent>(player);
     animation_comp.animation = &m_assets->playerWalkAnim;
+    animation_comp.animation = m_playerAnim.anims["anim1"].get();
 
     addComponent<PlayerComponent>(player);
     
@@ -52,9 +61,9 @@ secs::Entity DemuxEntityFactory::makePlayer(float x, float y)
     
     addComponent<JumperAgentComponent>(player);
     auto& atrc = addComponent<AnimatorComponent>(player);
-    atrc.groundStandAnimation = &m_assets->playerStandAnim;
-    atrc.groundWalkAnimation = &m_assets->playerWalkAnim;
-    atrc.airAnimation = &m_assets->playerAirAnim;
+    atrc.groundStandAnimation = m_playerAnim.anims["anim1"].get();
+    atrc.groundWalkAnimation = m_playerAnim.anims["anim2"].get();
+    atrc.airAnimation = m_playerAnim.anims["anim3"].get();
 
     auto& gc = addComponent<GravityComponent>(player);
     gc.gravityFactor = Config::instance().playerGravityFactor;

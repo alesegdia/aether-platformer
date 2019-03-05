@@ -67,7 +67,7 @@ void GameWorld::goToRoom(Room::Shared room, const Door::Shared& door, hadron::Co
     int dy = 25;
     switch(otherDoor.getOrientation()) {
         case Door::Left: 
-            spawnPos.set(doorRect.x() + 195, doorRect.y() + dy);
+            spawnPos.set(doorRect.x() + 200, doorRect.y() + dy);
             break;
         case Door::Right:
             spawnPos.set(doorRect.x() - 50, doorRect.y() + dy);
