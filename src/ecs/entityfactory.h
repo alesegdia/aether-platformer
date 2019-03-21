@@ -24,7 +24,7 @@ protected:
         return m_ecsEngine.processor().addComponent<ComponentType>(e);
     }
 
-    void addBasicTilemapEntity(secs::Entity e, float x, float y, float w, float h, float dx, float dy);
+    void addBasicTilemapEntity(secs::Entity e, float x, float y, float w, float h);
 
 private:
     secs::Engine& m_ecsEngine;

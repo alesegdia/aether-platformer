@@ -16,15 +16,15 @@ secs::Engine& EntityFactory::world()
     return m_ecsEngine;
 }
 
-void EntityFactory::addBasicTilemapEntity(secs::Entity e, float x, float y, float w, float h, float dx, float dy)
+void EntityFactory::addBasicTilemapEntity(secs::Entity e, float x, float y, float w, float h)
 {
     auto& transform_comp = addComponent<TransformComponent>(e);
     transform_comp.position.set( x, y );
     auto& aabb_comp = addComponent<AABBComponent>(e);
-    aabb_comp.aabb = aether::math::Recti(0, 0, w, h);
+    aabb_comp.aabb = aether::math::Recti(-w/2, -h/2, w, h);
     auto& hcc = addComponent<HadronCollisionComponent>(e);
     hcc.body = new hadron::Body(x, y, w, h);
-    hcc.offset.set(-w/2, -h/2);
+    hcc.offset.set(0, 0); //-w/2, -h/2);
     addComponent<VelocityComponent>(e);
     addComponent<TilemapCollisionComponent>(e);
 }
@@ -42,10 +42,10 @@ secs::Entity DemuxEntityFactory::makePlayer(float x, float y)
 {
     secs::Entity player = world().processor().addEntity();
 
-    addBasicTilemapEntity(player, x, y, 58, 230, 0, 0);
+    addBasicTilemapEntity(player, x, y, 58, 230);
 
     auto& render_comp = addComponent<RenderComponent>(player);
-    render_comp.render_offset.set(-(256-58)/2.0f, -20);
+    render_comp.render_offset.set(0, 0); //-(256)/2.0f, -256/2.0f);
     render_comp.texture = m_assets->playerSheet.getFrame(0);
     render_comp.renderOrder = m_playerIndex;
 

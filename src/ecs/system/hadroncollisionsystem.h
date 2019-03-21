@@ -109,7 +109,7 @@ public:
     {
         return m_hitDoor;
     }
-    
+
     const hadron::CollisionResult& doorCollisionResult()
     {
         return m_hitDoorResult;

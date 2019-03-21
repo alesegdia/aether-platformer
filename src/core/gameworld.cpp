@@ -25,7 +25,7 @@ void GameWorld::render()
 
     ALLEGRO_TRANSFORM tr;
     al_identity_transform(&tr);
-    al_build_transform(&tr, (Config::instance().windowWidth / 2 - 256 / 2) - tc.x(), (Config::instance().windowHeight / 2 - 256 / 2) - tc.y(), 1.0f, 1.0f, 0);
+    al_build_transform(&tr, (Config::instance().windowWidth / 2) - tc.x(), (Config::instance().windowHeight / 2) - tc.y(), 1.0f, 1.0f, 0);
     al_use_transform(&tr);
 
     m_ecsWorld->render();

@@ -4,5 +4,5 @@
 
 struct TilemapCollisionComponent
 {
-    aether::tilemap::CollisionTilemap::CollisionInfo lastCollisionInfo;
+    aether::tilemap::CollisionInfo lastCollisionInfo;
 };

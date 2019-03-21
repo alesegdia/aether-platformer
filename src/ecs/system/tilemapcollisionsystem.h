@@ -27,17 +27,23 @@ public:
         auto previous_position = aabbcomponent.aabb.position();
 
         // try to move the AABB in the tilemap to the dirty_position
-        auto ci = m_collisionTilemap->realmove( aabbcomponent.aabb, int(current_position.x()), ceil(current_position.y()) );
+        auto ci = m_collisionTilemap->realmove(aabbcomponent.aabb,
+                                               int(current_position.x()),
+                                               int(ceil(current_position.y())));
 
-        if( ci.collision_x )
-        {
-            current_position.x( aabbcomponent.aabb.position().x() );
-        }
+        auto center = aabbcomponent.aabb.center();
 
         if( ci.collision_y )
         {
-            current_position.y( aabbcomponent.aabb.position().y() );
+            current_position.y( aabbcomponent.aabb.y() );
         }
+
+        if( ci.collision_x )
+        {
+            current_position.x( aabbcomponent.aabb.x() );
+        }
+
+        aabbcomponent.aabb.position(aether::math::Vec2i(current_position.x(), current_position.y()));
 
         tcc.lastCollisionInfo = ci;
     }
