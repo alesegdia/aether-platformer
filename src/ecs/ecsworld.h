@@ -2,7 +2,7 @@
 
 #include <secs/secs.h>
 #include "systems.h"
-#include "entityfactory.h"
+#include "../core/entityfactory.h"
 
 class ECSWorld
 {
@@ -39,13 +39,3 @@ private:
 
 };
 
-class DemuxECSWorld : public ECSWorld
-{
-public:
-    DemuxECSWorld(std::shared_ptr<aether::tilemap::CollisionTilemap> ct)
-        : ECSWorld(ct)
-    {
-
-    }
-
-};

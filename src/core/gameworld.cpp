@@ -1,4 +1,6 @@
 #include "gameworld.h"
+
+#include "../ecs/ecsworld.h"
 #include "../constants.h"
 
 GameWorld::GameWorld()
@@ -44,6 +46,16 @@ void GameWorld::update(double delta)
     }
 }
 
+const aether::math::Vec2f GameWorld::playerPosition()
+{
+    return m_ecsWorld->engine().component<TransformComponent>(m_playerEntity).position;
+}
+
+const std::shared_ptr<ECSWorld> &GameWorld::ecsWorld()
+{
+    return m_ecsWorld;
+}
+
 void GameWorld::travelThroughDoor(const Door::Shared &door, hadron::CollisionResult& result)
 {
     checkStatus();
@@ -57,13 +69,26 @@ const Door& GameWorld::getDoorFromRoom(const std::string& room, const std::strin
     return *(*m_layout)[room]->getDoor(door);
 }
 
+void GameWorld::setLayout(std::shared_ptr<MapLayout> layout)
+{
+    m_layout = layout;
+}
+
+const Room::Shared &GameWorld::currentRoom()
+{
+    return m_currentRoom;
+}
+
+void GameWorld::checkStatus()
+{
+    assert(m_layout != nullptr);
+}
+
 void GameWorld::goToRoom(Room::Shared room, const Door::Shared& door, hadron::CollisionResult& result)
 {
-    // not using auto cause codelite sucks at guessing shared_ptr's contents
-    
-    const Door& otherDoor = getDoorFromRoom(door->otherRoom(), door->otherDoor());
-    aether::math::Recti doorRect = otherDoor.getRect();
-    aether::math::Vec2i spawnPos(0, 0);
+    const auto& otherDoor = getDoorFromRoom(door->otherRoom(), door->otherDoor());
+    auto doorRect = otherDoor.getRect();
+    auto spawnPos = aether::math::Vec2i(0, 0);
     int dy = 25;
     switch(otherDoor.getOrientation()) {
         case Door::Left: 
@@ -106,7 +131,3 @@ void GameWorld::goToRoom(Room::Shared room, int x, int y)
     onRoomCreated(room);
 }
 
-DemuxGameWorld::~DemuxGameWorld()
-{
-
-}

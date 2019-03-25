@@ -4,18 +4,16 @@
 
 #include <TmxColor.h>
 
-#include "../assets.h"
+class GameWorld;
 
-#include "../ecs/ecsworld.h"
 
-#include "../core/gameworld.h"
+namespace cortex {
 
-class PlatformerJam;
 
 class GameplayScreen : public aether::core::IScreen
 {
 public:
-    GameplayScreen(PlatformerJam* game);
+    GameplayScreen();
 
     void show() final;
     void hide() final;
@@ -23,7 +21,9 @@ public:
     void update(uint64_t delta) final;
 
 private:
-    PlatformerJam* m_game;
     std::shared_ptr<GameWorld> m_gameWorld;
 
 };
+
+
+}
