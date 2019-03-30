@@ -1,19 +1,24 @@
 #include "ecsworld.h"
 
+#include <utility>
 
-ECSWorld::ECSWorld(std::shared_ptr<aether::tilemap::CollisionTilemap> ct)
-    : m_tilemapCollisionSystem(ct)
+
+ECSWorld::ECSWorld()
 {
-    m_world.pushSystem(&m_renderingSystem);
-    m_world.pushSystem(&m_movementSystem);
-    m_world.pushSystem(&m_playerControllerSystem);
-    m_world.pushSystem(&m_gravitySystem);
-    m_world.pushSystem(&m_tilemapCollisionSystem);
-    m_world.pushSystem(&m_animatorSystem);
-    m_world.pushSystem(&m_animationSystem);
-    m_world.pushSystem(&m_jumperControllerSystem);
-    m_world.pushSystem(&m_flipFacingSystem);
-    m_world.pushSystem(&m_hadronCollisionSystem);
+    pushSystem<RenderingSystem>();
+    pushSystem<FlipFacingSystem>();
+    pushSystem<MovementSystem>();
+    m_tilemapCollisionSystem = pushSystem<TilemapCollisionSystem>();
+    m_hadronCollisionSystem = pushSystem<HadronCollisionSystem>();
+    pushSystem<AnimationSystem>();
+}
+
+ECSWorld::~ECSWorld()
+= default;
+
+void ECSWorld::setCollisionTilemap(std::shared_ptr<aether::tilemap::CollisionTilemap> ct)
+{
+    m_tilemapCollisionSystem->setCollisionTilemap(std::move(ct));
 }
 
 void ECSWorld::step(double delta)
@@ -29,4 +34,9 @@ void ECSWorld::render()
 secs::Engine &ECSWorld::engine()
 {
     return m_world;
+}
+
+HadronCollisionSystem &ECSWorld::hadron()
+{
+    return *m_hadronCollisionSystem;
 }

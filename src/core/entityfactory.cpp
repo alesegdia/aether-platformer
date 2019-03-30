@@ -7,9 +7,7 @@ BaseEntityFactory::BaseEntityFactory(secs::Engine &ecsEngine)
 }
 
 BaseEntityFactory::~BaseEntityFactory()
-{
-
-}
+= default;
 
 secs::Engine& BaseEntityFactory::world()
 {

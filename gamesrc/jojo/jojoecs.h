@@ -6,13 +6,12 @@
 #include <memory>
 
 
-namespace cortex {
+namespace jojo {
 
-
-class CortexECS : public ECSWorld
+class JojoECS : public ECSWorld
 {
 public:
-    CortexECS();
+    JojoECS();
 };
 
 

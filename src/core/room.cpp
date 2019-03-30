@@ -1,7 +1,7 @@
 
 #include "room.h"
 
-std::shared_ptr<MapLayout> parseLayout(std::shared_ptr<aether::tilemap::TileMap> layout)
+std::shared_ptr<MapLayout> parseLayout(const std::shared_ptr<aether::tilemap::TileMap>& layout)
 {
     auto objectLayer = layout->getObjectLayer("layout");
     auto rooms = std::make_shared<MapLayout>();

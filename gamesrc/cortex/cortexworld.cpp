@@ -1,7 +1,9 @@
 #include "cortexworld.h"
 #include "cortexecs.h"
 
+
 namespace cortex {
+
 
 CortexWorld::CortexWorld()
 {
@@ -13,9 +15,7 @@ CortexWorld::CortexWorld()
 }
 
 CortexWorld::~CortexWorld()
-{
-
-}
+= default;
 
 void CortexWorld::onRoomCreated(Room::Shared room)
 {
@@ -34,9 +34,11 @@ secs::Entity CortexWorld::makePlayer(float x, float y)
 
 std::shared_ptr<ECSWorld> CortexWorld::createECSWorld(std::shared_ptr<aether::tilemap::CollisionTilemap> ct, int playerIndex)
 {
-    auto ecsworld = std::make_shared<CortexECS>(ct);
+    auto ecsworld = std::make_shared<cortex::CortexECS>();
     m_factory.reset(new CortexEntityFactory(ecsworld->engine(), playerIndex));
+    ecsworld->setCollisionTilemap(ct);
     return std::static_pointer_cast<ECSWorld>(ecsworld);
 }
+
 
 }

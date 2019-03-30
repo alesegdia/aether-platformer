@@ -6,18 +6,18 @@
 
 class ECSWorld;
 
-class GameWorld
+class RoomLayoutGameWorld
 {
 public:
 
-    GameWorld();
-    virtual ~GameWorld();
+    RoomLayoutGameWorld();
+    virtual ~RoomLayoutGameWorld();
     void goToRoom(const std::string& name, int x, int y);
     void render();
 
     void update(double delta);
 
-    const aether::math::Vec2f playerPosition();
+    const aether::math::Vec2f& playerPosition();
 
     const std::shared_ptr<ECSWorld>& ecsWorld();
 
@@ -39,7 +39,7 @@ private:
 
     void travelThroughDoor(const Door::Shared& door, hadron::CollisionResult& result);
 
-    void goToRoom(Room::Shared room, int x, int y);
+    void goToRoom(const Room::Shared& room, int x, int y);
     void goToRoom(Room::Shared room, const Door::Shared& door, hadron::CollisionResult& result);
 
     std::shared_ptr<MapLayout> m_layout = nullptr;

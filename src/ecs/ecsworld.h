@@ -1,5 +1,6 @@
 #pragma once
 
+#include <aether/aether.h>
 #include <secs/secs.h>
 #include "systems.h"
 #include "../core/entityfactory.h"
@@ -8,7 +9,10 @@ class ECSWorld
 {
 public:
 
-    ECSWorld(std::shared_ptr<aether::tilemap::CollisionTilemap> ct);
+    ECSWorld();
+    virtual ~ECSWorld();
+
+    void setCollisionTilemap(std::shared_ptr<aether::tilemap::CollisionTilemap> ct);
 
     void step(double delta );
 
@@ -16,25 +20,24 @@ public:
 
     secs::Engine& engine();
 
-    HadronCollisionSystem& hadron()
+    HadronCollisionSystem& hadron();
+
+protected:
+
+    template <typename T, typename... Args>
+    std::shared_ptr<T> pushSystem(Args... args)
     {
-        return m_hadronCollisionSystem;
+        auto shared = std::make_shared<T>(std::forward(args)...);
+        m_world.pushSystem(shared);
+        return shared;
     }
 
 private:
 
     secs::Engine m_world;
 
-    RenderingSystem                 m_renderingSystem;
-    AnimationSystem                 m_animationSystem;
-    HadronCollisionSystem           m_hadronCollisionSystem;
-    PlayerControllerSystem          m_playerControllerSystem;
-    GravitySystem                   m_gravitySystem;
-    MovementSystem                  m_movementSystem;
-    TilemapCollisionSystem          m_tilemapCollisionSystem;
-    JumperControllerSystem          m_jumperControllerSystem;
-    FlipFacingSystem                m_flipFacingSystem;
-    AnimatorSystem                  m_animatorSystem;
+    std::shared_ptr<HadronCollisionSystem> m_hadronCollisionSystem;
+    std::shared_ptr<TilemapCollisionSystem> m_tilemapCollisionSystem;
 
 
 };

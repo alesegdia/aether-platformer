@@ -1,10 +1,10 @@
 #include "gameplayscreen.h"
 
-#include "cortex/cortexworld.h"
+#include "jojo/jojoworld.h"
 
 
 
-namespace cortex {
+namespace jojo {
 
 
 GameplayScreen::GameplayScreen()
@@ -12,7 +12,7 @@ GameplayScreen::GameplayScreen()
 
 void GameplayScreen::show()
 {
-    m_gameWorld.reset(new CortexWorld());
+    m_gameWorld.reset(new JojoWorld());
     
 }
 

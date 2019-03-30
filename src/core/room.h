@@ -145,5 +145,5 @@ private:
 
 using MapLayout = std::unordered_map<std::string, Room::Shared>;
 
-std::shared_ptr<MapLayout> parseLayout(std::shared_ptr<aether::tilemap::TileMap> layout);
+std::shared_ptr<MapLayout> parseLayout(const std::shared_ptr<aether::tilemap::TileMap>& layout);
 

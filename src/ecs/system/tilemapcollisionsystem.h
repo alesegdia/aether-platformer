@@ -6,10 +6,14 @@
 class TilemapCollisionSystem : public secs::TypedEntitySystem<AABBComponent, TransformComponent, TilemapCollisionComponent>
 {
 public:
-    TilemapCollisionSystem(std::shared_ptr<aether::tilemap::CollisionTilemap> ct)
-        : m_collisionTilemap(ct)
+    TilemapCollisionSystem()
     {
         setStepConfiguration(true, false);
+    }
+
+    void setCollisionTilemap(std::shared_ptr<aether::tilemap::CollisionTilemap> ct)
+    {
+        m_collisionTilemap = ct;
     }
 
     void process( double delta, const secs::Entity& e,

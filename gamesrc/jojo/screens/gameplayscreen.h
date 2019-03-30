@@ -7,8 +7,9 @@
 class RoomLayoutGameWorld;
 
 
-namespace cortex {
+namespace jojo {
 
+class JojoWorld;
 
 class GameplayScreen : public aether::core::IScreen
 {
@@ -21,7 +22,7 @@ public:
     void update(uint64_t delta) final;
 
 private:
-    std::shared_ptr<RoomLayoutGameWorld> m_gameWorld;
+    std::shared_ptr<JojoWorld> m_gameWorld;
 
 };
 

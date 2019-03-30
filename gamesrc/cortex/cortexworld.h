@@ -1,18 +1,16 @@
 #pragma once
 
-#include "../src/core/gameworld.h"
-#include "cortexentityfactory.h"
+#include "core/roomlayoutgameworld.h"
 #include "ecs/ecsworld.h"
+#include "cortex/cortexentityfactory.h"
 
-
-class ECSWorld;
 
 namespace cortex {
 
 class CortexEntityFactory;
 
 
-class CortexWorld : public GameWorld
+class CortexWorld : public RoomLayoutGameWorld
 {
 public:
     CortexWorld();

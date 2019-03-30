@@ -2,7 +2,7 @@
 
 #include <secs/secs.h>
 #include "../ecs/components.h"
-#include "../constants.h"
+#include "config.h"
 
 
 class BaseEntityFactory {

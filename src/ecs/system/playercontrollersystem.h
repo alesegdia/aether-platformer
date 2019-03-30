@@ -1,7 +1,7 @@
 #pragma once
 
 #include <secs/secs.h>
-#include "../../constants.h"
+#include "config.h"
 #include "../components.h"
 
 class PlayerControllerSystem : public secs::TypedEntitySystem<PlayerComponent, AgentInputComponent>

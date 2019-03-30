@@ -1,17 +1,16 @@
 
-#include "cortexecs.h"
+#include "jojoecs.h"
 
-namespace cortex {
+namespace jojo {
 
 
-CortexECS::CortexECS()
+JojoECS::JojoECS()
 {
     pushSystem<AnimatorSystem>();
     pushSystem<PlayerControllerSystem>();
     pushSystem<GravitySystem>();
     pushSystem<JumperControllerSystem>();
 }
-
 
 
 }
