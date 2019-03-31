@@ -13,7 +13,7 @@ public:
     RoomLayoutGameWorld();
     virtual ~RoomLayoutGameWorld();
     void goToRoom(const std::string& name, int x, int y);
-    void render();
+    virtual void render();
 
     void update(double delta);
 

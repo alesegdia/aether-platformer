@@ -1,5 +1,5 @@
 #include "jojoentityfactory.h"
-
+#include "jojoconfig.h"
 
 namespace jojo {
 
@@ -15,7 +15,7 @@ secs::Entity JojoEntityFactory::makePlayer(float x, float y)
 {
     secs::Entity player = world().processor().addEntity();
 
-    addBasicTilemapEntity(player, x, y, 58, 230);
+    addBasicTilemapEntity(player, x, y, 20, 20);
 
     auto& render_comp = addComponent<RenderComponent>(player);
     render_comp.render_offset.set(0, 0); //-(256)/2.0f, -256/2.0f);
@@ -28,8 +28,8 @@ secs::Entity JojoEntityFactory::makePlayer(float x, float y)
     addComponent<PlayerComponent>(player);
     
     auto& aic = addComponent<AgentInputComponent>(player);
-    aic.horizontal_speed = Config::instance().playerSpeed;
-    aic.jump_force = Config::instance().playerJumpForce;
+    aic.horizontal_speed = jojo::JojoConfig::instance().playerSpeed;
+    aic.jump_force = jojo::JojoConfig::instance().playerJumpForce;
     
     addComponent<JumperAgentComponent>(player);
     auto& atrc = addComponent<AnimatorComponent>(player);
@@ -38,8 +38,8 @@ secs::Entity JojoEntityFactory::makePlayer(float x, float y)
     atrc.airAnimation = m_playerAnim.anims["stand"].get();
 
     auto& gc = addComponent<GravityComponent>(player);
-    gc.gravityFactor = Config::instance().playerGravityFactor;
-    gc.fallingVelocityCap = Config::instance().playerFallingCap;
+    gc.gravityFactor = jojo::JojoConfig::instance().playerGravityFactor;
+    gc.fallingVelocityCap = jojo::JojoConfig::instance().playerFallingCap;
 
     return player;
 }

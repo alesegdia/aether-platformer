@@ -20,14 +20,6 @@ void RoomLayoutGameWorld::goToRoom(const std::string &name, int x, int y)
 
 void RoomLayoutGameWorld::render()
 {
-    checkStatus();
-    auto tc = playerPosition();
-
-    ALLEGRO_TRANSFORM tr;
-    al_identity_transform(&tr);
-    al_build_transform(&tr, float(Config::instance().windowWidth / 2) - tc.x(), float(Config::instance().windowHeight / 2) - tc.y(), 1.0f, 1.0f, 0);
-    al_use_transform(&tr);
-
     m_ecsWorld->render();
 }
 

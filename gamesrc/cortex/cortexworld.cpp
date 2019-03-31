@@ -1,6 +1,6 @@
 #include "cortexworld.h"
 #include "cortexecs.h"
-
+#include "cortexconfig.h"
 
 namespace cortex {
 
@@ -38,6 +38,21 @@ std::shared_ptr<ECSWorld> CortexWorld::createECSWorld(std::shared_ptr<aether::ti
     m_factory.reset(new CortexEntityFactory(ecsworld->engine(), playerIndex));
     ecsworld->setCollisionTilemap(ct);
     return std::static_pointer_cast<ECSWorld>(ecsworld);
+}
+
+void CortexWorld::render()
+{
+    auto tc = playerPosition();
+
+    ALLEGRO_TRANSFORM tr;
+    al_identity_transform(&tr);
+    al_build_transform(&tr,
+                       float(cortex::CortexConfig::instance().windowWidth / 2) - tc.x(),
+                       float(cortex::CortexConfig::instance().windowHeight / 2) - tc.y(),
+                       1.0f, 1.0f, 0);
+    al_use_transform(&tr);
+
+    RoomLayoutGameWorld::render();
 }
 
 

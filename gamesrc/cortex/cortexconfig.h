@@ -4,13 +4,16 @@
 
 #include <fstream>
 
-class Config
+namespace cortex {
+
+
+class CortexConfig
 {
 public:
     
-    static const Config& instance()
+    static const CortexConfig& instance()
     {
-        static Config config;
+        static CortexConfig config;
         return config;
     }
     
@@ -23,7 +26,7 @@ public:
     
 private:
 
-    Config()
+    CortexConfig()
     {
         std::string error;
         
@@ -42,3 +45,6 @@ private:
     }
 
 };
+
+
+}

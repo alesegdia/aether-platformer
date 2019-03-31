@@ -2,10 +2,12 @@
 
 #include "jojoapp.h"
 
-#include "config.h"
+#include "jojoconfig.h"
 
 
 int main( int argc, char** argv )
 {
-    jojo::createApp(Config::instance().windowWidth, Config::instance().windowHeight)->exec(argc, argv);
+    jojo::createApp(jojo::JojoConfig::instance().windowWidth,
+                    jojo::JojoConfig::instance().windowHeight)
+            ->exec(argc, argv);
 }

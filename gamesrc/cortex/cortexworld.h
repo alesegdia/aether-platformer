@@ -23,6 +23,7 @@ public:
 
     virtual std::shared_ptr<ECSWorld> createECSWorld(std::shared_ptr<aether::tilemap::CollisionTilemap> ct, int playerIndex) override;
 
+    void render() override;
 private:
     std::shared_ptr<CortexEntityFactory> m_factory;
 

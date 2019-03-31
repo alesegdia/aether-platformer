@@ -1,5 +1,5 @@
 #include "cortexentityfactory.h"
-
+#include "cortexconfig.h"
 
 namespace cortex {
 
@@ -28,8 +28,8 @@ secs::Entity CortexEntityFactory::makePlayer(float x, float y)
     addComponent<PlayerComponent>(player);
     
     auto& aic = addComponent<AgentInputComponent>(player);
-    aic.horizontal_speed = Config::instance().playerSpeed;
-    aic.jump_force = Config::instance().playerJumpForce;
+    aic.horizontal_speed = cortex::CortexConfig::instance().playerSpeed;
+    aic.jump_force = cortex::CortexConfig::instance().playerJumpForce;
     
     addComponent<JumperAgentComponent>(player);
     auto& atrc = addComponent<AnimatorComponent>(player);
@@ -38,8 +38,8 @@ secs::Entity CortexEntityFactory::makePlayer(float x, float y)
     atrc.airAnimation = m_playerAnim.anims["anim3"].get();
 
     auto& gc = addComponent<GravityComponent>(player);
-    gc.gravityFactor = Config::instance().playerGravityFactor;
-    gc.fallingVelocityCap = Config::instance().playerFallingCap;
+    gc.gravityFactor = cortex::CortexConfig::instance().playerGravityFactor;
+    gc.fallingVelocityCap = cortex::CortexConfig::instance().playerFallingCap;
 
     return player;
 }

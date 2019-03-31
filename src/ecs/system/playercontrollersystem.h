@@ -1,7 +1,6 @@
 #pragma once
 
 #include <secs/secs.h>
-#include "config.h"
 #include "../components.h"
 
 class PlayerControllerSystem : public secs::TypedEntitySystem<PlayerComponent, AgentInputComponent>
@@ -17,12 +16,12 @@ public:
 
         if( aether::core::is_key_down(aether::core::KeyCode::Left) )
         {
-            aicomp.x_axis = -Config::instance().playerSpeed;
+            aicomp.x_axis = -aicomp.horizontal_speed;
 
         }
         else if( aether::core::is_key_down(aether::core::KeyCode::Right) )
         {
-            aicomp.x_axis = Config::instance().playerSpeed;
+            aicomp.x_axis = aicomp.horizontal_speed;
         }
         else
         {

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.2.2" orientation="orthogonal" renderorder="right-down" width="50" height="20" tilewidth="16" tileheight="16" infinite="0" nextlayerid="6" nextobjectid="1">
+<map version="1.2" tiledversion="1.2.2" orientation="orthogonal" renderorder="right-down" width="50" height="20" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="1">
  <tileset firstgid="1" name="tiles" tilewidth="16" tileheight="16" tilecount="64" columns="8">
   <image source="../tiles.png" width="128" height="128"/>
-  <tile id="0">
+  <tile id="2">
    <properties>
     <property name="collision" value="solid"/>
    </properties>
@@ -13,7 +13,7 @@
    </properties>
   </tile>
  </tileset>
- <layer id="2" name="bg" width="50" height="20">
+ <layer id="6" name="bg" width="50" height="20">
   <data encoding="csv">
 1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
 1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
