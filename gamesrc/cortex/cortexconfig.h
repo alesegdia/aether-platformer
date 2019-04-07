@@ -30,10 +30,10 @@ private:
     {
         std::string error;
         
-        std::ifstream t("assets/configs.json");
+        std::ifstream t("assets/cortex/configs.json");
         std::stringstream buffer;
         buffer << t.rdbuf();
-                        
+
         auto result = json11::Json::parse(buffer.str(), error);
         std::cout << error << std::endl;
         windowWidth = result["windowWidth"].number_value();

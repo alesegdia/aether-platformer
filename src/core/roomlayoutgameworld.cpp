@@ -2,8 +2,8 @@
 
 #include <utility>
 
+#include "ecs/system/hadroncollisionsystem.h"
 #include "ecs/ecsworld.h"
-#include "config.h"
 
 RoomLayoutGameWorld::RoomLayoutGameWorld()
 = default;

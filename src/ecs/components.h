@@ -1,11 +1,12 @@
 #pragma once
 
 #include "component/aabbcomponent.h"
-#include "component/agentcomponent.h"
 #include "component/agentinputcomponent.h"
+#include "component/aiagentdumbwalkercomponent.h"
 #include "component/animationcomponent.h"
 #include "component/animatorcomponent.h"
 #include "component/doorcomponent.h"
+#include "component/dumbwalkeragentcomponent.h"
 #include "component/gravitycomponent.h"
 #include "component/hadroncollisioncomponent.h"
 #include "component/jumperagentcomponent.h"

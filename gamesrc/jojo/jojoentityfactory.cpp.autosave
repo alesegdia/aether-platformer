@@ -3,7 +3,7 @@
 
 namespace jojo {
 
-JojoEntityFactory::JojoEntityFactory(secs::Engine &world, int playerIndex)
+JojoFactory::JojoFactory(secs::Engine &world, int playerIndex)
     : BaseEntityFactory(world),
       m_playerIndex(playerIndex)
 {
@@ -12,7 +12,7 @@ JojoEntityFactory::JojoEntityFactory(secs::Engine &world, int playerIndex)
     m_ballEnemyAnim = animloader.load("assets/jojo/enemyball.json");
 }
 
-secs::Entity JojoEntityFactory::makePlayer(float x, float y)
+secs::Entity JojoFactory::makePlayer(float x, float y)
 {
     secs::Entity player = world().processor().addEntity();
 
@@ -45,7 +45,7 @@ secs::Entity JojoEntityFactory::makePlayer(float x, float y)
     return player;
 }
 
-secs::Entity JojoEntityFactory::makeBallEnemy(float x, float y)
+secs::Entity JojoFactory::makeBallEnemy(float x, float y)
 {
     auto entity = world().processor().addEntity();
 

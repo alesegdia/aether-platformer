@@ -2,8 +2,10 @@
 
 #include <aether/aether.h>
 #include <secs/secs.h>
-#include "systems.h"
 #include "../core/entityfactory.h"
+
+class HadronCollisionSystem;
+class TilemapCollisionSystem;
 
 class ECSWorld
 {
@@ -12,7 +14,7 @@ public:
     ECSWorld();
     virtual ~ECSWorld();
 
-    void setCollisionTilemap(std::shared_ptr<aether::tilemap::CollisionTilemap> ct);
+    virtual void setCollisionTilemap(std::shared_ptr<aether::tilemap::CollisionTilemap> ct);
 
     void step(double delta );
 

@@ -1,0 +1,10 @@
+{
+	"windowWidth": 1920,
+	"windowHeight": 1080,
+	"playerHorizontalSpeed": 1.0,
+	"playerJumpForce": -3,
+	"playerGravityFactor": 0.10,
+	"playerFallingCap": 3
+}
+
+

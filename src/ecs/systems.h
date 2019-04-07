@@ -1,5 +1,6 @@
 #pragma once
 
+#include "system/aiagentdumbwalkersystem.h"
 #include "system/animationsystem.h"
 #include "system/animatorsystem.h"
 #include "system/flipfacingsystem.h"

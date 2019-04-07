@@ -21,7 +21,7 @@ JojoWorld::JojoWorld()
     // creation
     m_ecsWorld = std::make_shared<JojoECS>();
     m_ecsWorld->setCollisionTilemap(collisionTilemap);
-    m_factory = std::make_shared<JojoEntityFactory>(m_ecsWorld->engine(), playerIndex);
+    m_factory = std::make_shared<JojoFactory>(m_ecsWorld->engine(), playerIndex);
     m_playerEntity = m_factory->makePlayer(100, 250);
     m_factory->makeBallEnemy(180, 260);
 

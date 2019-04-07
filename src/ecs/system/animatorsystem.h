@@ -19,7 +19,6 @@ public:
         if( atrc.onAir && atrc.airAnimation != nullptr )
         {
             animationcomponent.animation = atrc.airAnimation;
-            return;
         }
         else
         {

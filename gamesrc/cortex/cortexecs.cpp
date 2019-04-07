@@ -1,5 +1,6 @@
 
-#include "cortexecs.h"
+#include "cortex/cortexecs.h"
+#include "ecs/systems.h"
 
 namespace cortex {
 

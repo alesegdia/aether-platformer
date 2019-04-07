@@ -47,6 +47,12 @@ public:
             current_position.x( aabbcomponent.aabb.x() );
         }
 
+        if( hasComponent<AnimatorComponent>(e) )
+        {
+            auto& ac = component<AnimatorComponent>(e);
+            ac.onAir = !ci.collision_y || ci.y_collision_direction == -1;
+        }
+
         aabbcomponent.aabb.position(aether::math::Vec2i(current_position.x(), current_position.y()));
 
         tcc.lastCollisionInfo = ci;

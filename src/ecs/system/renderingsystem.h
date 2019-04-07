@@ -47,7 +47,7 @@ public:
             const auto& o = rendercomponent.render_offset;
             auto w = rendercomponent.texture->clip().w();
             auto h = rendercomponent.texture->clip().h();
-            rendercomponent.texture->draw( p.x() - w/2, p.y() - h/2/*, rendercomponent.flip*/ );
+            rendercomponent.texture->draw( p.x() - w/2, p.y() - h/2, rendercomponent.flip );
         }
     }
 

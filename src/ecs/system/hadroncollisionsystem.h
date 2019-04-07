@@ -13,7 +13,7 @@ public:
 
     HadronCollisionSystem()
     {
-        setStepConfiguration(true, true);
+        setStepConfiguration(true, false);
         m_physicsWorld.registerListener(this);
     }
 

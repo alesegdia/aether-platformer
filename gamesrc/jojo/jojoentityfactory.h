@@ -7,16 +7,18 @@
 namespace jojo {
 
 
-class JojoEntityFactory : public BaseEntityFactory
+class JojoFactory : public BaseEntityFactory
 {
 public:
-    JojoEntityFactory( secs::Engine& world, int playerIndex );
+    JojoFactory( secs::Engine& world, int playerIndex );
 
     secs::Entity makePlayer( float x, float y );
+    secs::Entity makeBallEnemy( float x, float y );
 
 private:
 
     aether::graphics::LoadedAnimationData m_playerAnim;
+    aether::graphics::LoadedAnimationData m_ballEnemyAnim;
     int m_playerIndex = 0;
 
 };

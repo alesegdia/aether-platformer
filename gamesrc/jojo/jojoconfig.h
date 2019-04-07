@@ -31,7 +31,7 @@ private:
     {
         std::string error;
         
-        std::ifstream t("assets/configs.json");
+        std::ifstream t("assets/jojo/configs.json");
         std::stringstream buffer;
         buffer << t.rdbuf();
                         
