@@ -1,4 +1,4 @@
-#include "jojoentityfactory.h"
+#include "jojofactory.h"
 #include "jojoconfig.h"
 
 namespace jojo {

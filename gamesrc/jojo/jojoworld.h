@@ -7,7 +7,7 @@ class ECSWorld;
 
 namespace jojo {
 
-class JojoEntityFactory;
+class JojoFactory;
 class JojoECS;
 
 
@@ -20,7 +20,7 @@ public:
     void update(double delta);
 
 private:
-    std::shared_ptr<JojoEntityFactory> m_factory;
+    std::shared_ptr<JojoFactory> m_factory;
     std::shared_ptr<aether::tilemap::TileMap> m_tilemap;
     std::shared_ptr<ECSWorld> m_ecsWorld = nullptr;
     secs::Entity m_playerEntity;
