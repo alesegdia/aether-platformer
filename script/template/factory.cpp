@@ -1,18 +1,18 @@
-#include "jojofactory.h"
-#include "jojoconfig.h"
+#include "##PROJNAMELOWER##factory.h"
+#include "##PROJNAMELOWER##config.h"
 
-namespace jojo {
+namespace ##PROJNAMELOWER## {
 
-JojoFactory::JojoFactory(secs::Engine &world, int playerIndex)
+##PROJNAME##Factory::##PROJNAME##Factory(secs::Engine &world, int playerIndex)
     : BaseEntityFactory(world),
       m_playerIndex(playerIndex)
 {
     aether::graphics::AsepriteAnimationLoader animloader;
-    m_playerAnim = animloader.load("assets/jojo/bicho.json");
-    m_ballEnemyAnim = animloader.load("assets/jojo/enemyball.json");
+    m_playerAnim = animloader.load("assets/##PROJNAMELOWER##/bicho.json");
+    m_ballEnemyAnim = animloader.load("assets/##PROJNAMELOWER##/enemyball.json");
 }
 
-secs::Entity JojoFactory::makePlayer(float x, float y)
+secs::Entity ##PROJNAME##Factory::makePlayer(float x, float y)
 {
     secs::Entity player = world().processor().addEntity();
 
@@ -29,8 +29,8 @@ secs::Entity JojoFactory::makePlayer(float x, float y)
     addComponent<PlayerComponent>(player);
     
     auto& aic = addComponent<AgentInputComponent>(player);
-    aic.horizontal_speed = jojo::JojoConfig::instance().playerSpeed;
-    aic.jump_force = jojo::JojoConfig::instance().playerJumpForce;
+    aic.horizontal_speed = ##PROJNAMELOWER##::##PROJNAME##Config::instance().playerSpeed;
+    aic.jump_force = ##PROJNAMELOWER##::##PROJNAME##Config::instance().playerJumpForce;
     
     addComponent<JumperAgentComponent>(player);
     auto& atrc = addComponent<AnimatorComponent>(player);
@@ -39,13 +39,13 @@ secs::Entity JojoFactory::makePlayer(float x, float y)
     atrc.airAnimation = m_playerAnim.anims["jump"].get();
 
     auto& gc = addComponent<GravityComponent>(player);
-    gc.gravityFactor = jojo::JojoConfig::instance().playerGravityFactor;
-    gc.fallingVelocityCap = jojo::JojoConfig::instance().playerFallingCap;
+    gc.gravityFactor = ##PROJNAMELOWER##::##PROJNAME##Config::instance().playerGravityFactor;
+    gc.fallingVelocityCap = ##PROJNAMELOWER##::##PROJNAME##Config::instance().playerFallingCap;
 
     return player;
 }
 
-secs::Entity JojoFactory::makeBallEnemy(float x, float y)
+secs::Entity ##PROJNAME##Factory::makeBallEnemy(float x, float y)
 {
     auto entity = world().processor().addEntity();
 
@@ -60,7 +60,7 @@ secs::Entity JojoFactory::makeBallEnemy(float x, float y)
     render_comp.texture = m_ballEnemyAnim.sheet->getFrame(0);
 
     auto& aic = addComponent<AgentInputComponent>(entity);
-    aic.horizontal_speed = 0.5f;
+    aic.horizontal_speed = 0.9f;
     aic.x_axis = 1;
 
     auto& atrc = addComponent<AnimatorComponent>(entity);

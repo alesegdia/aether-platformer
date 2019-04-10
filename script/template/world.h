@@ -5,27 +5,25 @@
 
 class ECSWorld;
 
-namespace jojo {
+namespace ##PROJNAMELOWER## {
 
-class JojoFactory;
-class JojoECS;
+class ##PROJNAME##Factory;
+class ##PROJNAME##ECS;
 
 
-class JojoWorld
+class ##PROJNAME##World
 {
 public:
-    JojoWorld();
+    ##PROJNAME##World();
 
     void render();
     void update(double delta);
 
 private:
-    std::shared_ptr<JojoFactory> m_factory;
+    std::shared_ptr<##PROJNAME##Factory> m_factory;
     std::shared_ptr<aether::tilemap::TileMap> m_tilemap;
     std::shared_ptr<ECSWorld> m_ecsWorld = nullptr;
     secs::Entity m_playerEntity;
-    std::shared_ptr<aether::graphics::Camera> m_cam;
-    std::shared_ptr<aether::graphics::PlatformerScroller> m_scroll;
 
 };
 

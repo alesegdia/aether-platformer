@@ -8,7 +8,7 @@ class TilemapCollisionSystem : public secs::TypedEntitySystem<AABBComponent, Tra
 public:
     TilemapCollisionSystem()
     {
-        setStepConfiguration(true, false);
+        setStepConfiguration(true, true);
     }
 
     void setCollisionTilemap(std::shared_ptr<aether::tilemap::CollisionTilemap> ct)
@@ -61,7 +61,7 @@ public:
     void render ( const secs::Entity& e ) override
     {
         auto& aabbcomp = component<AABBComponent>(e);
-        aether::graphics::draw_filled_rectangle(aabbcomp.aabb, aether::graphics::Color(uint8_t(0), uint8_t(255), uint8_t(255)));
+        aether::graphics::draw_filled_rectangle_centered(aabbcomp.aabb, aether::graphics::Color(uint8_t(0), uint8_t(255), uint8_t(255)));
     }
 
 private:
