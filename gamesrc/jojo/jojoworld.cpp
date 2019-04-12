@@ -49,7 +49,7 @@ JojoWorld::JojoWorld()
     m_cam = std::make_shared<aether::graphics::Camera>(viewport);
 
     m_scroll = std::make_shared<aether::graphics::PlatformerScroller>(
-                m_cam, aether::math::Vec2f(m_tilemap->width(), m_tilemap->height()));
+                m_cam, aether::math::Rectf(0, 0, m_tilemap->width(), m_tilemap->height()));
 }
 
 void JojoWorld::render()
@@ -67,6 +67,7 @@ void JojoWorld::render()
                        8.0f, 8.0f, 0);
     al_use_transform(&tr);
     */
+    m_cam->scale(8.f, 8.f);
     m_scroll->focus(pos.x(), pos.y());
     m_ecsWorld->render();
 }

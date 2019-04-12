@@ -8,7 +8,7 @@ class TilemapCollisionSystem : public secs::TypedEntitySystem<AABBComponent, Tra
 public:
     TilemapCollisionSystem()
     {
-        setStepConfiguration(true, true);
+        setStepConfiguration(true, false);
     }
 
     void setCollisionTilemap(std::shared_ptr<aether::tilemap::CollisionTilemap> ct)
