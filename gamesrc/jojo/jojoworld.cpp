@@ -47,27 +47,17 @@ JojoWorld::JojoWorld()
             float(JojoConfig::instance().windowWidth),
             float(JojoConfig::instance().windowHeight)};
     m_cam = std::make_shared<aether::graphics::Camera>(viewport);
+    m_cam->scale(8.f, 8.f);
 
     m_scroll = std::make_shared<aether::graphics::PlatformerScroller>(
-                m_cam, aether::math::Rectf(0, 0, m_tilemap->width(), m_tilemap->height()));
+                m_cam, aether::math::Rectf(0, 0, m_tilemap->width(), m_tilemap->height()),
+                aether::math::Vec2f(800, 500));
 }
 
 void JojoWorld::render()
 {
     auto pos = m_ecsWorld->engine().component<TransformComponent>(m_playerEntity).position;
 
-    /*
-    ALLEGRO_TRANSFORM tr;
-    al_identity_transform(&tr);
-    auto scroll_x = -std::max(pos.x(), 120.f) * 8.f;
-    std::cout << pos.x() << "  " << scroll_x << std::endl;
-    al_build_transform(&tr,
-                       (jojo::JojoConfig::instance().windowWidth / 2) + scroll_x,
-                       140 + -3 * (jojo::JojoConfig::instance().windowHeight / 2),
-                       8.0f, 8.0f, 0);
-    al_use_transform(&tr);
-    */
-    m_cam->scale(8.f, 8.f);
     m_scroll->focus(pos.x(), pos.y());
     m_ecsWorld->render();
 }
@@ -76,6 +66,17 @@ void JojoWorld::render()
 void JojoWorld::update(double delta)
 {
     m_ecsWorld->step(delta);
+    auto& pc = m_ecsWorld->engine().component<TransformComponent>(m_playerEntity);
+    auto& tc = m_ecsWorld->engine().component<TilemapCollisionComponent>(m_playerEntity);
+
+    m_scroll->update(delta);
+
+    m_scroll->setSnapToPlatform(tc.lastCollisionInfo.y_collision_direction == 1);
+
+    if( tc.lastCollisionInfo.y_collision_direction == 1 )
+    {
+        m_scroll->snapToPlatform(pc.position.y());
+    }
 }
 
 

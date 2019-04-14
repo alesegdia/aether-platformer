@@ -23,6 +23,10 @@ public:
     secs::Engine& engine();
 
     HadronCollisionSystem& hadron();
+    TilemapCollisionSystem& tilemapCollisionSystem()
+    {
+        return *m_tilemapCollisionSystem;
+    }
 
 protected:
 
