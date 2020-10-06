@@ -23,7 +23,7 @@ secs::Entity CortexEntityFactory::makePlayer(float x, float y)
 
     auto& animation_comp = addComponent<AnimationComponent>(player);
     animation_comp.animation = m_playerAnim.anims["anim1"].get();
-    render_comp.texture = m_playerAnim.sheet->getFrame(0);
+    render_comp.texture = *m_playerAnim.sheet->getFrame(0);
 
     addComponent<PlayerComponent>(player);
     
