@@ -41,3 +41,4 @@ solution "aether-platformer"
 			"../gamesrc/cortex/**.h",
 		}
 
+dofile(path.join(AETHER_DIR, "scripts/tests/aether-tests.lua"))
