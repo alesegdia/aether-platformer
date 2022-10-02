@@ -13,7 +13,6 @@ GameplayScreen::GameplayScreen()
 void GameplayScreen::show()
 {
     m_gameWorld.reset(new JojoWorld());
-    
 }
 
 void GameplayScreen::hide()

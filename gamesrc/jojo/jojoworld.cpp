@@ -3,11 +3,31 @@
 #include "jojofactory.h"
 #include "jojoconfig.h"
 
+#include "aether/lua/lua.h"
 
 namespace jojo {
 
 JojoWorld::JojoWorld()
 {
+    lua_State* L = luaL_newstate();
+    luaL_openlibs(L);
+
+    if (luaL_dofile(L, "assets/jojo/boot.lua") == LUA_OK)
+    {
+        lua_pop(L, lua_gettop(L));
+    }
+
+    lua_getglobal(L, "startingMap");
+
+    if (lua_isstring(L, -1))
+    {
+        const char* startingMap = lua_tostring(L, -1);
+        lua_pop(L, 1);
+        printf("Loading map: %s\n", startingMap);
+    }
+
+    lua_close(L);
+
     // load tilemap
     Tmx::Map map;
     map.ParseFile("assets/jojo/levels/level1.tmx");
@@ -52,6 +72,7 @@ JojoWorld::JojoWorld()
     m_scroll = std::make_shared<aether::graphics::PlatformerScroller>(
                 m_cam, aether::math::Rectf(0, 0, m_tilemap->width(), m_tilemap->height()),
                 aether::math::Vec2f(800, 500));
+
 }
 
 void JojoWorld::render()
