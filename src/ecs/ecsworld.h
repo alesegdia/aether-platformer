@@ -34,7 +34,7 @@ protected:
     std::shared_ptr<T> pushSystem(Args... args)
     {
         auto shared = std::make_shared<T>(std::forward(args)...);
-        m_world.pushSystem(shared);
+        m_world.PushSystem(shared);
         return shared;
     }
 

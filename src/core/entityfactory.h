@@ -20,7 +20,7 @@ protected:
     template <typename ComponentType>
     ComponentType& addComponent( const secs::Entity& e )
     {
-        return m_ecsEngine.processor().addComponent<ComponentType>(e);
+        return m_ecsEngine.GetEntityProcessor().AddComponent<ComponentType>(e);
     }
 
     void addBasicTilemapEntity(secs::Entity e, float x, float y, float w, float h);

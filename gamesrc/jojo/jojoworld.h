@@ -3,6 +3,8 @@
 #include <aether/aether.h>
 #include <secs/secs.h>
 
+#include "aether/graphics/scroll.h"
+
 class ECSWorld;
 
 namespace jojo {

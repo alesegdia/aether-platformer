@@ -12,7 +12,7 @@ public:
 	{
         SECS_UNUSED(delta);
         const auto& v = transformcomponent.position;
-        transformcomponent.position.translate( velocitycomponent.velocity );
+        transformcomponent.position.Translate( velocitycomponent.velocity );
 	}
 };
 

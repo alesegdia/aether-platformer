@@ -9,5 +9,5 @@ int main( int argc, char** argv )
 {
     cortex::createApp(cortex::CortexConfig::instance().windowWidth,
                       cortex::CortexConfig::instance().windowHeight)
-            ->exec(argc, argv);
+            ->Exec(argc, argv);
 }

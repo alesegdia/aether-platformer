@@ -3,7 +3,7 @@
 
 std::shared_ptr<MapLayout> parseLayout(const std::shared_ptr<aether::tilemap::TileMap>& layout)
 {
-    auto objectLayer = layout->getObjectLayer("layout");
+    auto objectLayer = layout->GetObjectLayer("layout");
     auto rooms = std::make_shared<MapLayout>();
 
     auto getRoom = [&rooms] (const std::string& name) -> Room::Shared {
@@ -13,7 +13,7 @@ std::shared_ptr<MapLayout> parseLayout(const std::shared_ptr<aether::tilemap::Ti
         return (*rooms)[name];
     };
 
-    for( auto object : objectLayer->objects() ) {
+    for( auto object : objectLayer->GetAllObjects() ) {
         assert(object.props.count("connection_1") > 0 && "ROOM HAS NO CONNECTIONS");
         for(int i = 1; true; i++) {
             // build connection key and check if exists
@@ -44,9 +44,9 @@ std::shared_ptr<MapLayout> parseLayout(const std::shared_ptr<aether::tilemap::Ti
 
         Tmx::Map map;
         assert(object.props.count("path") == 1 && "PATH VARIABLE NOT SET!");
-        auto fullpath = layout->getBasePath() + object.props["path"];
+        auto fullpath = layout->GetBasePath() + object.props["path"];
         map.ParseFile(fullpath);
-        auto tilemap = aether::tilemap::buildMap(map);
+        auto tilemap = aether::tilemap::BuildMap(map);
         (*rooms)[object.name]->setTilemap(tilemap);
     }
 

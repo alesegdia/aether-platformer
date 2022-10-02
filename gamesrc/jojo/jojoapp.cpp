@@ -21,23 +21,23 @@ JojoApp::JojoApp(int w, int h)
 
 }
 
-int JojoApp::ready(int argc, char **argv)
+int JojoApp::Ready(int argc, char **argv)
 {
     auto screen = std::static_pointer_cast<aether::core::IScreen>(std::make_shared<jojo::GameplayScreen>());
-    setScreen(screen);
+    SetScreen(screen);
     return 0;
 }
 
-void JojoApp::update(uint64_t delta)
+void JojoApp::Update(uint64_t delta)
 {
-    aether::core::Application::update(delta);
+    aether::core::Application::Update(delta);
     if( aether::core::is_key_down(aether::core::KeyCode::Escape) )
     {
-        close();
+        Close();
     }
 }
 
-void JojoApp::dispose()
+void JojoApp::Dispose()
 {
 
 }

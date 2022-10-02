@@ -98,8 +98,8 @@ public:
         assert(m_tilemapSet == false);
         m_tilemapSet = true;
         m_tilemap = map;
-        auto doorsLayer = m_tilemap->getObjectLayer("doors");
-        for( auto door : doorsLayer->objects() ) {
+        auto doorsLayer = m_tilemap->GetObjectLayer("doors");
+        for( auto door : doorsLayer->GetAllObjects() ) {
             auto doorName = door.name;
             assert(m_doorsMap.count(doorName) == 1 && "There MUST be ONE door already");
             m_doorsMap[doorName]->setRect(door.aabb);

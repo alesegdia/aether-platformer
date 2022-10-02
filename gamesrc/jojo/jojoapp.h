@@ -10,11 +10,11 @@ class JojoApp : public aether::core::Application
 public:
     JojoApp(int w, int h);
 
-    int ready(int argc, char **argv) override;
+    int Ready(int argc, char **argv) override;
 
-    void update(uint64_t delta) override;
+    void Update(uint64_t delta) override;
 
-    void dispose() override;
+    void Dispose() override;
 
     int level = 1;
 };

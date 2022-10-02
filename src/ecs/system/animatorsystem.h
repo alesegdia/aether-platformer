@@ -6,13 +6,13 @@
 class AnimatorSystem : public secs::TypedEntitySystem<AnimationComponent, AnimatorComponent>
 {
 public:
-    void onAdded(const secs::Entity& e) override
+    void OnEntityAdded(const secs::Entity& e) override
     {
-        auto& atrc = component<AnimationComponent>(e);
-        auto& ac = component<AnimatorComponent>(e);
+        auto& atrc = GetComponent<AnimationComponent>(e);
+        auto& ac = GetComponent<AnimatorComponent>(e);
         atrc.animation = ac.groundStandAnimation;
-        atrc.animation->reset(atrc.animationData);
-        atrc.animation->updateData(atrc.animationData);
+        atrc.animation->Reset(atrc.animationData);
+        atrc.animation->UpdateData(atrc.animationData);
     }
     void process( double delta, const secs::Entity& e, AnimationComponent& animationcomponent, AnimatorComponent& atrc ) override
     {
@@ -22,10 +22,10 @@ public:
         }
         else
         {
-            if( atrc.isWalkingEntity && hasComponent<VelocityComponent>(e) )
+            if( atrc.isWalkingEntity && HasComponent<VelocityComponent>(e) )
             {
-                auto& vc = component<VelocityComponent>(e);
-                if( abs(vc.velocity.x()) > 0.0001f )
+                auto& vc = GetComponent<VelocityComponent>(e);
+                if( abs(vc.velocity.GetX()) > 0.0001f )
                 {
                     animationcomponent.animation = atrc.groundWalkAnimation;
                 }

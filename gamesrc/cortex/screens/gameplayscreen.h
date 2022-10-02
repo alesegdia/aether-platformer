@@ -15,10 +15,10 @@ class GameplayScreen : public aether::core::IScreen
 public:
     GameplayScreen();
 
-    void show() final;
-    void hide() final;
-    void render() final;
-    void update(uint64_t delta) final;
+    int Load() final;
+    int Unload() final;
+    void Render() final;
+    void Update(uint64_t delta) final;
 
 private:
     std::shared_ptr<RoomLayoutGameWorld> m_gameWorld;

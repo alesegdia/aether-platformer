@@ -30,7 +30,7 @@ void RoomLayoutGameWorld::update(double delta)
     if( m_ecsWorld->hadron().isHittingDoor() ) {
         auto doorEntity = m_ecsWorld->hadron().hittingDoor();
         auto collisionResult = m_ecsWorld->hadron().doorCollisionResult();
-        auto door = m_ecsWorld->engine().component<DoorComponent>(doorEntity).door;
+        auto door = m_ecsWorld->engine().GetComponent<DoorComponent>(doorEntity).door;
         assert(door != nullptr);
         travelThroughDoor(door, collisionResult);
     }
@@ -38,7 +38,7 @@ void RoomLayoutGameWorld::update(double delta)
 
 const aether::math::Vec2f &RoomLayoutGameWorld::playerPosition()
 {
-    return m_ecsWorld->engine().component<TransformComponent>(m_playerEntity).position;
+    return m_ecsWorld->engine().GetComponent<TransformComponent>(m_playerEntity).position;
 }
 
 const std::shared_ptr<ECSWorld> &RoomLayoutGameWorld::ecsWorld()
@@ -82,22 +82,22 @@ void RoomLayoutGameWorld::goToRoom(Room::Shared room, const Door::Shared& door, 
     int dy = 25;
     switch(otherDoor.getOrientation()) {
     case Door::Left:
-        spawnPos.set(doorRect.x() + 200, doorRect.y() + dy);
+        spawnPos.Set(doorRect.x() + 200, doorRect.y() + dy);
         break;
     case Door::Right:
-        spawnPos.set(doorRect.x() - 50, doorRect.y() + dy);
+        spawnPos.Set(doorRect.x() - 50, doorRect.y() + dy);
         break;
     case Door::Top:
-        spawnPos.set(doorRect.x(), doorRect.y() + 200 + dy);
+        spawnPos.Set(doorRect.x(), doorRect.y() + 200 + dy);
         break;
     case Door::Bottom:
-        spawnPos.set(doorRect.x(), doorRect.y() - 200 + dy);
+        spawnPos.Set(doorRect.x(), doorRect.y() - 200 + dy);
         break;
     case Door::None:
         break;
     }
 
-    goToRoom(room, spawnPos.x(), spawnPos.y());
+    goToRoom(room, spawnPos.GetX(), spawnPos.GetY());
 }
 
 void RoomLayoutGameWorld::goToRoom(const Room::Shared& room, int x, int y)
@@ -105,18 +105,18 @@ void RoomLayoutGameWorld::goToRoom(const Room::Shared& room, int x, int y)
     checkStatus();
 
     m_currentRoom = room;
-    auto collisionLayer = m_currentRoom->tilemap()->getTileLayer("collision");
-    auto playerIndex = m_currentRoom->tilemap()->getObjectLayer("player")->zOrder();
+    auto collisionLayer = m_currentRoom->tilemap()->GetTileLayer("collision");
+    auto playerIndex = m_currentRoom->tilemap()->GetObjectLayer("player")->GetDepthOrder();
     auto collisionTilemap = std::make_shared<aether::tilemap::CollisionTilemap>(collisionLayer);
     m_ecsWorld = createECSWorld(collisionTilemap, playerIndex);
 
-    for( auto& layer : m_currentRoom->tilemap()->getTileLayers() )
+    for( auto& layer : m_currentRoom->tilemap()->GetTileLayers() )
     {
-        auto layerEntity = m_ecsWorld->engine().processor().addEntity();
-        auto& renderComponent = m_ecsWorld->engine().processor().addComponent<RenderComponent>(layerEntity);
+        auto layerEntity = m_ecsWorld->engine().GetEntityProcessor().AddEntity();
+        auto& renderComponent = m_ecsWorld->engine().GetEntityProcessor().AddComponent<RenderComponent>(layerEntity);
         renderComponent.layer = layer.second;
-        renderComponent.renderOrder = layer.second->zOrder();
-        m_ecsWorld->engine().processor().addComponent<TransformComponent>(layerEntity).position.set(0, 0);
+        renderComponent.renderOrder = layer.second->GetDepthOrder();
+        m_ecsWorld->engine().GetEntityProcessor().AddComponent<TransformComponent>(layerEntity).position.Set(0, 0);
     }
 
     m_playerEntity = makePlayer(x, y);

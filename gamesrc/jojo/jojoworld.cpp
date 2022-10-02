@@ -31,11 +31,11 @@ JojoWorld::JojoWorld()
     // load tilemap
     Tmx::Map map;
     map.ParseFile("assets/jojo/levels/level1.tmx");
-    m_tilemap = aether::tilemap::buildMap(map);
+    m_tilemap = aether::tilemap::BuildMap(map);
 
     // get useful information
-    auto playerIndex = m_tilemap->getObjectLayer("player")->zOrder();
-    auto collisionLayer = m_tilemap->getTileLayer("collision");
+    auto playerIndex = m_tilemap->GetObjectLayer("player")->GetDepthOrder();
+    auto collisionLayer = m_tilemap->GetTileLayer("collision");
     auto collisionTilemap = std::make_shared<aether::tilemap::CollisionTilemap>(collisionLayer);
 
     // creation
@@ -45,19 +45,19 @@ JojoWorld::JojoWorld()
     m_playerEntity = m_factory->makePlayer(100, 250);
 
     // create layers
-    for( auto& layer : m_tilemap->getTileLayers() )
+    for( auto& layer : m_tilemap->GetTileLayers() )
     {
-        auto layerEntity = m_ecsWorld->engine().processor().addEntity();
-        auto& renderComponent = m_ecsWorld->engine().processor().addComponent<RenderComponent>(layerEntity);
+        auto layerEntity = m_ecsWorld->engine().GetEntityProcessor().AddEntity();
+        auto& renderComponent = m_ecsWorld->engine().GetEntityProcessor().AddComponent<RenderComponent>(layerEntity);
         renderComponent.layer = layer.second;
-        renderComponent.renderOrder = layer.second->zOrder();
-        m_ecsWorld->engine().processor().addComponent<TransformComponent>(layerEntity).position.set(0, 0);
+        renderComponent.renderOrder = layer.second->GetDepthOrder();
+        m_ecsWorld->engine().GetEntityProcessor().AddComponent<TransformComponent>(layerEntity).position.Set(0, 0);
     }
 
-    m_tilemap->getObjectLayer("enemies")->foreach([this](const auto& o) {
+    m_tilemap->GetObjectLayer("enemies")->ForEachObject([this](const auto& o) {
         const auto& type = o.props.at("type");
-        auto x = o.aabb.center().x();
-        auto y = o.aabb.center().y();
+        auto x = o.aabb.center().GetX();
+        auto y = o.aabb.center().GetY();
         if( type == "dumbwalker" ) {
             m_factory->makeBallEnemy(x, y-4);
         }
@@ -67,19 +67,19 @@ JojoWorld::JojoWorld()
             float(JojoConfig::instance().windowWidth),
             float(JojoConfig::instance().windowHeight)};
     m_cam = std::make_shared<aether::graphics::Camera>(viewport);
-    m_cam->scale(8.f, 8.f);
+    m_cam->SetScale(8.f, 8.f);
 
     m_scroll = std::make_shared<aether::graphics::PlatformerScroller>(
-                m_cam, aether::math::Rectf(0, 0, m_tilemap->width(), m_tilemap->height()),
+                m_cam, aether::math::Rectf(0, 0, m_tilemap->GetWidth(), m_tilemap->GetHeight()),
                 aether::math::Vec2f(800, 500));
 
 }
 
 void JojoWorld::render()
 {
-    auto pos = m_ecsWorld->engine().component<TransformComponent>(m_playerEntity).position;
+    auto pos = m_ecsWorld->engine().GetComponent<TransformComponent>(m_playerEntity).position;
 
-    m_scroll->focus(pos.x(), pos.y());
+    m_scroll->Focus(pos.GetX(), pos.GetY());
     m_ecsWorld->render();
 }
 
@@ -87,16 +87,16 @@ void JojoWorld::render()
 void JojoWorld::update(double delta)
 {
     m_ecsWorld->step(delta);
-    auto& pc = m_ecsWorld->engine().component<TransformComponent>(m_playerEntity);
-    auto& tc = m_ecsWorld->engine().component<TilemapCollisionComponent>(m_playerEntity);
+    auto& pc = m_ecsWorld->engine().GetComponent<TransformComponent>(m_playerEntity);
+    auto& tc = m_ecsWorld->engine().GetComponent<TilemapCollisionComponent>(m_playerEntity);
 
-    m_scroll->update(delta);
+    m_scroll->Update(delta);
 
-    m_scroll->setSnapToPlatform(tc.lastCollisionInfo.y_collision_direction == 1);
+    m_scroll->SetSnapToPlatform(tc.lastCollisionInfo.y_collision_direction == 1);
 
     if( tc.lastCollisionInfo.y_collision_direction == 1 )
     {
-        m_scroll->snapToPlatform(pc.position.y());
+        m_scroll->SnapToPlatform(pc.position.GetY());
     }
 }
 

@@ -9,7 +9,7 @@ CortexWorld::CortexWorld()
 {
     Tmx::Map map;
     map.ParseFile("assets/maps/main/layout.tmx");
-    auto leMap = aether::tilemap::buildMap(map);
+    auto leMap = aether::tilemap::BuildMap(map);
     setLayout(parseLayout(leMap));
     goToRoom("medical-supplies", 1000, 1000);
 }
@@ -47,8 +47,8 @@ void CortexWorld::render()
     ALLEGRO_TRANSFORM tr;
     al_identity_transform(&tr);
     al_build_transform(&tr,
-                       float(cortex::CortexConfig::instance().windowWidth / 2) - tc.x(),
-                       float(cortex::CortexConfig::instance().windowHeight / 2) - tc.y(),
+                       float(cortex::CortexConfig::instance().windowWidth / 2) - tc.GetX(),
+                       float(cortex::CortexConfig::instance().windowHeight / 2) - tc.GetY(),
                        1.0f, 1.0f, 0);
     al_use_transform(&tr);
 

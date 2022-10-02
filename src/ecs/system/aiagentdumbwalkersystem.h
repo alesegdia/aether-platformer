@@ -18,12 +18,12 @@ public:
                   VelocityComponent& vc )
 	{
         auto y = aabbcomponent.aabb.y2() + 2;
-        if( !m_collisionTilemap->isSolidTile(aabbcomponent.aabb.x(), y) )
+        if( !m_collisionTilemap->IsSolidTile(aabbcomponent.aabb.x(), y) )
         {
             aic.x_axis = - aic.x_axis;
         }
 
-        vc.velocity.x(aic.x_axis * aic.horizontal_speed);
+        vc.velocity.SetX(aic.x_axis * aic.horizontal_speed);
 	}
 
     void setCollisionTilemap(std::shared_ptr<aether::tilemap::CollisionTilemap> ct)

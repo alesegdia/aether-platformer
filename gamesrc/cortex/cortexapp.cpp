@@ -21,23 +21,23 @@ CortexApp::CortexApp(int w, int h)
 
 }
 
-int CortexApp::ready(int argc, char **argv)
+int CortexApp::Ready(int argc, char **argv)
 {
     auto screen = std::static_pointer_cast<aether::core::IScreen>(std::make_shared<cortex::GameplayScreen>());
-    setScreen(screen);
+    SetScreen(screen);
     return 0;
 }
 
-void CortexApp::update(uint64_t delta)
+void CortexApp::Update(uint64_t delta)
 {
-    aether::core::Application::update(delta);
+    aether::core::Application::Update(delta);
     if( aether::core::is_key_down(aether::core::KeyCode::Escape) )
     {
-        close();
+        Close();
     }
 }
 
-void CortexApp::dispose()
+void CortexApp::Dispose()
 {
 
 }

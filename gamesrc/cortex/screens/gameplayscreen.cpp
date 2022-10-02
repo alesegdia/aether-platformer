@@ -10,25 +10,25 @@ namespace cortex {
 GameplayScreen::GameplayScreen()
 = default;
 
-void GameplayScreen::show()
+int GameplayScreen::Load()
 {
-    m_gameWorld.reset(new CortexWorld());
-    
+	m_gameWorld.reset(new CortexWorld());
+	return 0;
 }
 
-void GameplayScreen::hide()
+int GameplayScreen::Unload()
 {
-
+	return 0;
 }
 
-void GameplayScreen::render()
+void GameplayScreen::Render()
 {
     aether::graphics::clear(1, 0, 0);
     m_gameWorld->render();
 }
 
 
-void GameplayScreen::update(uint64_t delta)
+void GameplayScreen::Update(uint64_t delta)
 {
     m_gameWorld->update(double(delta));
 }

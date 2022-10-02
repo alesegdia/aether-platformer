@@ -9,5 +9,5 @@ int main( int argc, char** argv )
 {
     jojo::createApp(jojo::JojoConfig::instance().windowWidth,
                     jojo::JojoConfig::instance().windowHeight)
-            ->exec(argc, argv);
+            ->Exec(argc, argv);
 }

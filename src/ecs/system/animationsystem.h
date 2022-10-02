@@ -12,7 +12,7 @@ public:
         SECS_UNUSED(delta);
         SECS_UNUSED(e);
         anim_comp.animationData.timer += delta;
-        anim_comp.animation->updateData( anim_comp.animationData );
+        anim_comp.animation->UpdateData( anim_comp.animationData );
         render_comp.texture = anim_comp.animationData.currentFrame->texture;
     }
 };

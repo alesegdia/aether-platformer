@@ -8,22 +8,22 @@ CortexEntityFactory::CortexEntityFactory(secs::Engine &world, int playerIndex)
       m_playerIndex(playerIndex)
 {
     aether::graphics::AsepriteAnimationLoader animloader;
-    m_playerAnim = animloader.load("assets/sampleanim.json");
+    m_playerAnim = animloader.Load("assets/sampleanim.json");
 }
 
 secs::Entity CortexEntityFactory::makePlayer(float x, float y)
 {
-    secs::Entity player = world().processor().addEntity();
+    secs::Entity player = world().GetEntityProcessor().AddEntity();
 
     addBasicTilemapEntity(player, x, y, 58, 230);
 
     auto& render_comp = addComponent<RenderComponent>(player);
-    render_comp.render_offset.set(0, 0); //-(256)/2.0f, -256/2.0f);
+    render_comp.render_offset.Set(0, 0); //-(256)/2.0f, -256/2.0f);
     render_comp.renderOrder = m_playerIndex;
 
     auto& animation_comp = addComponent<AnimationComponent>(player);
     animation_comp.animation = m_playerAnim.anims["anim1"].get();
-    render_comp.texture = *m_playerAnim.sheet->getFrame(0);
+    render_comp.texture = *m_playerAnim.sheet->GetFrame(0);
 
     addComponent<PlayerComponent>(player);
     
@@ -46,7 +46,7 @@ secs::Entity CortexEntityFactory::makePlayer(float x, float y)
 
 secs::Entity CortexEntityFactory::makeDoor( const Door::Shared& door )
 {
-    secs::Entity e = world().processor().addEntity();
+    secs::Entity e = world().GetEntityProcessor().AddEntity();
     
     auto x = float(door->getRect().x());
     auto y = float(door->getRect().y());
@@ -54,7 +54,7 @@ secs::Entity CortexEntityFactory::makeDoor( const Door::Shared& door )
     auto h = float(door->getRect().h());
     
     auto& tc = addComponent<TransformComponent>(e);
-    tc.position.set(x, y);
+    tc.position.Set(x, y);
     
     auto& dc = addComponent<DoorComponent>(e);
     dc.door = door;
@@ -64,7 +64,7 @@ secs::Entity CortexEntityFactory::makeDoor( const Door::Shared& door )
     
     auto& hcc = addComponent<HadronCollisionComponent>(e);
     hcc.body = new hadron::Body(x, y, w, h);
-    hcc.offset.set(0, 0);
+    hcc.offset.Set(0, 0);
 
     return e;    
 }

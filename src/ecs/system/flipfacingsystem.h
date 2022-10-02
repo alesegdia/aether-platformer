@@ -8,7 +8,7 @@ class FlipFacingSystem : public secs::TypedEntitySystem<RenderComponent, Velocit
 public:
 	void process( double delta, const secs::Entity& e, RenderComponent& rendercomponent, VelocityComponent& velocitycomponent )
 	{
-        float vx = velocitycomponent.velocity.x();
+        float vx = velocitycomponent.velocity.GetX();
         if( vx != 0 )
         {
             rendercomponent.flip = vx < 0;

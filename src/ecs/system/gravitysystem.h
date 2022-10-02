@@ -10,7 +10,7 @@ public:
                   GravityComponent& gravitycomponent,
                   VelocityComponent& velocitycomponent ) override
 	{
-        float prev_y = velocitycomponent.velocity.y();
+        float prev_y = velocitycomponent.velocity.GetY();
         float new_y = prev_y + gravitycomponent.gravityFactor;
 
         if( new_y > gravitycomponent.fallingVelocityCap )
@@ -18,7 +18,7 @@ public:
             new_y = gravitycomponent.fallingVelocityCap;
         }
 
-        velocitycomponent.velocity.y(new_y);
+        velocitycomponent.velocity.SetY(new_y);
 	}
 };	
 

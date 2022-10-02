@@ -24,12 +24,12 @@ void ECSWorld::setCollisionTilemap(std::shared_ptr<aether::tilemap::CollisionTil
 
 void ECSWorld::step(double delta)
 {
-    m_world.step( delta );
+    m_world.Step( delta );
 }
 
 void ECSWorld::render()
 {
-    m_world.render();
+    m_world.Render();
 }
 
 secs::Engine &ECSWorld::engine()
