@@ -16,10 +16,11 @@ class JojoECS;
 class JojoWorld
 {
 public:
-    JojoWorld();
+    JojoWorld() = default;
 
-    void render();
-    void update(double delta);
+    int Init();
+    void Render();
+    void Update(double delta);
 
 private:
     std::shared_ptr<JojoFactory> m_factory;

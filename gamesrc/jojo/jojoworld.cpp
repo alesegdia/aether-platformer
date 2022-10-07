@@ -7,7 +7,7 @@
 
 namespace jojo {
 
-JojoWorld::JojoWorld()
+int JojoWorld::Init()
 {
     lua_State* L = luaL_newstate();
     luaL_openlibs(L);
@@ -16,21 +16,30 @@ JojoWorld::JojoWorld()
     {
         lua_pop(L, lua_gettop(L));
     }
+    else
+    {
+	    return -1;
+    }
 
     lua_getglobal(L, "startingMap");
 
-    if (lua_isstring(L, -1))
+	Tmx::Map map;
+	if (lua_isstring(L, -1))
     {
         const char* startingMap = lua_tostring(L, -1);
         lua_pop(L, 1);
         printf("Loading map: %s\n", startingMap);
+		map.ParseFile(startingMap);
     }
+    else
+    {
+	    return -1;
+    }
+
 
     lua_close(L);
 
     // load tilemap
-    Tmx::Map map;
-    map.ParseFile("assets/jojo/levels/level1.tmx");
     m_tilemap = aether::tilemap::BuildMap(map);
 
     // get useful information
@@ -72,10 +81,10 @@ JojoWorld::JojoWorld()
     m_scroll = std::make_shared<aether::graphics::PlatformerScroller>(
                 m_cam, aether::math::Rectf(0, 0, m_tilemap->GetWidth(), m_tilemap->GetHeight()),
                 aether::math::Vec2f(800, 500));
-
+    return 0;
 }
 
-void JojoWorld::render()
+void JojoWorld::Render()
 {
     auto pos = m_ecsWorld->engine().GetComponent<TransformComponent>(m_playerEntity).position;
 
@@ -84,7 +93,7 @@ void JojoWorld::render()
 }
 
 
-void JojoWorld::update(double delta)
+void JojoWorld::Update(double delta)
 {
     m_ecsWorld->step(delta);
     auto& pc = m_ecsWorld->engine().GetComponent<TransformComponent>(m_playerEntity);

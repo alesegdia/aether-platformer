@@ -13,6 +13,7 @@ GameplayScreen::GameplayScreen()
 int GameplayScreen::Load()
 {
 	m_gameWorld.reset(new JojoWorld());
+	m_gameWorld->Init();
 	return 0;
 }
 
@@ -24,13 +25,13 @@ int GameplayScreen::Unload()
 void GameplayScreen::Render()
 {
     aether::graphics::clear(1, 0, 0);
-    m_gameWorld->render();
+    m_gameWorld->Render();
 }
 
 
 void GameplayScreen::Update(uint64_t delta)
 {
-    m_gameWorld->update(double(delta));
+    m_gameWorld->Update(double(delta));
 }
 
 
