@@ -1,0 +1,1 @@
+startingMap = "assets/jojo/levels/level1.tmx"
