@@ -23,7 +23,7 @@ int GameplayScreen::Unload()
 
 void GameplayScreen::Render()
 {
-    aether::graphics::clear(1, 0, 0);
+    aether::graphics::clear(1.f, 0.f, 0.f);
     m_gameWorld->render();
 }
 

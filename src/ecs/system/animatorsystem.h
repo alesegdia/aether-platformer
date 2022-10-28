@@ -28,6 +28,14 @@ public:
                 if( abs(vc.velocity.GetX()) > 0.0001f )
                 {
                     animationcomponent.animation = atrc.groundWalkAnimation;
+                    if(atrc.slowingDown)
+                    {
+                        animationcomponent.animation = atrc.slowDownAnim;
+                    }
+                    else if(atrc.running)
+                    {
+                        animationcomponent.animation = atrc.runningAnim;
+                    }
                 }
                 else
                 {

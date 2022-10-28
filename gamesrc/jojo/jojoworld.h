@@ -3,7 +3,7 @@
 #include <aether/aether.h>
 #include <secs/secs.h>
 
-#include "aether/graphics/scroll.h"
+#include "aether/graphics/platformerscroller.h"
 
 class ECSWorld;
 

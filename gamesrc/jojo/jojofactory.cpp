@@ -24,7 +24,6 @@ secs::Entity JojoFactory::makePlayer(float x, float y)
 
     auto& animation_comp = addComponent<AnimationComponent>(player);
     animation_comp.animation = m_playerAnim.anims["stand"].get();
-    render_comp.texture = *m_playerAnim.sheet->GetFrame(0);
 
     addComponent<PlayerComponent>(player);
     
@@ -37,6 +36,8 @@ secs::Entity JojoFactory::makePlayer(float x, float y)
     atrc.groundStandAnimation = m_playerAnim.anims["stand"].get();
     atrc.groundWalkAnimation = m_playerAnim.anims["walk"].get();
     atrc.airAnimation = m_playerAnim.anims["jump"].get();
+    atrc.runningAnim = m_playerAnim.anims["run"].get();
+    atrc.slowDownAnim = m_playerAnim.anims["stop"].get();
 
     auto& gc = addComponent<GravityComponent>(player);
     gc.gravityFactor = jojo::JojoConfig::instance().playerGravityFactor;
@@ -57,7 +58,6 @@ secs::Entity JojoFactory::makeBallEnemy(float x, float y)
 
     auto& animation_comp = addComponent<AnimationComponent>(entity);
     animation_comp.animation = m_ballEnemyAnim.anims["walk"].get();
-    render_comp.texture = *m_ballEnemyAnim.sheet->GetFrame(0);
 
     auto& aic = addComponent<AgentInputComponent>(entity);
     aic.horizontal_speed = 0.5f;

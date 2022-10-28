@@ -17,8 +17,8 @@ public:
 
 private:
 
-    aether::graphics::LoadedAnimationData m_playerAnim;
-    aether::graphics::LoadedAnimationData m_ballEnemyAnim;
+    aether::graphics::AsepriteAnimationData m_playerAnim;
+    aether::graphics::AsepriteAnimationData m_ballEnemyAnim;
     int m_playerIndex = 0;
 
 };

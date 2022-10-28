@@ -4,5 +4,11 @@
 
 struct VelocityComponent
 {
-    aether::math::Vec2f velocity = aether::math::Vec2f(0,0);
+	aether::math::Vec2f velocity = aether::math::Vec2f(0, 0);
 };
+
+struct AccelerationComponent
+{
+	aether::math::Vec2f velocity = aether::math::Vec2f(0, 0);
+};
+
