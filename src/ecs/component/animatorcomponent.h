@@ -11,10 +11,10 @@ struct AnimatorComponent
 	bool running = false;
 	bool slowingDown = true;
 
-    aether::graphics::Animation* airAnimation;
-    aether::graphics::Animation* groundStandAnimation;
-	aether::graphics::Animation* groundWalkAnimation;
-	aether::graphics::Animation* slowDownAnim;
-	aether::graphics::Animation* runningAnim;
+    aether::render::Animation* airAnimation;
+    aether::render::Animation* groundStandAnimation;
+	aether::render::Animation* groundWalkAnimation;
+	aether::render::Animation* slowDownAnim;
+	aether::render::Animation* runningAnim;
 
 };

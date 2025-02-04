@@ -1,5 +1,4 @@
-AETHER_DIR = path.getabsolute("../module/aether")
-
+dofile("../aether-config.lua")
 dofile(path.join(AETHER_DIR, "scripts/util/util.lua"))
 
 aetherConfig()
@@ -10,9 +9,10 @@ solution "aether-platformer"
 	configurations { "debug", "release" }
 	platforms { "x32", "x64" }
 	language "C++"
-
+	
 	aetherBuild()
 
+	group("games")
 	aetherProject("jojo")
 		includedirs {
 			"../src/",
@@ -25,6 +25,7 @@ solution "aether-platformer"
 			"../src/**.h",
 			"../gamesrc/jojo/**.cpp",
 			"../gamesrc/jojo/**.h",
+			path.join(AETHER_DIR, "src/main/main.cpp")
 		}
 
 	aetherProject("cortex")
@@ -39,6 +40,6 @@ solution "aether-platformer"
 			"../src/**.h",
 			"../gamesrc/cortex/**.cpp",
 			"../gamesrc/cortex/**.h",
+			path.join(AETHER_DIR, "src/main/main.cpp")
 		}
 
-dofile(path.join(AETHER_DIR, "scripts/tests/aether-tests.lua"))
