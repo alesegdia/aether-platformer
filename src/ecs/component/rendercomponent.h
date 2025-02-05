@@ -4,7 +4,6 @@
 
 struct RenderComponent
 {
-    aether::render::Animation animation;
-	aether::render::AnimationData animationData;
+    std::string currentAnimation;
 	aether::scene::ISpriteNode* sprite = nullptr;
 };

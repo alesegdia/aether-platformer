@@ -7,7 +7,7 @@ JojoFactory::JojoFactory(secs::Engine &world, int playerIndex)
     : BaseEntityFactory(world),
       m_playerIndex(playerIndex)
 {
-    aether::graphics::AsepriteAnimationLoader animloader;
+    aether::render::AsepriteAnimationLoader animloader;
     m_playerAnim = animloader.Load("assets/jojo/bicho.json");
     m_ballEnemyAnim = animloader.Load("assets/jojo/enemyball.json");
 }
@@ -19,11 +19,10 @@ secs::Entity JojoFactory::makePlayer(float x, float y)
     addBasicTilemapEntity(player, x, y, 20, 16);
 
     auto& render_comp = addComponent<RenderComponent>(player);
-    render_comp.render_offset.Set(0, 0); //-(256)/2.0f, -256/2.0f);
-    render_comp.renderOrder = m_playerIndex;
-
-    auto& animation_comp = addComponent<AnimationComponent>(player);
-    animation_comp.animation = m_playerAnim.anims["stand"].get();
+    render_comp.sprite = aether::GEngine->CreateSpriteNode(glm::fvec2{ 32, 32 });
+    render_comp.sprite->LoadAllAnimations(m_ballEnemyAnim);
+    render_comp.sprite->PlayAnimation("stand");
+    render_comp.currentAnimation = "stand";
 
     addComponent<PlayerComponent>(player);
     
@@ -33,11 +32,11 @@ secs::Entity JojoFactory::makePlayer(float x, float y)
     
     addComponent<JumperAgentComponent>(player);
     auto& atrc = addComponent<AnimatorComponent>(player);
-    atrc.groundStandAnimation = m_playerAnim.anims["stand"].get();
-    atrc.groundWalkAnimation = m_playerAnim.anims["walk"].get();
-    atrc.airAnimation = m_playerAnim.anims["jump"].get();
-    atrc.runningAnim = m_playerAnim.anims["run"].get();
-    atrc.slowDownAnim = m_playerAnim.anims["stop"].get();
+    atrc.groundStandAnimation = "stand";
+    atrc.groundWalkAnimation = "walk";
+    atrc.airAnimation = "jump";
+    atrc.runningAnim = "run";
+    atrc.slowDownAnim = "stop";
 
     auto& gc = addComponent<GravityComponent>(player);
     gc.gravityFactor = jojo::JojoConfig::instance().playerGravityFactor;
@@ -53,20 +52,19 @@ secs::Entity JojoFactory::makeBallEnemy(float x, float y)
     addBasicTilemapEntity(entity, x, y, 20, 16);
 
     auto& render_comp = addComponent<RenderComponent>(entity);
-    render_comp.render_offset.Set(0, 0);
-    render_comp.renderOrder = m_playerIndex;
-
-    auto& animation_comp = addComponent<AnimationComponent>(entity);
-    animation_comp.animation = m_ballEnemyAnim.anims["walk"].get();
+    render_comp.currentAnimation = "walk";
+	render_comp.sprite = aether::GEngine->CreateSpriteNode(glm::fvec2{ 32, 32 });
+	render_comp.sprite->LoadAllAnimations(m_ballEnemyAnim);
+	render_comp.sprite->PlayAnimation("walk");
 
     auto& aic = addComponent<AgentInputComponent>(entity);
     aic.horizontal_speed = 0.5f;
     aic.x_axis = 1;
 
     auto& atrc = addComponent<AnimatorComponent>(entity);
-    atrc.groundStandAnimation = m_ballEnemyAnim.anims["walk"].get();
-    atrc.groundWalkAnimation = m_ballEnemyAnim.anims["walk"].get();
-    atrc.airAnimation = m_ballEnemyAnim.anims["walk"].get();
+    atrc.groundStandAnimation = "walk";
+    atrc.groundWalkAnimation = "walk";
+    atrc.airAnimation = "walk";
 
     addComponent<AIAgentDumbWalkerComponent>(entity);
 

@@ -21,7 +21,7 @@ JojoApp::JojoApp(int w, int h)
 
 }
 
-int JojoApp::Ready(int argc, char **argv)
+int JojoApp::Ready(const aether::core::CommandLineArguments& args)
 {
     auto screen = std::static_pointer_cast<aether::core::IScreen>(std::make_shared<jojo::GameplayScreen>());
     SetScreen(screen);
