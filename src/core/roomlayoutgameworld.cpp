@@ -110,6 +110,7 @@ void RoomLayoutGameWorld::goToRoom(const Room::Shared& room, int x, int y)
     auto collisionTilemap = std::make_shared<aether::tilemap::CollisionTilemap>(collisionLayer);
     m_ecsWorld = createECSWorld(collisionTilemap, playerIndex);
 
+    /*
     for( auto& layer : m_currentRoom->tilemap()->GetTileLayers() )
     {
         auto layerEntity = m_ecsWorld->engine().GetEntityProcessor().AddEntity();
@@ -118,7 +119,7 @@ void RoomLayoutGameWorld::goToRoom(const Room::Shared& room, int x, int y)
         renderComponent.renderOrder = layer.second->GetDepthOrder();
         m_ecsWorld->engine().GetEntityProcessor().AddComponent<TransformComponent>(layerEntity).position.Set(0, 0);
     }
-
+    */
     m_playerEntity = makePlayer(x, y);
     onRoomCreated(room);
 }

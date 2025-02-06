@@ -10,7 +10,7 @@ class CortexApp : public aether::core::Application
 public:
     CortexApp(int w, int h);
 
-    int Ready(int argc, char **argv) override;
+    int Ready(const aether::core::CommandLineArguments& args) override;
 
     void Update(uint64_t delta) override;
 

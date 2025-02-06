@@ -17,7 +17,7 @@ public:
 
 private:
 
-    aether::graphics::AsepriteAnimationData m_playerAnim;
+    aether::render::AsepriteAnimationData m_playerAnim;
     int m_playerIndex = 0;
 
 };

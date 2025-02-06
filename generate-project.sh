@@ -1,1 +1,1 @@
-genie --backend=backend-allegro vs2022
+genie.exe --backend=backend-gl vs2022

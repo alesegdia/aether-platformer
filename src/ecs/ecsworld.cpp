@@ -6,12 +6,10 @@
 
 ECSWorld::ECSWorld()
 {
-    pushSystem<RenderingSystem>();
     pushSystem<FlipFacingSystem>();
     pushSystem<MovementSystem>();
     m_tilemapCollisionSystem = pushSystem<TilemapCollisionSystem>();
     m_hadronCollisionSystem = pushSystem<HadronCollisionSystem>();
-    pushSystem<AnimationSystem>();
 }
 
 ECSWorld::~ECSWorld()

@@ -45,7 +45,7 @@ public:
         x2 = x1 + aabb.width;
         y1 = aabb.y;
         y2 = y1 + aabb.height;
-        aether::graphics::draw_rectangle(x1, y1, x2, y2, aether::graphics::Color(uint8_t(0), uint8_t(255), uint8_t(255)), 2.f );
+        // aether::graphics::draw_rectangle(x1, y1, x2, y2, aether::graphics::Color(uint8_t(0), uint8_t(255), uint8_t(255)), 2.f );
     }
 
     void OnEntityAdded( const secs::Entity& e ) override

@@ -61,7 +61,7 @@ public:
     void Render ( const secs::Entity& e ) override
     {
         auto& aabbcomp = GetComponent<AABBComponent>(e);
-        aether::graphics::draw_filled_rectangle_centered(aabbcomp.aabb, aether::graphics::Color(uint8_t(0), uint8_t(255), uint8_t(255)));
+        // aether::graphics::draw_filled_rectangle_centered(aabbcomp.aabb, aether::graphics::Color(uint8_t(0), uint8_t(255), uint8_t(255)));
     }
 
 private:

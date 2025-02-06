@@ -44,6 +44,7 @@ void CortexWorld::render()
 {
     auto tc = playerPosition();
 
+    /*
     ALLEGRO_TRANSFORM tr;
     al_identity_transform(&tr);
     al_build_transform(&tr,
@@ -53,6 +54,7 @@ void CortexWorld::render()
     al_use_transform(&tr);
 
     RoomLayoutGameWorld::render();
+    */
 }
 
 

@@ -21,7 +21,7 @@ CortexApp::CortexApp(int w, int h)
 
 }
 
-int CortexApp::Ready(int argc, char **argv)
+int CortexApp::Ready(const aether::core::CommandLineArguments& args)
 {
     auto screen = std::static_pointer_cast<aether::core::IScreen>(std::make_shared<cortex::GameplayScreen>());
     SetScreen(screen);

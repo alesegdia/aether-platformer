@@ -7,7 +7,7 @@ CortexEntityFactory::CortexEntityFactory(secs::Engine &world, int playerIndex)
     : BaseEntityFactory(world),
       m_playerIndex(playerIndex)
 {
-    aether::graphics::AsepriteAnimationLoader animloader;
+    aether::render::AsepriteAnimationLoader animloader;
     m_playerAnim = animloader.Load("assets/sampleanim.json");
 }
 

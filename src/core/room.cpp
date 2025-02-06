@@ -46,7 +46,7 @@ std::shared_ptr<MapLayout> parseLayout(const std::shared_ptr<aether::tilemap::Ti
         assert(object.props.count("path") == 1 && "PATH VARIABLE NOT SET!");
         auto fullpath = layout->GetBasePath() + object.props["path"];
         map.ParseFile(fullpath);
-        auto tilemap = aether::tilemap::BuildMap(map);
+        auto tilemap = std::make_shared<aether::tilemap::TileMap>(map);
         (*rooms)[object.name]->setTilemap(tilemap);
     }
 

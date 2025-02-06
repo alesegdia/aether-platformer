@@ -3,43 +3,42 @@
 #include <secs/secs.h>
 #include "../components.h"
 
-class AnimatorSystem : public secs::TypedEntitySystem<AnimationComponent, AnimatorComponent>
+class AnimatorSystem : public secs::TypedEntitySystem<RenderComponent, AnimatorComponent>
 {
 public:
     void OnEntityAdded(const secs::Entity& e) override
     {
-        auto& atrc = GetComponent<AnimationComponent>(e);
+        auto& rc = GetComponent<RenderComponent>(e);
         auto& ac = GetComponent<AnimatorComponent>(e);
-        atrc.animation = ac.groundStandAnimation;
-        atrc.animation->Reset(atrc.animationData);
-        atrc.animation->UpdateData(atrc.animationData);
+        rc.sprite->PlayAnimation(ac.groundStandAnimation);
     }
-    void process( double delta, const secs::Entity& e, AnimationComponent& animationcomponent, AnimatorComponent& atrc ) override
+
+    void process( double delta, const secs::Entity& e, RenderComponent& rc, AnimatorComponent& ac ) override
     {
-        if( atrc.onAir && atrc.airAnimation != nullptr )
+        if( ac.onAir && rc.sprite->HasAnimation(ac.airAnimation))
         {
-            animationcomponent.animation = atrc.airAnimation;
+            rc.sprite->PlayAnimation(ac.airAnimation);
         }
         else
         {
-            if( atrc.isWalkingEntity && HasComponent<VelocityComponent>(e) )
+            if( ac.isWalkingEntity && HasComponent<VelocityComponent>(e) )
             {
                 auto& vc = GetComponent<VelocityComponent>(e);
                 if( abs(vc.velocity.GetX()) > 0.0001f )
                 {
-                    animationcomponent.animation = atrc.groundWalkAnimation;
-                    if(atrc.slowingDown)
+                    rc.sprite->PlayAnimation(ac.groundWalkAnimation);
+                    if(ac.slowingDown)
                     {
-                        animationcomponent.animation = atrc.slowDownAnim;
+                        rc.sprite->PlayAnimation(ac.slowDownAnim);
                     }
-                    else if(atrc.running)
+                    else if(ac.running)
                     {
-                        animationcomponent.animation = atrc.runningAnim;
+                        rc.sprite->PlayAnimation(ac.runningAnim);
                     }
                 }
                 else
                 {
-                    animationcomponent.animation = atrc.groundStandAnimation;
+                    rc.sprite->PlayAnimation(ac.groundStandAnimation);
                 }
             }
         }
