@@ -25,7 +25,7 @@ solution "aether-platformer"
 			"../src/**.h",
 			"../gamesrc/jojo/**.cpp",
 			"../gamesrc/jojo/**.h",
-			path.join(AETHER_DIR, "src/main/main.cpp")
+			-- path.join(AETHER_DIR, "src/main/main.cpp")
 		}
 
 	aetherProject("cortex")
@@ -40,6 +40,6 @@ solution "aether-platformer"
 			"../src/**.h",
 			"../gamesrc/cortex/**.cpp",
 			"../gamesrc/cortex/**.h",
-			path.join(AETHER_DIR, "src/main/main.cpp")
+			-- path.join(AETHER_DIR, "src/main/main.cpp")
 		}
 

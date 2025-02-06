@@ -9,8 +9,8 @@ CortexWorld::CortexWorld()
 {
     Tmx::Map map;
     map.ParseFile("assets/maps/main/layout.tmx");
-    auto leMap = aether::tilemap::BuildMap(map);
-    setLayout(parseLayout(leMap));
+    // auto leMap = aether::tilemap::BuildMap(map);
+    // setLayout(parseLayout(leMap));
     goToRoom("medical-supplies", 1000, 1000);
 }
 

@@ -18,11 +18,10 @@ secs::Entity CortexEntityFactory::makePlayer(float x, float y)
     addBasicTilemapEntity(player, x, y, 58, 230);
 
     auto& render_comp = addComponent<RenderComponent>(player);
-    render_comp.render_offset.Set(0, 0); //-(256)/2.0f, -256/2.0f);
-    render_comp.renderOrder = m_playerIndex;
-
-    auto& animation_comp = addComponent<AnimationComponent>(player);
-    animation_comp.animation = m_playerAnim.anims["anim1"].get();
+    render_comp.sprite = aether::GEngine->CreateSpriteNode(glm::fvec2{ 32, 32 });
+    render_comp.sprite->LoadAllAnimations(m_playerAnim);
+    render_comp.sprite->PlayAnimation("anim1");
+    render_comp.currentAnimation = "anim1";
 
     addComponent<PlayerComponent>(player);
     
@@ -32,9 +31,9 @@ secs::Entity CortexEntityFactory::makePlayer(float x, float y)
     
     addComponent<JumperAgentComponent>(player);
     auto& atrc = addComponent<AnimatorComponent>(player);
-    atrc.groundStandAnimation = m_playerAnim.anims["anim1"].get();
-    atrc.groundWalkAnimation = m_playerAnim.anims["anim2"].get();
-    atrc.airAnimation = m_playerAnim.anims["anim3"].get();
+    atrc.groundStandAnimation = "anim1";
+    atrc.groundWalkAnimation = "anim2";
+    atrc.airAnimation = "anim3";
 
     auto& gc = addComponent<GravityComponent>(player);
     gc.gravityFactor = cortex::CortexConfig::instance().playerGravityFactor;

@@ -7,7 +7,7 @@
 
 int main( int argc, char** argv )
 {
-    jojo::createApp(jojo::JojoConfig::instance().windowWidth,
+    return jojo::createApp(jojo::JojoConfig::instance().windowWidth,
                     jojo::JojoConfig::instance().windowHeight)
-            ->Exec(argc, argv);
+            ->Exec(aether::core::CommandLineArguments(argc, argv));
 }

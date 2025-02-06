@@ -7,7 +7,7 @@
 
 int main( int argc, char** argv )
 {
-    cortex::createApp(cortex::CortexConfig::instance().windowWidth,
-                      cortex::CortexConfig::instance().windowHeight)
-            ->Exec(argc, argv);
+    return cortex::createApp(cortex::CortexConfig::instance().windowWidth,
+                             cortex::CortexConfig::instance().windowHeight)
+            ->Exec(aether::core::CommandLineArguments(argc, argv));
 }

@@ -11,7 +11,7 @@ public:
         float vx = velocitycomponent.velocity.GetX();
         if( vx != 0 )
         {
-            rendercomponent.flip = vx < 0;
+            rendercomponent.sprite->SetXFlip(vx < 0);
         }
 	}
 };	

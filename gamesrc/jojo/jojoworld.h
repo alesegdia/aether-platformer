@@ -27,8 +27,8 @@ private:
     std::shared_ptr<aether::tilemap::TileMap> m_tilemap;
     std::shared_ptr<ECSWorld> m_ecsWorld = nullptr;
     secs::Entity m_playerEntity;
-    std::shared_ptr<aether::render::Camera> m_cam;
-    std::shared_ptr<aether::graphics::PlatformerScroller> m_scroll;
+    aether::render::Camera* m_cam;
+    std::shared_ptr<aether::render::PlatformerScroller> m_scroll;
 
 };
 
