@@ -1,7 +1,7 @@
 #pragma once
 
 #include <secs/secs.h>
-#include "core/entityfactory.h"
+#include "aether/plugin/platformer/core/entityfactory.h"
 
 
 namespace cortex {

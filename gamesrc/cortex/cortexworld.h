@@ -1,7 +1,7 @@
 #pragma once
 
-#include "core/roomlayoutgameworld.h"
-#include "ecs/ecsworld.h"
+#include "aether/plugin/platformer/core/roomlayoutgameworld.h"
+#include "aether/plugin/platformer/ecs/ecsworld.h"
 #include "cortex/cortexentityfactory.h"
 
 

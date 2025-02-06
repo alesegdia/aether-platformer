@@ -1,6 +1,6 @@
 
 #include "cortex/cortexecs.h"
-#include "ecs/systems.h"
+#include "aether/plugin/platformer/ecs/systems.h"
 
 namespace cortex {
 

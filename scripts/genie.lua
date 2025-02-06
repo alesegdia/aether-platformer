@@ -15,14 +15,11 @@ solution "aether-platformer"
 	group("games")
 	aetherProject("jojo")
 		includedirs {
-			"../src/",
 			"../gamesrc/"
 		}
 		debugdir ("..")
 		targetdir ("../build")
 		files {
-			"../src/**.cpp",
-			"../src/**.h",
 			"../gamesrc/jojo/**.cpp",
 			"../gamesrc/jojo/**.h",
 			-- path.join(AETHER_DIR, "src/main/main.cpp")
@@ -30,14 +27,11 @@ solution "aether-platformer"
 
 	aetherProject("cortex")
 		includedirs {
-			"../src/",
 			"../gamesrc/"
 		}
 		debugdir ("..")
 		targetdir ("../build")
 		files {
-			"../src/**.cpp",
-			"../src/**.h",
 			"../gamesrc/cortex/**.cpp",
 			"../gamesrc/cortex/**.h",
 			-- path.join(AETHER_DIR, "src/main/main.cpp")
