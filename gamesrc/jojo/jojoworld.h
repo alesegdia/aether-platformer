@@ -3,7 +3,7 @@
 #include <aether/aether.h>
 #include <secs/secs.h>
 
-#include "aether/graphics/platformerscroller.h"
+#include "aether/render/platformerscroller.h"
 
 class ECSWorld;
 
@@ -27,7 +27,7 @@ private:
     std::shared_ptr<aether::tilemap::TileMap> m_tilemap;
     std::shared_ptr<ECSWorld> m_ecsWorld = nullptr;
     secs::Entity m_playerEntity;
-    std::shared_ptr<aether::graphics::Camera> m_cam;
+    std::shared_ptr<aether::render::Camera> m_cam;
     std::shared_ptr<aether::graphics::PlatformerScroller> m_scroll;
 
 };

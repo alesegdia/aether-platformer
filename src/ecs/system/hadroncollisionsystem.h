@@ -39,7 +39,7 @@ public:
     void Render(const secs::Entity &e) override
     {
         auto& hcc = GetComponent<HadronCollisionComponent>(e);
-        const auto& aabb = hcc.body->GetAABB();
+        const auto& aabb = hcc.body->GetLocalAABB();
         float x1, y1, x2, y2;
         x1 = aabb.x;
         x2 = x1 + aabb.width;
