@@ -10,6 +10,11 @@ class JojoApp : public aether::core::Application
 public:
     JojoApp(int w, int h);
 
+    std::vector<std::string> GetAssetPaths() const override
+    {
+        return { "media/", "assets/" };
+    }
+
 protected:
     int Ready(const aether::core::CommandLineArguments& args) override;
 

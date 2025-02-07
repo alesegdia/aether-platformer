@@ -40,11 +40,11 @@ int JojoWorld::Init()
     lua_close(L);
 
     // load tilemap
-    // m_tilemap = aether::tilemap::BuildMap(map);
+    auto tilemap = aether::tilemap::BuildMap(map);
 
     // get useful information
-    auto playerIndex = m_tilemap->GetObjectLayer("player")->GetDepthOrder();
-    auto collisionLayer = m_tilemap->GetTileLayer("collision");
+    auto playerIndex = tilemap->GetObjectLayer("player")->GetDepthOrder();
+    auto collisionLayer = tilemap->GetTileLayer("collision");
     auto collisionTilemap = std::make_shared<aether::tilemap::CollisionTilemap>(collisionLayer);
 
     // creation
@@ -53,19 +53,9 @@ int JojoWorld::Init()
     m_factory = std::make_shared<JojoFactory>(m_ecsWorld->engine(), playerIndex);
     m_playerEntity = m_factory->makePlayer(100, 250);
 
-    /*
-    // create layers
-    for( auto& layer : m_tilemap->GetTileLayers() )
-    {
-        auto layerEntity = m_ecsWorld->engine().GetEntityProcessor().AddEntity();
-        auto& renderComponent = m_ecsWorld->engine().GetEntityProcessor().AddComponent<RenderComponent>(layerEntity);
-        renderComponent.layer = layer.second;
-        renderComponent.renderOrder = layer.second->GetDepthOrder();
-        m_ecsWorld->engine().GetEntityProcessor().AddComponent<TransformComponent>(layerEntity).position.Set(0, 0);
-    }
-    */
+	auto tilemapNode = aether::GEngine->CreateTilemapNode(tilemap);
 
-    m_tilemap->GetObjectLayer("enemies")->ForEachObject([this](const auto& o) {
+    tilemap->GetObjectLayer("enemies")->ForEachObject([this](const auto& o) {
         const auto& type = o.props.at("type");
         auto x = o.aabb.center().GetX();
         auto y = o.aabb.center().GetY();
@@ -77,20 +67,18 @@ int JojoWorld::Init()
     auto viewport = aether::math::Vec2f{
             float(JojoConfig::instance().windowWidth),
             float(JojoConfig::instance().windowHeight)};
-    m_cam = aether::GEngine->GetCamera(aether::render::CameraFlags::Default);
-    m_cam->SetOrtographicScale(8.f);
+    auto cam = aether::GEngine->GetCamera(aether::render::CameraFlags::Default);
+    cam->SetOrtographicScale(8.f);
 
-    /*
     m_scroll = std::make_shared<aether::render::PlatformerScroller>(
-                m_cam, aether::math::Rectf(0, 0, m_tilemap->GetWidth(), m_tilemap->GetHeight()),
+                cam, aether::math::Rectf(0, 0, tilemap->GetTotalWidthInPixels(), tilemap->GetTotalHeightInPixels()),
                 aether::math::Vec2f(800, 500));
-    */
     return 0;
 }
 
 void JojoWorld::Render()
 {
-    auto pos = m_ecsWorld->engine().GetComponent<TransformComponent>(m_playerEntity).position;
+    auto& pos = m_ecsWorld->engine().GetComponent<TransformComponent>(m_playerEntity).position;
 
     m_scroll->Focus(pos.GetX(), pos.GetY());
     m_ecsWorld->render();

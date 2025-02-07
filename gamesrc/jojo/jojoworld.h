@@ -17,17 +17,14 @@ class JojoWorld
 {
 public:
     JojoWorld() = default;
-
     int Init();
     void Render();
     void Update(double delta);
 
 private:
     std::shared_ptr<JojoFactory> m_factory;
-    std::shared_ptr<aether::tilemap::TileMap> m_tilemap;
     std::shared_ptr<ECSWorld> m_ecsWorld = nullptr;
     secs::Entity m_playerEntity;
-    aether::render::Camera* m_cam;
     std::shared_ptr<aether::render::PlatformerScroller> m_scroll;
 
 };
