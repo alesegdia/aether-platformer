@@ -69,7 +69,7 @@ int JojoWorld::Init()
             float(JojoConfig::instance().windowHeight)};
     auto cam = aether::GEngine->GetCamera(aether::render::CameraFlags::Default);
 	aether::GEngine->EnableDebugMode();
-    // cam->SetOrtographicScale(8.f);
+    cam->SetOrthographicSize(8.f);
 
     /*
     m_scroll = std::make_shared<aether::render::PlatformerScroller>(
