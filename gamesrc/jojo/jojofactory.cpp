@@ -20,7 +20,7 @@ secs::Entity JojoFactory::makePlayer(float x, float y)
 
     auto& render_comp = addComponent<RenderComponent>(player);
     render_comp.sprite = aether::GEngine->CreateSpriteNode(glm::fvec2{ 32, 32 });
-    render_comp.sprite->LoadAllAnimations(m_ballEnemyAnim);
+    render_comp.sprite->LoadAllAnimations(m_playerAnim);
     render_comp.sprite->PlayAnimation("stand");
     render_comp.currentAnimation = "stand";
 
