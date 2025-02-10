@@ -1,6 +1,5 @@
 #include <aether/aether.h>
 
-
 namespace jojo {
 
 std::shared_ptr<aether::core::Application> createApp(int ww, int wh);

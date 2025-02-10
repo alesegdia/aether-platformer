@@ -1,6 +1,7 @@
 
 #include "jojoapp.h"
 #include <Tmx.h.in>
+#include "imgui.h"
 
 #include "jojo/screens/gameplayscreen.h"
 

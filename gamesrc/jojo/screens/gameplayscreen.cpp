@@ -1,6 +1,10 @@
 #include "gameplayscreen.h"
 
+
+#include <secs/secs.h>
 #include "jojo/jojoworld.h"
+
+#include <imgui.h>
 
 
 
@@ -32,6 +36,23 @@ void GameplayScreen::Render()
 void GameplayScreen::Update(uint64_t delta)
 {
     m_gameWorld->Update(double(delta));
+}
+
+void GameplayScreen::ImGui()
+{
+    auto ecsWorld = m_gameWorld->GetECSWorld();
+
+	auto entitySystems = ecsWorld.GetAllSystems();
+
+	ImGui::Begin("Jojo");
+	for (auto entitySystem : entitySystems)
+	{
+		auto system = entitySystem;
+		auto name = system->GetName();
+		ImGui::Text("%s", name);
+	}
+	ImGui::End();
+
 }
 
 

@@ -20,6 +20,7 @@ public:
     int Unload() final;
     void Render() final;
     void Update(uint64_t delta) final;
+	void ImGui() final;
 
 private:
     std::shared_ptr<JojoWorld> m_gameWorld;
