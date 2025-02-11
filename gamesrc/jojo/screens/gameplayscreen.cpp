@@ -18,6 +18,12 @@ int GameplayScreen::Load()
 {
 	m_gameWorld.reset(new JojoWorld());
 	m_gameWorld->Init();
+
+	aether::core::get_input_manager().AddEventOnKeyJustPressed("game", aether::core::KeyCode::N1, [this]() {
+		aether::GEngine->ToggleFeature("debugfpscam");
+	});
+
+
 	return 0;
 }
 
@@ -40,11 +46,15 @@ void GameplayScreen::Update(uint64_t delta)
 
 void GameplayScreen::ImGui()
 {
-    auto ecsWorld = m_gameWorld->GetECSWorld();
+	auto ecsWorld = m_gameWorld->GetECSWorld();
+	ImGuiECS(ecsWorld);
+}
 
-	auto entitySystems = ecsWorld.GetAllSystems();
+void GameplayScreen::ImGuiECS(const secs::Engine& engine)
+{
+	auto entitySystems = engine.GetAllSystems();
 
-	ImGui::Begin("Jojo");
+	ImGui::Begin("SECS");
 	for (auto entitySystem : entitySystems)
 	{
 		auto system = entitySystem;

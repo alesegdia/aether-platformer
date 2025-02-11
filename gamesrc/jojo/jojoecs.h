@@ -14,7 +14,7 @@ namespace jojo {
 class JojoECS : public ECSWorld
 {
 public:
-    JojoECS();
+    JojoECS(int mapHeightInPixels);
 
     void setCollisionTilemap(std::shared_ptr<aether::tilemap::CollisionTilemap> ct) override;
 

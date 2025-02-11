@@ -25,10 +25,11 @@ namespace jojo {
 		auto collisionTilemap = std::make_shared<aether::tilemap::CollisionTilemap>(collisionLayer);
 
 		// creation
-		m_ecsWorld = std::make_shared<JojoECS>();
+		m_ecsWorld = std::make_shared<JojoECS>(tilemap->GetTotalHeightInPixels());
 		m_ecsWorld->setCollisionTilemap(collisionTilemap);
 		m_factory = std::make_shared<JojoFactory>(m_ecsWorld->engine(), playerIndex);
-		m_playerEntity = m_factory->makePlayer(100, 250);
+		m_playerEntity = m_factory->makePlayerFreeMover(100, 250);
+		// m_playerEntity = m_factory->makePlayer(100, 250);
 
 		auto tilemapNode = aether::GEngine->CreateTilemapNode(tilemap);
 
@@ -45,9 +46,8 @@ namespace jojo {
 				float(JojoConfig::instance().windowWidth),
 				float(JojoConfig::instance().windowHeight) };
 		auto cam = aether::GEngine->GetCamera(aether::render::CameraFlags::Default);
-		aether::GEngine->EnableFeature("debugfpscam");
-		cam->SetOrthographicSize(8.f);
-		cam->SetPosition(300.f, 300.f);
+		cam->SetOrthographicSize(2.f);
+		cam->SetPosition(0.f, 100.f, -100.f);
 
 		/*
 		m_scroll = std::make_shared<aether::render::PlatformerScroller>(

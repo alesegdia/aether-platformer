@@ -8,7 +8,9 @@ namespace cortex {
 CortexECS::CortexECS()
 {
     pushSystem<AnimatorSystem>();
-    pushSystem<PlayerControllerSystem>();
+    pushSystem<JumperPlayerControllerSystem>();
+    pushSystem<FreeMoverPlayerControllerSystem>();
+    pushSystem<FreeMoverControllerSystem>();
     pushSystem<GravitySystem>();
     pushSystem<JumperControllerSystem>();
 }

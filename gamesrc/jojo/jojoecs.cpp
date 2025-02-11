@@ -5,12 +5,15 @@
 namespace jojo {
 
 
-JojoECS::JojoECS()
+JojoECS::JojoECS(int mapHeightInPixels)
+	: ECSWorld(mapHeightInPixels)
 {
     pushSystem<AnimatorSystem>();
-    pushSystem<PlayerControllerSystem>();
+    pushSystem<JumperPlayerControllerSystem>();
     pushSystem<GravitySystem>();
     pushSystem<JumperControllerSystem>();
+    pushSystem<FreeMoverControllerSystem>();
+    pushSystem<FreeMoverPlayerControllerSystem>();
     m_aiAgentDumbWalkerSystem = pushSystem<AIAgentDumbWalkerSystem>();
 }
 

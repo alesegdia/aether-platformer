@@ -4,8 +4,9 @@
 
 #include <TmxColor.h>
 
-class RoomLayoutGameWorld;
+#include <secs/secs.h>
 
+class RoomLayoutGameWorld;
 
 namespace jojo {
 
@@ -23,6 +24,9 @@ public:
 	void ImGui() final;
 
 private:
+    void ImGuiECS(const secs::Engine& engine);
+
+
     std::shared_ptr<JojoWorld> m_gameWorld;
 
 };

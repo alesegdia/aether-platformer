@@ -12,7 +12,8 @@ class JojoFactory : public BaseEntityFactory
 public:
     JojoFactory( secs::Engine& world, int playerIndex );
 
-    secs::Entity makePlayer( float x, float y );
+    secs::Entity makePlayerFreeMover(float x, float y);
+    secs::Entity makePlayer(float x, float y);
     secs::Entity makeBallEnemy( float x, float y );
 
 private:
