@@ -28,6 +28,7 @@ private:
     std::shared_ptr<ECSWorld> m_ecsWorld = nullptr;
     secs::Entity m_playerEntity;
     std::shared_ptr<aether::render::PlatformerScroller> m_scroll;
+    std::shared_ptr<aether::tilemap::TileMap> m_tilemap;
 
 };
 

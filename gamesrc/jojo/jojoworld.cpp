@@ -17,37 +17,37 @@ namespace jojo {
 		}
 
 		// load tilemap
-		auto tilemap = aether::tilemap::BuildMap(map);
+		m_tilemap = aether::tilemap::BuildMap(map);
 
 		// get useful information
-		auto playerIndex = tilemap->GetObjectLayer("player")->GetDepthOrder();
-		auto collisionLayer = tilemap->GetTileLayer("collision");
+		auto playerIndex = m_tilemap->GetObjectLayer("player")->GetDepthOrder();
+		auto collisionLayer = m_tilemap->GetTileLayer("collision");
 		auto collisionTilemap = std::make_shared<aether::tilemap::CollisionTilemap>(collisionLayer);
 
 		// creation
-		m_ecsWorld = std::make_shared<JojoECS>(tilemap->GetTotalHeightInPixels());
+		m_ecsWorld = std::make_shared<JojoECS>(m_tilemap->GetTotalHeightInPixels());
 		m_ecsWorld->setCollisionTilemap(collisionTilemap);
 		m_factory = std::make_shared<JojoFactory>(m_ecsWorld->engine(), playerIndex);
 		m_playerEntity = m_factory->makePlayerFreeMover(100, 250);
 		// m_playerEntity = m_factory->makePlayer(100, 250);
 
-		auto tilemapNode = aether::GEngine->CreateTilemapNode(tilemap);
+		auto tilemapNode = aether::GEngine->CreateTilemapNode(m_tilemap);
 
-		tilemap->GetObjectLayer("enemies")->ForEachObject([this](const auto& o) {
+		m_tilemap->GetObjectLayer("enemies")->ForEachObject([this](const auto& o) {
 			const auto& type = o.props.at("type");
 			auto x = o.aabb.center().GetX();
 			auto y = o.aabb.center().GetY();
 			if (type == "dumbwalker") {
 				m_factory->makeBallEnemy(x, y - 4);
 			}
-			});
+		});
 
-		auto viewport = aether::math::Vec2f{
+		auto viewport = aether::math::Vec2f {
 				float(JojoConfig::instance().windowWidth),
 				float(JojoConfig::instance().windowHeight) };
 		auto cam = aether::GEngine->GetCamera(aether::render::CameraFlags::Default);
 		cam->SetOrthographicSize(2.f);
-		cam->SetPosition(0.f, 100.f, -100.f);
+		cam->SetPosition(100.f, 100.f, -100.f);
 
 		/*
 		m_scroll = std::make_shared<aether::render::PlatformerScroller>(
@@ -96,6 +96,7 @@ namespace jojo {
 
 		// m_scroll->Focus(pos.GetX(), pos.GetY());
 		m_ecsWorld->render();
+
 	}
 
 
