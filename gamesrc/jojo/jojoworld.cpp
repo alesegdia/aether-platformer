@@ -99,6 +99,33 @@ namespace jojo {
 
 	}
 
+	void JojoWorld::DebugTilemap()
+	{
+		auto zOffset = 100;
+		auto collisionLayer = m_tilemap->GetTileLayer("collision");
+		for (int i = 0; i < m_tilemap->GetWidthInTiles(); i++)
+		{
+			for (int j = 0; j < m_tilemap->GetHeightInTiles(); j++)
+			{
+				auto collisionBehaviour = collisionLayer->GetTileCollisionBehaviour(i, m_tilemap->GetHeightInTiles() - j - 1);
+				if(collisionBehaviour == aether::tilemap::TileCollisionBehaviour::Solid)
+				{
+					float size = 16;
+					// draw AABB for tile
+					aether::GEngine->GetInstantRenderer()->DrawAABB({ {i * size, j * size, zOffset}, {(i+1) * size, (j+1) * size, zOffset + 10} }, aether::render::Color::Red);
+
+					//aether::GEngine->GetInstantRenderer()->DrawAABB({ {}, {} }, aether::render::Color::Blue);
+				}
+			}
+		}
+
+		auto aabb = m_ecsWorld->engine().GetComponent<AABBComponent>(m_playerEntity).aabb;
+
+
+		aether::GEngine->GetInstantRenderer()->DrawAABB({ {aabb.x1() - aabb.w() / 2, aabb.y1() - aabb.h() / 2, 0}, {aabb.x2() - aabb.w() / 2, aabb.y2() - aabb.h() / 2, 10.f}}, aether::render::Color::Green, -1);
+
+	}
+
 
 	void JojoWorld::Update(double delta)
 	{

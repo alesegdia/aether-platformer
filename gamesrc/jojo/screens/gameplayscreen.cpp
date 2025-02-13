@@ -36,7 +36,7 @@ void GameplayScreen::Render()
 {
     // aether::graphics::clear(1.f, 0.f, 0.f);
     m_gameWorld->Render();
-	aether::render::RenderAABBs();
+
 
 }
 
@@ -45,7 +45,7 @@ void GameplayScreen::Update(uint64_t delta)
 {
     m_gameWorld->Update(double(delta));
 	aether::render::RenderAABBs();
-
+	m_gameWorld->DebugTilemap();
 }
 
 void GameplayScreen::ImGui()

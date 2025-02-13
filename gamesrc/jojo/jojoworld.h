@@ -22,6 +22,7 @@ public:
     void Update(double delta);
     int LoadMapFromLua(Tmx::Map& map);
     const secs::Engine& GetECSWorld() const;
+    void DebugTilemap();
 
 private:
     std::shared_ptr<JojoFactory> m_factory;
