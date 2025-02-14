@@ -12,7 +12,7 @@ CortexECS::CortexECS()
     pushSystem<FreeMoverPlayerControllerSystem>();
     pushSystem<FreeMoverControllerSystem>();
     pushSystem<GravitySystem>();
-    pushSystem<JumperControllerSystem>();
+    pushSystem<JumperAgentControllerSystem>();
 }
 
 

@@ -10,7 +10,7 @@ JojoECS::JojoECS()
     pushSystem<AnimatorSystem>();
     pushSystem<JumperPlayerControllerSystem>();
     pushSystem<GravitySystem>();
-    pushSystem<JumperControllerSystem>();
+    pushSystem<JumperAgentControllerSystem>();
     pushSystem<FreeMoverControllerSystem>();
     pushSystem<FreeMoverPlayerControllerSystem>();
     m_aiAgentDumbWalkerSystem = pushSystem<AIAgentDumbWalkerSystem>();
