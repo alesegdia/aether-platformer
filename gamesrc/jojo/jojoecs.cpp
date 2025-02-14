@@ -5,8 +5,7 @@
 namespace jojo {
 
 
-JojoECS::JojoECS(int mapHeightInPixels)
-	: ECSWorld(mapHeightInPixels)
+JojoECS::JojoECS()
 {
     pushSystem<AnimatorSystem>();
     pushSystem<JumperPlayerControllerSystem>();
@@ -17,10 +16,10 @@ JojoECS::JojoECS(int mapHeightInPixels)
     m_aiAgentDumbWalkerSystem = pushSystem<AIAgentDumbWalkerSystem>();
 }
 
-void JojoECS::setCollisionTilemap(std::shared_ptr<aether::tilemap::CollisionTilemap> ct)
+void JojoECS::SetTilemapMovementSolver(const std::shared_ptr<aether::tilemap::TilemapMovementSolver>& tilemapMovementSolver)
 {
-    ECSWorld::setCollisionTilemap(ct);
-    m_aiAgentDumbWalkerSystem->setCollisionTilemap(ct);
+    ECSWorld::SetTilemapMovementSolver(tilemapMovementSolver);
+    m_aiAgentDumbWalkerSystem->SetTileCollisionQueryInterface(tilemapMovementSolver->GetCollisionQueryInterface());
 }
 
 

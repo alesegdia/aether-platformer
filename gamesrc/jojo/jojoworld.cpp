@@ -22,11 +22,13 @@ namespace jojo {
 		// get useful information
 		auto playerIndex = m_tilemap->GetObjectLayer("player")->GetDepthOrder();
 		auto collisionLayer = m_tilemap->GetTileLayer("collision");
-		auto collisionTilemap = std::make_shared<aether::tilemap::CollisionTilemap>(collisionLayer);
+		auto collisionTilemap = std::make_shared<aether::tilemap::AetherTilemapCollisionQueryInterface>(collisionLayer);
+		auto collisionTilemapSolver = std::make_shared<aether::tilemap::TilemapMovementSolver>(collisionTilemap);
+		collisionTilemap->SetInvertedY(true);
 
 		// creation
-		m_ecsWorld = std::make_shared<JojoECS>(m_tilemap->GetTotalHeightInPixels());
-		m_ecsWorld->setCollisionTilemap(collisionTilemap);
+		m_ecsWorld = std::make_shared<JojoECS>(/*m_tilemap->GetTotalHeightInPixels()*/);
+		m_ecsWorld->SetTilemapMovementSolver(collisionTilemapSolver);
 		m_factory = std::make_shared<JojoFactory>(m_ecsWorld->engine(), playerIndex);
 		m_playerEntity = m_factory->makePlayerFreeMover(100, 250);
 		// m_playerEntity = m_factory->makePlayer(100, 250);
@@ -122,7 +124,7 @@ namespace jojo {
 		auto aabb = m_ecsWorld->engine().GetComponent<AABBComponent>(m_playerEntity).aabb;
 
 
-		aether::GEngine->GetInstantRenderer()->DrawAABB({ {aabb.x1() - aabb.w() / 2, aabb.y1() - aabb.h() / 2, 0}, {aabb.x2() - aabb.w() / 2, aabb.y2() - aabb.h() / 2, 10.f}}, aether::render::Color::Green, -1);
+		aether::GEngine->GetInstantRenderer()->DrawAABB({ {aabb.x1(), aabb.y1(), 0}, {aabb.x2(), aabb.y2(), 100.f}}, aether::render::Color::Green, -1);
 
 	}
 

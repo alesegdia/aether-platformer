@@ -32,11 +32,11 @@ secs::Entity CortexWorld::makePlayer(float x, float y)
     return m_factory->makePlayer(x, y);
 }
 
-std::shared_ptr<ECSWorld> CortexWorld::createECSWorld(std::shared_ptr<aether::tilemap::CollisionTilemap> ct, int playerIndex)
+std::shared_ptr<ECSWorld> CortexWorld::createECSWorld(std::shared_ptr<aether::tilemap::TilemapMovementSolver> tilemapMovementSolver, int playerIndex)
 {
     auto ecsworld = std::make_shared<cortex::CortexECS>();
     m_factory.reset(new CortexEntityFactory(ecsworld->engine(), playerIndex));
-    ecsworld->setCollisionTilemap(ct);
+    ecsworld->SetTilemapMovementSolver(tilemapMovementSolver);
     return std::static_pointer_cast<ECSWorld>(ecsworld);
 }
 

@@ -21,7 +21,7 @@ public:
 
     virtual secs::Entity makePlayer( float x, float y ) override;
 
-    virtual std::shared_ptr<ECSWorld> createECSWorld(std::shared_ptr<aether::tilemap::CollisionTilemap> ct, int playerIndex) override;
+    virtual std::shared_ptr<ECSWorld> createECSWorld(std::shared_ptr<aether::tilemap::TilemapMovementSolver> tilemapMovementSolver, int playerIndex) override;
 
     void render() override;
 private:

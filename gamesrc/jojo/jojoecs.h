@@ -14,9 +14,9 @@ namespace jojo {
 class JojoECS : public ECSWorld
 {
 public:
-    JojoECS(int mapHeightInPixels);
+    JojoECS();
 
-    void setCollisionTilemap(std::shared_ptr<aether::tilemap::CollisionTilemap> ct) override;
+	void SetTilemapMovementSolver(const std::shared_ptr<aether::tilemap::TilemapMovementSolver>& tilemapMovementSolver) override;
 
 private:
     std::shared_ptr<AIAgentDumbWalkerSystem> m_aiAgentDumbWalkerSystem;
