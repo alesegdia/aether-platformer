@@ -140,6 +140,7 @@ namespace jojo {
 		auto& pc = m_ecsWorld->engine().GetComponent<TransformComponent>(m_playerEntity);
 		auto& tc = m_ecsWorld->engine().GetComponent<TilemapCollisionComponent>(m_playerEntity);
 		auto& aabb = m_ecsWorld->engine().GetComponent<AABBComponent>(m_playerEntity);
+		auto& rendercomp = m_ecsWorld->engine().GetComponent<RenderComponent>(m_playerEntity);
 
 		/*
 		m_platformerScroll->Update(delta);
@@ -152,7 +153,12 @@ namespace jojo {
 		}
 		*/
 
-		m_directScroller->Focus(aabb.aabb.x() + aabb.aabb.w() / 2.f, aabb.aabb.y() + aabb.aabb.h() / 2.f);
+		//m_directScroller->Focus(aabb.aabb.x() + aabb.aabb.w() / 2.f, aabb.aabb.y() + aabb.aabb.h() / 2.f);
+
+		auto pos = rendercomp.sprite->GetWorldPosition();
+		m_directScroller->Focus(pos.x + aabb.aabb.w() / 2.f, pos.y + aabb.aabb.h() / 2.f);
+
+
 		//m_topDownScroll->Focus(pc.position.GetX(), pc.position.GetY());
 	}
 
