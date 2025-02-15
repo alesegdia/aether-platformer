@@ -25,6 +25,7 @@ namespace jojo {
 		auto collisionTilemap = std::make_shared<aether::tilemap::AetherTilemapCollisionQueryInterface>(collisionLayer);
 		auto collisionTilemapSolver = std::make_shared<aether::tilemap::TilemapMovementSolver>(collisionTilemap);
 		collisionTilemap->SetInvertedY(true);
+		collisionTilemapSolver->SetOneWayUp(true);
 
 		// creation
 		m_ecsWorld = std::make_shared<JojoECS>(/*m_tilemap->GetTotalHeightInPixels()*/);

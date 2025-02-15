@@ -23,6 +23,10 @@ public:
     int LoadMapFromLua(Tmx::Map& map);
     const secs::Engine& GetECSWorld() const;
     void DebugTilemap();
+    secs::Entity GetPlayerEntity() const
+    {
+		return m_playerEntity;
+    }
 
 private:
     std::shared_ptr<JojoFactory> m_factory;

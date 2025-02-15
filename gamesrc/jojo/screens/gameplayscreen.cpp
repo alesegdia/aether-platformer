@@ -4,6 +4,8 @@
 #include <secs/secs.h>
 #include "jojo/jojoworld.h"
 
+#include "aether/plugin/platformer/ecs/components.h"
+
 #include <imgui.h>
 
 
@@ -52,6 +54,8 @@ void GameplayScreen::ImGui()
 {
 	auto ecsWorld = m_gameWorld->GetECSWorld();
 	ImGuiECS(ecsWorld);
+	const auto& tcc = ecsWorld.GetComponent<TilemapCollisionComponent>(m_gameWorld->GetPlayerEntity());
+	aether::tilemap::ImGuiDebug(tcc.lastCollisionInfo);
 }
 
 void GameplayScreen::ImGuiECS(const secs::Engine& engine)
