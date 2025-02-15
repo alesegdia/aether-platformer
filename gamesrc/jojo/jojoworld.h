@@ -32,7 +32,9 @@ private:
     std::shared_ptr<JojoFactory> m_factory;
     std::shared_ptr<ECSWorld> m_ecsWorld = nullptr;
     secs::Entity m_playerEntity;
-    std::shared_ptr<aether::render::PlatformerScroller> m_scroll;
+	std::shared_ptr<aether::render::PlatformerScroller> m_platformerScroll;
+	std::shared_ptr<aether::render::TopDownMapScroller> m_topDownScroll;
+	std::shared_ptr<aether::render::DirectScroller> m_directScroller;
     std::shared_ptr<aether::tilemap::TileMap> m_tilemap;
 
 };

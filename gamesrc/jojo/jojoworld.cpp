@@ -49,14 +49,18 @@ namespace jojo {
 				float(JojoConfig::instance().windowWidth),
 				float(JojoConfig::instance().windowHeight) };
 		auto cam = aether::GEngine->GetCamera(aether::render::CameraFlags::Default);
-		cam->SetOrthographicSize(2.f);
+		cam->SetOrthographicSize(12.f);
 		cam->SetPosition(100.f, 100.f, -100.f);
 
-		/*
-		m_scroll = std::make_shared<aether::render::PlatformerScroller>(
-					cam, aether::math::Rectf(0, 0, tilemap->GetTotalWidthInPixels(), tilemap->GetTotalHeightInPixels()),
+		m_platformerScroll = std::make_shared<aether::render::PlatformerScroller>(
+					cam, aether::math::Rectf(0, 0, m_tilemap->GetTotalWidthInPixels(), m_tilemap->GetTotalHeightInPixels()),
 					aether::math::Vec2f(800, 500));
-		*/
+
+		m_topDownScroll = std::make_shared<aether::render::TopDownMapScroller>();
+		m_topDownScroll->Setup(cam, {{ -1000000, -1000000 }, { 100000000, 100000000 }});
+
+		m_directScroller = std::make_shared<aether::render::DirectScroller>(cam);
+		
 		return 0;
 	}
 
@@ -97,7 +101,7 @@ namespace jojo {
 	{
 		auto& pos = m_ecsWorld->engine().GetComponent<TransformComponent>(m_playerEntity).position;
 
-		// m_scroll->Focus(pos.GetX(), pos.GetY());
+		// m_platformerScroll->Focus(pos.GetX(), pos.GetY());
 		m_ecsWorld->render();
 
 	}
@@ -135,17 +139,21 @@ namespace jojo {
 		m_ecsWorld->step(delta);
 		auto& pc = m_ecsWorld->engine().GetComponent<TransformComponent>(m_playerEntity);
 		auto& tc = m_ecsWorld->engine().GetComponent<TilemapCollisionComponent>(m_playerEntity);
+		auto& aabb = m_ecsWorld->engine().GetComponent<AABBComponent>(m_playerEntity);
 
 		/*
-		m_scroll->Update(delta);
+		m_platformerScroll->Update(delta);
 
-		m_scroll->SetSnapToPlatform(tc.lastCollisionInfo.y_collision_direction == 1);
+		m_platformerScroll->SetSnapToPlatform(tc.lastCollisionInfo.y_collision_direction == 1);
 
 		if( tc.lastCollisionInfo.y_collision_direction == 1 )
 		{
-			m_scroll->SnapToPlatform(pc.position.GetY());
+			m_platformerScroll->SnapToPlatform(pc.position.GetY());
 		}
 		*/
+
+		m_directScroller->Focus(aabb.aabb.x() + aabb.aabb.w() / 2.f, aabb.aabb.y() + aabb.aabb.h() / 2.f);
+		//m_topDownScroll->Focus(pc.position.GetX(), pc.position.GetY());
 	}
 
 	const secs::Engine& JojoWorld::GetECSWorld() const
