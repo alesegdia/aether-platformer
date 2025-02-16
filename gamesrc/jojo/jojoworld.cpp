@@ -58,7 +58,6 @@ namespace jojo {
 
 		m_topDownScroll = std::make_shared<aether::render::TopDownMapScroller>();
 		m_topDownScroll->Setup(cam, {{ 0, 0 }, { float(m_tilemap->GetTotalWidthInPixels()), float(m_tilemap->GetTotalHeightInPixels())}});
-
 		m_directScroller = std::make_shared<aether::render::DirectScroller>(cam);
 		
 		return 0;
@@ -136,7 +135,8 @@ namespace jojo {
 	{
 		m_ecsWorld->step(delta);
 		// DoDirectScrolling();
-		DoTopDownScrolling();
+		// DoTopDownScrolling();
+		DoPlatformerScrolling(delta);
 	}
 
 	void JojoWorld::DoPlatformerScrolling(float deltaInSeconds)
