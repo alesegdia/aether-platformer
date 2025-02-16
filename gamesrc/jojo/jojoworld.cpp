@@ -60,6 +60,8 @@ namespace jojo {
 		m_topDownScroll->Setup(cam, {{ 0, 0 }, { float(m_tilemap->GetTotalWidthInPixels()), float(m_tilemap->GetTotalHeightInPixels())}});
 		m_directScroller = std::make_shared<aether::render::DirectScroller>(cam);
 		
+		aether::GEngine->ToggleImGuiStats();
+
 		return 0;
 	}
 
@@ -135,8 +137,8 @@ namespace jojo {
 	{
 		m_ecsWorld->step(delta);
 		// DoDirectScrolling();
-		// DoTopDownScrolling();
-		DoPlatformerScrolling(delta);
+		DoTopDownScrolling();
+		// DoPlatformerScrolling(delta);
 	}
 
 	void JojoWorld::DoPlatformerScrolling(float deltaInSeconds)
@@ -172,7 +174,7 @@ namespace jojo {
 		m_topDownScroll->Focus(pos.x + aabb.w() / 2.f, pos.y + aabb.h() / 2.f);
 		//m_topDownScroll->Focus(pc.position.GetX(), pc.position.GetY());
 	}
-
+	
 	void JojoWorld::DoDirectScrolling()
 	{
 		auto& pc = m_ecsWorld->engine().GetComponent<TransformComponent>(m_playerEntity);

@@ -11,5 +11,8 @@ uniform float bias;
 
 void main()
 {
-    FragColor = texture(texture1, TexCoord);
+    vec4 color = texture(texture1, TexCoord);
+    if(color.a < 0.1)
+        discard;
+    FragColor = color;
 }
