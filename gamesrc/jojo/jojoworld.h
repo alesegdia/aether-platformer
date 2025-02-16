@@ -28,6 +28,10 @@ public:
 		return m_playerEntity;
     }
 
+    void DoPlatformerScrolling(float deltaInSeconds);
+	void DoTopDownScrolling();
+	void DoDirectScrolling();
+
 private:
     std::shared_ptr<JojoFactory> m_factory;
     std::shared_ptr<ECSWorld> m_ecsWorld = nullptr;
