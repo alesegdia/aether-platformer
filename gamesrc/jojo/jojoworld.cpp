@@ -49,7 +49,7 @@ namespace jojo {
 				float(JojoConfig::instance().windowWidth),
 				float(JojoConfig::instance().windowHeight) };
 		auto cam = aether::GEngine->GetCamera(aether::render::CameraFlags::Default);
-		cam->SetOrthographicSize(12.f);
+		cam->SetOrthographicSize(6.f);
 		cam->SetPosition(100.f, 100.f, -100.f);
 
 		m_platformerScroll = std::make_shared<aether::render::PlatformerScroller>(
@@ -127,10 +127,7 @@ namespace jojo {
 		}
 
 		auto aabb = m_ecsWorld->engine().GetComponent<AABBComponent>(m_playerEntity).aabb;
-
-
 		aether::GEngine->GetInstantRenderer()->DrawAABB({ {aabb.x1(), aabb.y1(), 0}, {aabb.x2(), aabb.y2(), 100.f}}, aether::render::Color::Green, -1);
-
 	}
 
 
@@ -139,7 +136,7 @@ namespace jojo {
 		m_ecsWorld->step(delta);
 		auto& pc = m_ecsWorld->engine().GetComponent<TransformComponent>(m_playerEntity);
 		auto& tc = m_ecsWorld->engine().GetComponent<TilemapCollisionComponent>(m_playerEntity);
-		auto& aabb = m_ecsWorld->engine().GetComponent<AABBComponent>(m_playerEntity);
+		auto& aabbc = m_ecsWorld->engine().GetComponent<AABBComponent>(m_playerEntity);
 		auto& rendercomp = m_ecsWorld->engine().GetComponent<RenderComponent>(m_playerEntity);
 
 		/*
@@ -156,7 +153,12 @@ namespace jojo {
 		//m_directScroller->Focus(aabb.aabb.x() + aabb.aabb.w() / 2.f, aabb.aabb.y() + aabb.aabb.h() / 2.f);
 
 		auto pos = rendercomp.sprite->GetWorldPosition();
-		m_directScroller->Focus(pos.x + aabb.aabb.w() / 2.f, pos.y + aabb.aabb.h() / 2.f);
+		auto aabb = aabbc.aabb;
+		//m_directScroller->Focus(pos.x + aabb.w() / 2.f, pos.y + aabb.h() / 2.f);
+		m_directScroller->Focus(pos.x, pos.y);
+		//m_directScroller->Focus(aabb.x() + aabb.w() / 2.f, aabb.y() + aabb.h() / 2.f);
+		//m_directScroller->Focus(aabb.x(), aabb.y());
+		//m_topDownScroll->Focus(pos.x + aabb.aabb.w() / 2.f, pos.y + aabb.aabb.h() / 2.f);
 
 
 		//m_topDownScroll->Focus(pc.position.GetX(), pc.position.GetY());
