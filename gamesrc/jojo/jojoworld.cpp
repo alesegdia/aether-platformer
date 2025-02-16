@@ -49,7 +49,7 @@ namespace jojo {
 				float(JojoConfig::instance().windowWidth),
 				float(JojoConfig::instance().windowHeight) };
 		auto cam = aether::GEngine->GetCamera(aether::render::CameraFlags::Default);
-		cam->SetOrthographicSize(6.f);
+		cam->SetOrthographicSize(5.f);
 		cam->SetPosition(100.f, 100.f, -100.f);
 
 		m_platformerScroll = std::make_shared<aether::render::PlatformerScroller>(
@@ -57,7 +57,7 @@ namespace jojo {
 					aether::math::Vec2f(800, 500));
 
 		m_topDownScroll = std::make_shared<aether::render::TopDownMapScroller>();
-		m_topDownScroll->Setup(cam, {{ -1000000, -1000000 }, { 100000000, 100000000 }});
+		m_topDownScroll->Setup(cam, {{ 0, 0 }, { float(m_tilemap->GetTotalWidthInPixels()), float(m_tilemap->GetTotalHeightInPixels())}});
 
 		m_directScroller = std::make_shared<aether::render::DirectScroller>(cam);
 		
@@ -135,7 +135,8 @@ namespace jojo {
 	void JojoWorld::Update(double delta)
 	{
 		m_ecsWorld->step(delta);
-		DoDirectScrolling();
+		// DoDirectScrolling();
+		DoTopDownScrolling();
 	}
 
 	void JojoWorld::DoPlatformerScrolling(float deltaInSeconds)
@@ -168,8 +169,8 @@ namespace jojo {
 		auto pos = rendercomp.sprite->GetWorldPosition();
 		auto aabb = aabbc.aabb;
 
-		//m_topDownScroll->Focus(pos.x + aabb.aabb.w() / 2.f, pos.y + aabb.aabb.h() / 2.f);
-		m_topDownScroll->Focus(pc.position.GetX(), pc.position.GetY());
+		m_topDownScroll->Focus(pos.x + aabb.w() / 2.f, pos.y + aabb.h() / 2.f);
+		//m_topDownScroll->Focus(pc.position.GetX(), pc.position.GetY());
 	}
 
 	void JojoWorld::DoDirectScrolling()
