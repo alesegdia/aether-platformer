@@ -25,6 +25,7 @@ solution "aether-platformer"
 			-- path.join(AETHER_DIR, "src/main/main.cpp")
 		}
 
+		--[[
 	aetherProject("cortex")
 		includedirs {
 			"../gamesrc/"
@@ -36,4 +37,5 @@ solution "aether-platformer"
 			"../gamesrc/cortex/**.h",
 			-- path.join(AETHER_DIR, "src/main/main.cpp")
 		}
+]]--
 

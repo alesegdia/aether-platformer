@@ -1,6 +1,19 @@
 #include "cortexentityfactory.h"
 #include "cortexconfig.h"
 
+
+#include "aether/plugin/platformer/ecs/component/TransformComponent.h"
+#include "aether/plugin/platformer/ecs/component/RenderComponent.h"
+#include "aether/plugin/platformer/ecs/component/PlayerComponent.h"
+#include "aether/plugin/platformer/ecs/component/AgentInputComponent.h"
+#include "aether/plugin/platformer/ecs/component/JumperAgentComponent.h"
+#include "aether/plugin/platformer/ecs/component/AnimatorComponent.h"
+#include "aether/plugin/platformer/ecs/component/GravityComponent.h"
+#include "aether/plugin/platformer/ecs/component/DoorComponent.h"
+#include "aether/plugin/platformer/ecs/component/AABBComponent.h"
+#include "aether/plugin/platformer/ecs/component/HadronCollisionComponent.h"
+
+
 namespace cortex {
 
 CortexEntityFactory::CortexEntityFactory(secs::Engine &world, int playerIndex)
@@ -26,8 +39,8 @@ secs::Entity CortexEntityFactory::makePlayer(float x, float y)
     addComponent<PlayerComponent>(player);
     
     auto& aic = addComponent<AgentInputComponent>(player);
-    aic.horizontal_speed = cortex::CortexConfig::instance().playerSpeed;
-    aic.jump_force = cortex::CortexConfig::instance().playerJumpForce;
+    aic.horizontalSpeed = cortex::CortexConfig::instance().playerSpeed;
+    aic.jumpForce = cortex::CortexConfig::instance().playerJumpForce;
     
     addComponent<JumperAgentComponent>(player);
     auto& atrc = addComponent<AnimatorComponent>(player);

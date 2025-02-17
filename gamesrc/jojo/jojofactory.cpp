@@ -1,6 +1,17 @@
 #include "jojofactory.h"
 #include "jojoconfig.h"
 
+#include "aether/plugin/platformer/ecs/component/RenderComponent.h"
+#include "aether/plugin/platformer/ecs/component/PlayerComponent.h"
+#include "aether/plugin/platformer/ecs/component/AgentInputComponent.h"
+#include "aether/plugin/platformer/ecs/component/JumperAgentComponent.h"
+#include "aether/plugin/platformer/ecs/component/AnimatorComponent.h"
+#include "aether/plugin/platformer/ecs/component/GravityComponent.h"
+#include "aether/plugin/platformer/ecs/component/AIAgentDumbWalkerComponent.h"
+#include "aether/plugin/platformer/ecs/component/HadronCollisionComponent.h"
+
+
+
 namespace jojo {
 
 JojoFactory::JojoFactory(secs::Engine &world, int playerIndex)
@@ -27,10 +38,10 @@ secs::Entity JojoFactory::makePlayerFreeMover(float x, float y)
     addComponent<PlayerComponent>(player);
 
     auto& aic = addComponent<AgentInputComponent>(player);
-    aic.horizontal_speed = jojo::JojoConfig::instance().playerSpeed;
-    aic.jump_force = jojo::JojoConfig::instance().playerJumpForce;
+    aic.horizontalSpeed = jojo::JojoConfig::instance().playerSpeed;
+    aic.jumpForce = jojo::JojoConfig::instance().playerJumpForce;
 
-    addComponent<FreeMoverComponent>(player);
+    addComponent<FreeMoverAgentComponent>(player);
 
     auto& atrc = addComponent<AnimatorComponent>(player);
     atrc.groundStandAnimation = "stand";
@@ -61,8 +72,8 @@ secs::Entity JojoFactory::makePlayer(float x, float y)
     addComponent<PlayerComponent>(player);
     
     auto& aic = addComponent<AgentInputComponent>(player);
-    aic.horizontal_speed = jojo::JojoConfig::instance().playerSpeed;
-    aic.jump_force = jojo::JojoConfig::instance().playerJumpForce;
+    aic.horizontalSpeed = jojo::JojoConfig::instance().playerSpeed;
+    aic.jumpForce = jojo::JojoConfig::instance().playerJumpForce;
     
     addComponent<JumperAgentComponent>(player);
     auto& atrc = addComponent<AnimatorComponent>(player);
@@ -76,7 +87,7 @@ secs::Entity JojoFactory::makePlayer(float x, float y)
     gc.gravityFactor = jojo::JojoConfig::instance().playerGravityFactor;
     gc.fallingVelocityCap = jojo::JojoConfig::instance().playerFallingCap;
 
-	addComponent<JumperPlayerComponent>(player);
+	addComponent<JumperAgentComponent>(player);
 
     return player;
 }
@@ -94,8 +105,8 @@ secs::Entity JojoFactory::makeBallEnemy(float x, float y)
 	render_comp.sprite->PlayAnimation("walk");
 
     auto& aic = addComponent<AgentInputComponent>(entity);
-    aic.horizontal_speed = 0.5f;
-    aic.x_axis = 1;
+    aic.horizontalSpeed = 0.5f;
+    aic.xAxis = 1;
 
     auto& atrc = addComponent<AnimatorComponent>(entity);
     atrc.groundStandAnimation = "walk";

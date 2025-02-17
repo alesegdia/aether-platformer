@@ -2,7 +2,7 @@
 
 #include <secs/secs.h>
 #include "aether/plugin/platformer/core/entityfactory.h"
-
+#include "aether/plugin/platformer/core/room.h"
 
 namespace cortex {
 

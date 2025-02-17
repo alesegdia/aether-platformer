@@ -5,6 +5,13 @@
 
 #include "aether/lua/lua.h"
 
+#include "aether/plugin/platformer/ecs/component/TransformComponent.h"
+#include "aether/plugin/platformer/ecs/component/AABBComponent.h"
+#include "aether/plugin/platformer/ecs/component/RenderComponent.h"
+
+#include "aether/plugin/platformer/ecs/component/TilemapCollisionComponent.h"
+
+
 namespace jojo {
 
 	int JojoWorld::Init()
