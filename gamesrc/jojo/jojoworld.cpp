@@ -42,13 +42,14 @@ namespace jojo {
 		m_playerEntity = m_factory->makePlayer(100, 250);
 
 		auto tilemapNode = aether::GEngine->CreateTilemapNode(m_tilemap);
+		auto mapHeightInPixels = m_tilemap->GetTotalHeightInPixels();
 
-		m_tilemap->GetObjectLayer("enemies")->ForEachObject([this](const auto& o) {
+		m_tilemap->GetObjectLayer("enemies")->ForEachObject([this, mapHeightInPixels](const auto& o) {
 			const auto& type = o.props.at("type");
 			auto x = o.aabb.center().GetX();
 			auto y = o.aabb.center().GetY();
 			if (type == "dumbwalker") {
-				m_factory->makeBallEnemy(x, y - 4);
+				m_factory->makeBallEnemy(x, mapHeightInPixels - y - 1 - 3);
 			}
 		});
 
