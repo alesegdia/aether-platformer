@@ -2,18 +2,16 @@
 #include "jojoecs.h"
 
 #include "aether/plugin/platformer/ecs/system/AnimatorSystem.h"
-#include "aether/plugin/platformer/ecs/system/JumperPlayerControllerSystem.h"
 #include "aether/plugin/platformer/ecs/system/GravitySystem.h"
     
-#include "aether/plugin/platformer/ecs/system/JumperControllerSystem.h"
-#include "aether/plugin/platformer/ecs/system/FreeMoverControllerSystem.h"
-#include "aether/plugin/platformer/ecs/system/FreeMoverPlayerControllerSystem.h"
+#include "aether/plugin/platformer/ecs/system/JumperController/JumperControllerSystem.h"
+#include "aether/plugin/platformer/ecs/system/FreeMoverController/FreeMoverControllerSystem.h"
 #include "aether/plugin/platformer/ecs/system/AIAgentDumbWalkerSystem.h"
 
 #include "aether/plugin/platformer/ecs/component/RenderComponent.h"
 #include "aether/plugin/platformer/ecs/component/GravityComponent.h"
 #include "aether/plugin/platformer/ecs/component/AnimatorComponent.h"
-#include "aether/plugin/platformer/ecs/component/JumperAgentComponent.h"
+#include "aether/plugin/platformer/ecs/component/JumperController/JumperAgentComponent.h"
 #include "aether/plugin/platformer/ecs/component/TilemapCollisionComponent.h"
 #include "aether/plugin/platformer/ecs/component/PlayerComponent.h"
 #include "aether/plugin/platformer/ecs/component/AgentInputComponent.h"
