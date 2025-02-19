@@ -114,9 +114,7 @@ secs::Entity JojoFactory::makeCrazyPlayer(float x, float y)
 
     addComponent<PlayerComponent>(player);
 
-    addComponent<CrazyAgentComponent>(player);
-
-    auto& apc = addComponent<AgentParamsComponent>(player);
+    auto& apc = addComponent<CrazyAgentComponent>(player);
     apc.horizontalSpeed = jojo::JojoConfig::instance().playerSpeed;
     apc.jumpForce = jojo::JojoConfig::instance().playerJumpForce;
 
