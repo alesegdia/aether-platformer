@@ -3,10 +3,15 @@
 
 #include "aether/plugin/platformer/ecs/system/AnimatorSystem.h"
 #include "aether/plugin/platformer/ecs/system/GravitySystem.h"
-    
+
+
+#include "aether/plugin/platformer/ecs/system/CrazyController/CrazyControllerSystem.h"
+#include "aether/plugin/platformer/ecs/system/CrazyController/CrazyAnimatorSystem.h"
+
 #include "aether/plugin/platformer/ecs/system/JumperController/JumperControllerSystem.h"
 #include "aether/plugin/platformer/ecs/system/FreeMoverController/FreeMoverControllerSystem.h"
 #include "aether/plugin/platformer/ecs/system/AIAgentDumbWalkerSystem.h"
+#include "aether/plugin/platformer/ecs/system/PlayerKeyboardControllerSystem.h"
 
 #include "aether/plugin/platformer/ecs/component/RenderComponent.h"
 #include "aether/plugin/platformer/ecs/component/GravityComponent.h"
@@ -29,12 +34,12 @@ namespace jojo {
 
 JojoECS::JojoECS()
 {
-    pushSystem<AnimatorSystem>();
-    pushSystem<JumperPlayerControllerSystem>();
-    pushSystem<GravitySystem>();
-    pushSystem<JumperAgentControllerSystem>();
-    pushSystem<FreeMoverControllerSystem>();
-    pushSystem<FreeMoverPlayerControllerSystem>();
+    pushSystems<
+        AnimatorSystem,
+        GravitySystem,
+        JumperAgentControllerSystem,
+		FreeMoverControllerSystem,
+        PlayerKeyboardControllerSystem>();
     m_aiAgentDumbWalkerSystem = pushSystem<AIAgentDumbWalkerSystem>();
 }
 

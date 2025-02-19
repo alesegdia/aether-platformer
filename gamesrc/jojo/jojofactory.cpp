@@ -4,7 +4,7 @@
 #include "aether/plugin/platformer/ecs/component/RenderComponent.h"
 #include "aether/plugin/platformer/ecs/component/PlayerComponent.h"
 #include "aether/plugin/platformer/ecs/component/AgentInputComponent.h"
-#include "aether/plugin/platformer/ecs/component/JumperAgentComponent.h"
+#include "aether/plugin/platformer/ecs/component/JumperController/JumperAgentComponent.h"
 #include "aether/plugin/platformer/ecs/component/AnimatorComponent.h"
 #include "aether/plugin/platformer/ecs/component/GravityComponent.h"
 #include "aether/plugin/platformer/ecs/component/AIAgentDumbWalkerComponent.h"
@@ -37,9 +37,11 @@ secs::Entity JojoFactory::makePlayerFreeMover(float x, float y)
 
     addComponent<PlayerComponent>(player);
 
-    auto& aic = addComponent<AgentInputComponent>(player);
-    aic.horizontalSpeed = jojo::JojoConfig::instance().playerSpeed;
-    aic.jumpForce = jojo::JojoConfig::instance().playerJumpForce;
+    addComponent<AgentInputComponent>(player);
+
+	auto& apc = addComponent<AgentParamsComponent>(player);
+    apc.horizontalSpeed = jojo::JojoConfig::instance().playerSpeed;
+    apc.jumpForce = jojo::JojoConfig::instance().playerJumpForce;
 
     addComponent<FreeMoverAgentComponent>(player);
 
@@ -71,9 +73,11 @@ secs::Entity JojoFactory::makePlayer(float x, float y)
 
     addComponent<PlayerComponent>(player);
     
-    auto& aic = addComponent<AgentInputComponent>(player);
-    aic.horizontalSpeed = jojo::JojoConfig::instance().playerSpeed;
-    aic.jumpForce = jojo::JojoConfig::instance().playerJumpForce;
+    addComponent<AgentInputComponent>(player);
+    
+    auto& apc = addComponent<AgentParamsComponent>(player);
+    apc.horizontalSpeed = jojo::JojoConfig::instance().playerSpeed;
+    apc.jumpForce = jojo::JojoConfig::instance().playerJumpForce;
     
     addComponent<JumperAgentComponent>(player);
     auto& atrc = addComponent<AnimatorComponent>(player);
@@ -105,8 +109,10 @@ secs::Entity JojoFactory::makeBallEnemy(float x, float y)
 	render_comp.sprite->PlayAnimation("walk");
 
     auto& aic = addComponent<AgentInputComponent>(entity);
-    aic.horizontalSpeed = 0.5f;
     aic.xAxis = 1;
+
+	auto& apc = addComponent<AgentParamsComponent>(entity);
+    apc.horizontalSpeed = 0.5f;
 
     auto& atrc = addComponent<AnimatorComponent>(entity);
     atrc.groundStandAnimation = "walk";
