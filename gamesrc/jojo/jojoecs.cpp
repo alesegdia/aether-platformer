@@ -25,6 +25,9 @@
 #include "aether/plugin/platformer/ecs/component/TransformComponent.h"
 #include "aether/plugin/platformer/ecs/component/HadronCollisionComponent.h"
 #include "aether/plugin/platformer/ecs/component/AIAgentDumbWalkerComponent.h"
+#include "aether/plugin/platformer/ecs/component/CrazyController/CrazyAgentComponent.h"
+#include "aether/plugin/platformer/ecs/component/CrazyController/CrazyAnimatorComponent.h"
+#include "aether/plugin/platformer/ecs/system/CrazyController/CrazyControllerPlayerSystem.h"
 
     
 
@@ -39,7 +42,10 @@ JojoECS::JojoECS()
         GravitySystem,
         JumperAgentControllerSystem,
 		FreeMoverControllerSystem,
-        PlayerKeyboardControllerSystem>();
+        PlayerKeyboardControllerSystem,
+        CrazyAgentControllerSystem,
+        CrazyControllerPlayerSystem,
+        CrazyAnimatorSystem>();
     m_aiAgentDumbWalkerSystem = pushSystem<AIAgentDumbWalkerSystem>();
 }
 

@@ -38,8 +38,11 @@ namespace jojo {
 		m_ecsWorld = std::make_shared<JojoECS>(/*m_tilemap->GetTotalHeightInPixels()*/);
 		m_ecsWorld->SetTilemapMovementSolver(collisionTilemapSolver);
 		m_factory = std::make_shared<JojoFactory>(m_ecsWorld->engine(), playerIndex);
+		
 		//m_playerEntity = m_factory->makePlayerFreeMover(100, 250);
-		m_playerEntity = m_factory->makePlayer(100, 250);
+		
+		//m_playerEntity = m_factory->makePlayer(100, 250);
+		m_playerEntity = m_factory->makeCrazyPlayer(100, 250);
 
 		auto tilemapNode = aether::GEngine->CreateTilemapNode(m_tilemap);
 		auto mapHeightInPixels = m_tilemap->GetTotalHeightInPixels();

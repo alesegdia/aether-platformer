@@ -14,6 +14,7 @@ public:
 
     secs::Entity makePlayerFreeMover(float x, float y);
     secs::Entity makePlayer(float x, float y);
+    secs::Entity makeCrazyPlayer(float x, float y);
     secs::Entity makeBallEnemy( float x, float y );
 
 private:

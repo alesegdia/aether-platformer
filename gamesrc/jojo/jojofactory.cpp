@@ -5,6 +5,8 @@
 #include "aether/plugin/platformer/ecs/component/PlayerComponent.h"
 #include "aether/plugin/platformer/ecs/component/AgentInputComponent.h"
 #include "aether/plugin/platformer/ecs/component/JumperController/JumperAgentComponent.h"
+#include "aether/plugin/platformer/ecs/component/CrazyController/CrazyAgentComponent.h"
+#include "aether/plugin/platformer/ecs/component/CrazyController/CrazyAnimatorComponent.h"
 #include "aether/plugin/platformer/ecs/component/AnimatorComponent.h"
 #include "aether/plugin/platformer/ecs/component/GravityComponent.h"
 #include "aether/plugin/platformer/ecs/component/AIAgentDumbWalkerComponent.h"
@@ -95,6 +97,47 @@ secs::Entity JojoFactory::makePlayer(float x, float y)
 
     return player;
 }
+
+
+
+secs::Entity JojoFactory::makeCrazyPlayer(float x, float y)
+{
+    secs::Entity player = world().GetEntityProcessor().AddEntity();
+
+    addBasicTilemapEntity(player, x, y, 20, 16);
+
+    auto& render_comp = addComponent<RenderComponent>(player);
+    render_comp.sprite = aether::GEngine->CreateSpriteNode(glm::fvec2{ 32, 32 });
+    render_comp.sprite->LoadAllAnimations(m_playerAnim);
+    render_comp.sprite->PlayAnimation("stand");
+    render_comp.currentAnimation = "stand";
+
+    addComponent<PlayerComponent>(player);
+
+    addComponent<CrazyAgentComponent>(player);
+
+    auto& apc = addComponent<AgentParamsComponent>(player);
+    apc.horizontalSpeed = jojo::JojoConfig::instance().playerSpeed;
+    apc.jumpForce = jojo::JojoConfig::instance().playerJumpForce;
+
+    auto& atrc = addComponent<CrazyAnimatorComponent>(player);
+    atrc.groundStandAnimation = "stand";
+    atrc.groundWalkAnimation = "walk";
+    atrc.airAnimation = "jump";
+    atrc.runningAnim = "run";
+    atrc.slowDownAnim = "stop";
+
+    auto& gc = addComponent<GravityComponent>(player);
+    gc.gravityFactor = jojo::JojoConfig::instance().playerGravityFactor;
+    gc.fallingVelocityCap = jojo::JojoConfig::instance().playerFallingCap;
+
+    addComponent<JumperAgentComponent>(player);
+
+    return player;
+}
+
+
+
 
 secs::Entity JojoFactory::makeBallEnemy(float x, float y)
 {
