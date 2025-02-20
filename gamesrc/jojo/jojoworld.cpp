@@ -42,7 +42,7 @@ namespace jojo {
 		//m_playerEntity = m_factory->makePlayerFreeMover(100, 250);
 		
 		//m_playerEntity = m_factory->makePlayer(100, 250);
-		m_playerEntity = m_factory->makeCrazyPlayer(100, 250);
+		m_playerEntity = m_factory->makeCrazyPlayer(100, 100);
 
 		auto tilemapNode = aether::GEngine->CreateTilemapNode(m_tilemap);
 		auto mapHeightInPixels = m_tilemap->GetTotalHeightInPixels();
