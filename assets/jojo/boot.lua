@@ -1,1 +1,1 @@
-startingMap = "assets/jojo/levels/level1.tmx"
+startingMap = "assets/jojo/levels/level2.tmx"

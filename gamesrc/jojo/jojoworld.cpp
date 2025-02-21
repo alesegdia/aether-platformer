@@ -8,9 +8,42 @@
 #include "aether/plugin/platformer/ecs/component/TransformComponent.h"
 #include "aether/plugin/platformer/ecs/component/AABBComponent.h"
 #include "aether/plugin/platformer/ecs/component/RenderComponent.h"
+#include "aether/plugin/platformer/ecs/system/CrazyController/CrazyControllerSystem.h"
 
 #include "aether/plugin/platformer/ecs/component/TilemapCollisionComponent.h"
 
+#include "aether/lua/helpers.h"
+
+namespace {
+	
+
+
+	CrazyAgentConfigurationData GetInitialCrazyAgentConfigurationDataFromLuaFile()
+	{
+		int status;
+		aether::lua::LuaState L;
+		L.LoadFile("assets/jojo/boot.lua");
+
+
+		// load all the data with GetGlobalFloat in the temporary data
+		CrazyAgentConfigurationData data;
+		data.walkSpeed = L.GetGlobalFloat("walkSpeed", status);
+		data.walkSpeedIncrement = L.GetGlobalFloat("walkSpeedIncrement", status);
+		data.walkFriction = L.GetGlobalFloat("walkFriction", status);
+		data.walkAcceleration = L.GetGlobalFloat("walkAcceleration", status);
+		data.dashSpeed = L.GetGlobalFloat("dashSpeed", status);
+		data.dashSpeedIncrement = L.GetGlobalFloat("dashSpeedIncrement", status);
+		data.dashFriction = L.GetGlobalFloat("dashFriction", status);
+		data.dashAcceleration = L.GetGlobalFloat("dashAcceleration", status);
+		data.jumpForce = L.GetGlobalFloat("jumpForce", status);
+		data.gravityFactor = L.GetGlobalFloat("gravityFactor", status);
+		data.fallingCap = L.GetGlobalFloat("fallingCap", status);
+
+		return data;
+
+	}
+
+}
 
 namespace jojo {
 
@@ -60,7 +93,7 @@ namespace jojo {
 				float(JojoConfig::instance().windowWidth),
 				float(JojoConfig::instance().windowHeight) };
 		auto cam = aether::GEngine->GetCamera(aether::render::CameraFlags::Default);
-		cam->SetOrthographicSize(10.f);
+		cam->SetOrthographicSize(5.f);
 		cam->SetPosition(100.f, 100.f, -100.f);
 
 		m_platformerScroll = std::make_shared<aether::render::PlatformerScroller>(

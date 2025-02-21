@@ -104,7 +104,7 @@ secs::Entity JojoFactory::makeCrazyPlayer(float x, float y)
 {
     secs::Entity player = world().GetEntityProcessor().AddEntity();
 
-    addBasicTilemapEntity(player, x, y, 20, 16);
+    addBasicTilemapEntity(player, x, y, 8, 16);
 
     auto& render_comp = addComponent<RenderComponent>(player);
     render_comp.sprite = aether::GEngine->CreateSpriteNode(glm::fvec2{ 32, 32 });
