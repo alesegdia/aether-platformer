@@ -38,11 +38,14 @@ private:
         auto result = json11::Json::parse(buffer.str(), error);
         std::cout << error << std::endl;
         windowWidth = result["windowWidth"].number_value();
-        windowHeight = result["windowHeight"].number_value();
+        windowHeight = result["windowHeight"].number_value();   
+
+        /*
         playerSpeed = result["playerHorizontalSpeed"].number_value();
         playerJumpForce = result["playerJumpForce"].number_value();
         playerGravityFactor = result["playerGravityFactor"].number_value();
         playerFallingCap = result["playerFallingCap"].number_value();
+        */
     }
 
 };

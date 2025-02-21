@@ -18,29 +18,24 @@ namespace {
 	
 
 
-	CrazyAgentConfigurationData GetInitialCrazyAgentConfigurationDataFromLuaFile()
+	std::shared_ptr<CrazyAgentConfigurationData> GetInitialCrazyAgentConfigurationDataFromLuaFile()
 	{
 		int status;
 		aether::lua::LuaState L;
-		L.LoadFile("assets/jojo/boot.lua");
-
+		status = L.LoadFile("assets/jojo/boot.lua");
 
 		// load all the data with GetGlobalFloat in the temporary data
-		CrazyAgentConfigurationData data;
-		data.walkSpeed = L.GetGlobalFloat("walkSpeed", status);
-		data.walkSpeedIncrement = L.GetGlobalFloat("walkSpeedIncrement", status);
-		data.walkFriction = L.GetGlobalFloat("walkFriction", status);
-		data.walkAcceleration = L.GetGlobalFloat("walkAcceleration", status);
-		data.dashSpeed = L.GetGlobalFloat("dashSpeed", status);
-		data.dashSpeedIncrement = L.GetGlobalFloat("dashSpeedIncrement", status);
-		data.dashFriction = L.GetGlobalFloat("dashFriction", status);
-		data.dashAcceleration = L.GetGlobalFloat("dashAcceleration", status);
-		data.jumpForce = L.GetGlobalFloat("jumpForce", status);
-		data.gravityFactor = L.GetGlobalFloat("gravityFactor", status);
-		data.fallingCap = L.GetGlobalFloat("fallingCap", status);
+		std::shared_ptr<CrazyAgentConfigurationData> data = std::make_shared<CrazyAgentConfigurationData>();
+		data->walkSpeed = L.GetGlobalFloat("walkSpeed", status);
+		data->walkSpeedIncrement = L.GetGlobalFloat("walkSpeedIncrement", status);
+		data->walkFriction = L.GetGlobalFloat("walkFriction", status);
+		data->dashSpeed = L.GetGlobalFloat("dashSpeed", status);
+		data->dashFriction = L.GetGlobalFloat("dashFriction", status);
+		data->jumpForce = L.GetGlobalFloat("jumpForce", status);
+		data->gravityFactor = L.GetGlobalFloat("gravityFactor", status);
+		data->fallingCap = L.GetGlobalFloat("fallingCap", status);
 
 		return data;
-
 	}
 
 }
@@ -67,8 +62,10 @@ namespace jojo {
 		collisionTilemap->SetInvertedY(true);
 		collisionTilemapSolver->SetOneWayUp(true);
 
+		m_data = GetInitialCrazyAgentConfigurationDataFromLuaFile();
+
 		// creation
-		m_ecsWorld = std::make_shared<JojoECS>(/*m_tilemap->GetTotalHeightInPixels()*/);
+		m_ecsWorld = std::make_shared<JojoECS>(*m_data);
 		m_ecsWorld->SetTilemapMovementSolver(collisionTilemapSolver);
 		m_factory = std::make_shared<JojoFactory>(m_ecsWorld->engine(), playerIndex);
 		

@@ -8,13 +8,14 @@
 
 class AIAgentDumbWalkerSystem;
 
+class CrazyAgentConfigurationData;
 
 namespace jojo {
 
 class JojoECS : public ECSWorld
 {
 public:
-    JojoECS();
+    JojoECS(const CrazyAgentConfigurationData& data);
 
 	void SetTilemapMovementSolver(const std::shared_ptr<aether::tilemap::TilemapMovementSolver>& tilemapMovementSolver) override;
 

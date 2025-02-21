@@ -6,6 +6,7 @@
 #include "aether/render/platformerscroller.h"
 
 class ECSWorld;
+class CrazyAgentConfigurationData;
 
 namespace jojo {
 
@@ -40,6 +41,7 @@ private:
 	std::shared_ptr<aether::render::TopDownMapScroller> m_topDownScroll;
 	std::shared_ptr<aether::render::DirectScroller> m_directScroller;
     std::shared_ptr<aether::tilemap::TileMap> m_tilemap;
+    std::shared_ptr<CrazyAgentConfigurationData> m_data;
 
 };
 

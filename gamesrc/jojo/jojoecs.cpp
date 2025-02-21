@@ -35,7 +35,7 @@
 namespace jojo {
 
 
-JojoECS::JojoECS()
+JojoECS::JojoECS(const CrazyAgentConfigurationData& data)
 {
     pushSystems<
         AnimatorSystem,
@@ -43,9 +43,9 @@ JojoECS::JojoECS()
         JumperAgentControllerSystem,
 		FreeMoverControllerSystem,
         PlayerKeyboardControllerSystem,
-        CrazyAgentControllerSystem,
         CrazyControllerPlayerSystem,
         CrazyAnimatorSystem>();
+	pushSystem<CrazyAgentControllerSystem>(data);
     m_aiAgentDumbWalkerSystem = pushSystem<AIAgentDumbWalkerSystem>();
 }
 
