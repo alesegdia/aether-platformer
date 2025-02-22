@@ -67,7 +67,7 @@ namespace jojo {
 		// creation
 		m_ecsWorld = std::make_shared<JojoECS>(*m_data);
 		m_ecsWorld->SetTilemapMovementSolver(collisionTilemapSolver);
-		m_factory = std::make_shared<JojoFactory>(m_ecsWorld->engine(), playerIndex);
+		m_factory = std::make_shared<JojoFactory>(m_ecsWorld->engine(), playerIndex, *m_data);
 		
 		//m_playerEntity = m_factory->makePlayerFreeMover(100, 250);
 		

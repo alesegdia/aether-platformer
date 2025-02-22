@@ -20,10 +20,6 @@ public:
     
     double windowWidth;
     double windowHeight;
-    double playerSpeed;
-    double playerJumpForce;
-    double playerGravityFactor;
-    double playerFallingCap;
     
 private:
 

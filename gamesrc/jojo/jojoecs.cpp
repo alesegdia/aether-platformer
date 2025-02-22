@@ -43,9 +43,9 @@ JojoECS::JojoECS(const CrazyAgentConfigurationData& data)
         JumperAgentControllerSystem,
 		FreeMoverControllerSystem,
         PlayerKeyboardControllerSystem,
-        CrazyControllerPlayerSystem,
         CrazyAnimatorSystem>();
 	pushSystem<CrazyAgentControllerSystem>(data);
+    pushSystem< CrazyControllerPlayerSystem>();
     m_aiAgentDumbWalkerSystem = pushSystem<AIAgentDumbWalkerSystem>();
 }
 

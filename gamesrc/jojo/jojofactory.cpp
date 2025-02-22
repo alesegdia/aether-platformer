@@ -11,14 +11,15 @@
 #include "aether/plugin/platformer/ecs/component/GravityComponent.h"
 #include "aether/plugin/platformer/ecs/component/AIAgentDumbWalkerComponent.h"
 #include "aether/plugin/platformer/ecs/component/HadronCollisionComponent.h"
+#include "aether/plugin/platformer/ecs/system/CrazyController/CrazyControllerSystem.h"
 
 
 
 namespace jojo {
 
-JojoFactory::JojoFactory(secs::Engine &world, int playerIndex)
-    : BaseEntityFactory(world),
-      m_playerIndex(playerIndex)
+JojoFactory::JojoFactory(secs::Engine &world, int playerIndex, const CrazyAgentConfigurationData& config)
+    : BaseEntityFactory(world)
+    , m_config(config)
 {
     aether::render::AsepriteAnimationLoader animloader;
     m_playerAnim = animloader.Load("assets/jojo/bicho.json");
@@ -42,8 +43,8 @@ secs::Entity JojoFactory::makePlayerFreeMover(float x, float y)
     addComponent<AgentInputComponent>(player);
 
 	auto& apc = addComponent<AgentParamsComponent>(player);
-    apc.horizontalSpeed = jojo::JojoConfig::instance().playerSpeed;
-    apc.jumpForce = jojo::JojoConfig::instance().playerJumpForce;
+    apc.horizontalSpeed = m_config.walkSpeed;
+    apc.jumpForce = m_config.jumpForce;
 
     addComponent<FreeMoverAgentComponent>(player);
 
@@ -55,8 +56,8 @@ secs::Entity JojoFactory::makePlayerFreeMover(float x, float y)
     atrc.slowDownAnim = "stop";
 
     auto& gc = addComponent<GravityComponent>(player);
-    gc.gravityFactor = jojo::JojoConfig::instance().playerGravityFactor;
-    gc.fallingVelocityCap = jojo::JojoConfig::instance().playerFallingCap;
+    gc.gravityFactor = m_config.gravityFactor;
+    gc.fallingVelocityCap = m_config.fallingCap;
 
     return player;
 }
@@ -78,8 +79,8 @@ secs::Entity JojoFactory::makePlayer(float x, float y)
     addComponent<AgentInputComponent>(player);
     
     auto& apc = addComponent<AgentParamsComponent>(player);
-    apc.horizontalSpeed = jojo::JojoConfig::instance().playerSpeed;
-    apc.jumpForce = jojo::JojoConfig::instance().playerJumpForce;
+    apc.horizontalSpeed = m_config.walkSpeed;
+    apc.jumpForce = m_config.jumpForce;
     
     addComponent<JumperAgentComponent>(player);
     auto& atrc = addComponent<AnimatorComponent>(player);
@@ -90,8 +91,8 @@ secs::Entity JojoFactory::makePlayer(float x, float y)
     atrc.slowDownAnim = "stop";
 
     auto& gc = addComponent<GravityComponent>(player);
-    gc.gravityFactor = jojo::JojoConfig::instance().playerGravityFactor;
-    gc.fallingVelocityCap = jojo::JojoConfig::instance().playerFallingCap;
+    gc.gravityFactor = m_config.gravityFactor;
+    gc.fallingVelocityCap = m_config.fallingCap;
 
 	addComponent<JumperAgentComponent>(player);
 
@@ -124,8 +125,8 @@ secs::Entity JojoFactory::makeCrazyPlayer(float x, float y)
     atrc.slowDownAnim = "stop";
 
     auto& gc = addComponent<GravityComponent>(player);
-    gc.gravityFactor = jojo::JojoConfig::instance().playerGravityFactor;
-    gc.fallingVelocityCap = jojo::JojoConfig::instance().playerFallingCap;
+    gc.gravityFactor = m_config.gravityFactor;
+    gc.fallingVelocityCap = m_config.fallingCap;
 
     addComponent<JumperAgentComponent>(player);
 
