@@ -34,6 +34,7 @@ namespace {
 		data->jumpForce = L.GetGlobalFloat("jumpForce", status);
 		data->gravityFactor = L.GetGlobalFloat("gravityFactor", status);
 		data->fallingCap = L.GetGlobalFloat("fallingCap", status);
+		data->dashDuration = L.GetGlobalFloat("dashDuration", status);
 
 		return data;
 	}
