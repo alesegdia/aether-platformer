@@ -22,7 +22,7 @@ JojoFactory::JojoFactory(secs::Engine &world, int playerIndex, const CrazyAgentC
     , m_config(config)
 {
     aether::render::AsepriteAnimationLoader animloader;
-    m_playerAnim = animloader.Load("assets/jojo/bicho.json");
+    m_playerAnim = animloader.Load("assets/jojo/jojo.json");
     m_ballEnemyAnim = animloader.Load("assets/jojo/enemyball.json");
 }
 
@@ -54,6 +54,7 @@ secs::Entity JojoFactory::makePlayerFreeMover(float x, float y)
     atrc.airAnimation = "jump";
     atrc.runningAnim = "run";
     atrc.slowDownAnim = "stop";
+    atrc.dashAirAnimation = "jumpdash";
 
     auto& gc = addComponent<GravityComponent>(player);
     gc.gravityFactor = m_config.gravityFactor;
@@ -89,6 +90,7 @@ secs::Entity JojoFactory::makePlayer(float x, float y)
     atrc.airAnimation = "jump";
     atrc.runningAnim = "run";
     atrc.slowDownAnim = "stop";
+    atrc.dashAirAnimation = "jumpdash";
 
     auto& gc = addComponent<GravityComponent>(player);
     gc.gravityFactor = m_config.gravityFactor;
@@ -123,6 +125,7 @@ secs::Entity JojoFactory::makeCrazyPlayer(float x, float y)
     atrc.airAnimation = "jump";
     atrc.runningAnim = "run";
     atrc.slowDownAnim = "stop";
+    atrc.dashAirAnimation = "jumpdash";
 
     auto& gc = addComponent<GravityComponent>(player);
     gc.gravityFactor = m_config.gravityFactor;
