@@ -38,6 +38,11 @@ namespace {
 		data->dashJumpForce = L.GetGlobalFloat("dashJumpForce", status);
 		data->dashCooldown = L.GetGlobalFloat("dashCooldown", status);
 
+		data->stampingTime = L.GetGlobalFloat("stampingTime", status);
+		data->coyoteTime = L.GetGlobalFloat("coyoteTime", status);
+		data->stopVelocityThreshold = L.GetGlobalFloat("stopVelocityThreshold", status);
+		data->numberOfJumps = L.GetGlobalInt("numberOfJumps", status);
+
 		return data;
 	}
 
@@ -172,8 +177,8 @@ namespace jojo {
 			}
 		}
 		*/
-		auto aabb = m_ecsWorld->engine().GetComponent<AABBComponent>(m_playerEntity).aabb;
-		aether::GEngine->GetInstantRenderer()->DrawAABB({ {aabb.x1(), aabb.y1(), 0}, {aabb.x2(), aabb.y2(), 100.f}}, aether::render::Color::Green, -1);
+		//auto aabb = m_ecsWorld->engine().GetComponent<AABBComponent>(m_playerEntity).aabb;
+		//aether::GEngine->GetInstantRenderer()->DrawAABB({ {aabb.x1(), aabb.y1(), 0}, {aabb.x2(), aabb.y2(), 100.f}}, aether::render::Color::Green, -1);
 	}
 
 

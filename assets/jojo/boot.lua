@@ -1,8 +1,8 @@
 startingMap = "assets/jojo/levels/level3.tmx"
 
-walkSpeed = 1.0
+walkSpeed = 2.0
 walkSpeedIncrement = 0.05
-walkFriction = 0.95
+walkFriction = 0.99
 
 dashSpeed = 3.0
 dashFriction = 0.95
@@ -15,3 +15,7 @@ fallingCap = 3.0
 dashDuration = 0.7
 dashCooldown = 1.0
 
+stampingTime = 0.5
+coyoteTime = 0.5
+stopVelocityThreshold = 0.2
+numberOfJumps = 1

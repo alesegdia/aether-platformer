@@ -126,6 +126,7 @@ secs::Entity JojoFactory::makeCrazyPlayer(float x, float y)
     atrc.runningAnim = "run";
     atrc.slowDownAnim = "stop";
     atrc.dashAirAnimation = "jumpdash";
+	atrc.stampingAnimation = "stamped";
 
     auto& gc = addComponent<GravityComponent>(player);
     gc.gravityFactor = m_config.gravityFactor;
