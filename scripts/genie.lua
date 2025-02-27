@@ -4,7 +4,7 @@ dofile(path.join(AETHER_DIR, "scripts/util/util.lua"))
 aetherConfig()
 
 solution "aether-platformer"
-	startproject("jojo")
+	startproject("enerjim")
 	location "../build/"
 	configurations { "debug", "release" }
 	platforms { "x32", "x64" }
@@ -24,6 +24,18 @@ solution "aether-platformer"
 			"../gamesrc/jojo/**.h",
 			-- path.join(AETHER_DIR, "src/main/main.cpp")
 		}
+
+	aetherProject("enerjim")
+		includedirs {
+			"../gamesrc/"
+		}
+		debugdir ("..")
+		targetdir ("../build")
+		files {
+			"../gamesrc/enerjim/**.cpp",
+			"../gamesrc/enerjim/**.h",
+			-- path.join(AETHER_DIR, "src/main/main.cpp")
+	}
 
 		--[[
 	aetherProject("cortex")
