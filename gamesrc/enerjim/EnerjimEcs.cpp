@@ -29,6 +29,12 @@
 #include "aether/plugin/platformer/ecs/component/CrazyController/CrazyAnimatorComponent.h"
 #include "aether/plugin/platformer/ecs/system/CrazyController/CrazyControllerPlayerSystem.h"
 
+#include "aether/plugin/platformer/ecs/system/VaniaJumper/VaniaJumperControllerSystem.h"
+#include "aether/plugin/platformer/ecs/system/VaniaJumper/VaniaJumperAnimatorSystem.h"
+#include "aether/plugin/platformer/ecs/component/VaniaJumper/VaniaJumperAgentComponent.h"
+#include "aether/plugin/platformer/ecs/component/VaniaJumper/VaniaJumperAnimatorComponent.h"
+#include "aether/plugin/platformer/ecs/system/VaniaJumper/VaniaJumperControllerPlayerSystem.h"
+
     
 
 
@@ -43,9 +49,11 @@ namespace enerjim {
         JumperAgentControllerSystem,
 		FreeMoverControllerSystem,
         PlayerKeyboardControllerSystem,
-        CrazyAnimatorSystem>();
+        CrazyAnimatorSystem,
+        VaniaJumperAgentControllerSystem,
+        VaniaJumperAnimatorSystem,
+        VaniaJumperControllerPlayerSystem>();
 	pushSystem<CrazyAgentControllerSystem>(data);
-    pushSystem< CrazyControllerPlayerSystem>();
     m_aiAgentDumbWalkerSystem = pushSystem<AIAgentDumbWalkerSystem>();
 }
 
