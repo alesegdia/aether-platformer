@@ -82,17 +82,20 @@ namespace enerjim {
 		//m_playerEntity = m_factory->makePlayer(100, 250);
 
 		auto spawn = m_tilemap->GetObjectLayer("entities")->GetObjectByName("playerSpawn");
-		auto spawnTile = m_tilemap->GetObjectTilePosition(*spawn);
-		m_playerEntity = m_factory->MakePlayer(spawnTile.GetX() * 32, spawnTile.GetY() * 32);
+		auto objectTilePosition = m_tilemap->GetObjectTilePosition(*spawn);
+		// auto objectLayerIndex = object.tileLayerIndex;
+		auto spawnTile = glm::ivec2{ objectTilePosition.x, m_tilemap->GetHeightInTiles() - objectTilePosition.y };
+		m_playerEntity = m_factory->MakePlayer(spawnTile.x * 32, spawnTile.y * 32); // , objectLayerIndex * 10);
+		// m_playerEntity = m_factory->MakePlayer(100, 100);
 
 		auto tilemapNode = aether::GEngine->CreateTilemapNode(m_tilemap);
 		auto mapHeightInPixels = m_tilemap->GetTotalHeightInPixels();
 
 		auto viewport = aether::math::Vec2f {
-				float(EnerjimConfig::instance().windowWidth),
-				float(EnerjimConfig::instance().windowHeight) };
+				float(EnerjimConfig::instance().GetWindowWidth()),
+				float(EnerjimConfig::instance().GetWindowHeight()) };
 		auto cam = aether::GEngine->GetCamera(aether::render::CameraFlags::Default);
-		cam->SetOrthographicSize(3.f);
+		cam->SetOrthographicSize(EnerjimConfig::instance().GetOrthoScale());
 		cam->SetPosition(100.f, 100.f, -100.f);
 
 		m_platformerScroll = std::make_shared<aether::render::PlatformerScroller>(
@@ -104,6 +107,8 @@ namespace enerjim {
 		m_directScroller = std::make_shared<aether::render::DirectScroller>(cam);
 		
 		aether::GEngine->ToggleImGuiStats();
+
+		aether::GEngine->GetCamera(aether::render::CameraFlags::Default)->SetZPosition(-500);
 
 		return 0;
 	}
@@ -163,9 +168,10 @@ namespace enerjim {
 				auto collisionBehaviour = collisionLayer->GetTileCollisionBehaviour(i, m_tilemap->GetHeightInTiles() - j - 1);
 				if(collisionBehaviour == aether::tilemap::TileCollisionBehaviour::Solid)
 				{
-					float size = 16;
+					float tw = m_tilemap->GetTileWidth();
+					float th = m_tilemap->GetTileHeight();
 					// draw AABB for tile
-					aether::GEngine->GetInstantRenderer()->DrawAABB({ {i * size, j * size, zOffset}, {(i+1) * size, (j+1) * size, zOffset + 10} }, aether::render::Color::Red);
+					aether::GEngine->GetInstantRenderer()->DrawAABB({ {i * tw, j * th, zOffset}, {(i+1) * tw, (j+1) * th, zOffset + 10} }, aether::render::Color::Red);
 
 					//aether::GEngine->GetInstantRenderer()->DrawAABB({ {}, {} }, aether::render::Color::Blue);
 				}
