@@ -13,10 +13,7 @@ class EnerjimFactory : public BaseEntityFactory
 public:
     EnerjimFactory( secs::Engine& world, int playerIndex, const CrazyAgentConfigurationData& configData);
 
-    secs::Entity makePlayerFreeMover(float x, float y);
-    secs::Entity makePlayer(float x, float y);
-    secs::Entity makeCrazyPlayer(float x, float y);
-    secs::Entity makeBallEnemy( float x, float y );
+    secs::Entity MakePlayer(float x, float y);
 
 private:
 

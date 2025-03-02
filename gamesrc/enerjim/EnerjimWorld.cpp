@@ -63,7 +63,7 @@ namespace enerjim {
 		m_tilemap = aether::tilemap::BuildMap(map);
 
 		// get useful information
-		auto playerIndex = m_tilemap->GetObjectLayer("player")->GetDepthOrder();
+		auto playerIndex = m_tilemap->GetObjectLayer("entities")->GetDepthOrder();
 		auto collisionLayer = m_tilemap->GetTileLayer("collision");
 		auto collisionTilemap = std::make_shared<aether::tilemap::AetherTilemapCollisionQueryInterface>(collisionLayer);
 		auto collisionTilemapSolver = std::make_shared<aether::tilemap::TilemapMovementSolver>(collisionTilemap);
@@ -80,25 +80,19 @@ namespace enerjim {
 		//m_playerEntity = m_factory->makePlayerFreeMover(100, 250);
 		
 		//m_playerEntity = m_factory->makePlayer(100, 250);
-		m_playerEntity = m_factory->makeCrazyPlayer(100, 100);
+
+		auto spawn = m_tilemap->GetObjectLayer("entities")->GetObjectByName("playerSpawn");
+		auto spawnTile = m_tilemap->GetObjectTilePosition(*spawn);
+		m_playerEntity = m_factory->MakePlayer(spawnTile.GetX() * 32, spawnTile.GetY() * 32);
 
 		auto tilemapNode = aether::GEngine->CreateTilemapNode(m_tilemap);
 		auto mapHeightInPixels = m_tilemap->GetTotalHeightInPixels();
-
-		m_tilemap->GetObjectLayer("enemies")->ForEachObject([this, mapHeightInPixels](const auto& o) {
-			const auto& type = o.props.at("type");
-			auto x = o.aabb.center().GetX();
-			auto y = o.aabb.center().GetY();
-			if (type == "dumbwalker") {
-				m_factory->makeBallEnemy(x, mapHeightInPixels - y - 1 - 3);
-			}
-		});
 
 		auto viewport = aether::math::Vec2f {
 				float(EnerjimConfig::instance().windowWidth),
 				float(EnerjimConfig::instance().windowHeight) };
 		auto cam = aether::GEngine->GetCamera(aether::render::CameraFlags::Default);
-		cam->SetOrthographicSize(2.f);
+		cam->SetOrthographicSize(3.f);
 		cam->SetPosition(100.f, 100.f, -100.f);
 
 		m_platformerScroll = std::make_shared<aether::render::PlatformerScroller>(
@@ -119,7 +113,7 @@ namespace enerjim {
 		lua_State* L = luaL_newstate();
 		luaL_openlibs(L);
 
-		if (luaL_dofile(L, "assets/jojo/boot.lua") == LUA_OK)
+		if (luaL_dofile(L, "assets/enerjim/boot.lua") == LUA_OK)
 		{
 			lua_pop(L, lua_gettop(L));
 		}
@@ -154,11 +148,12 @@ namespace enerjim {
 		// m_platformerScroll->Focus(pos.GetX(), pos.GetY());
 		m_ecsWorld->render();
 
+		DebugTilemap();
+
 	}
 
 	void EnerjimWorld::DebugTilemap()
 	{
-		/*
 		auto zOffset = 100;
 		auto collisionLayer = m_tilemap->GetTileLayer("collision");
 		for (int i = 0; i < m_tilemap->GetWidthInTiles(); i++)
@@ -176,9 +171,8 @@ namespace enerjim {
 				}
 			}
 		}
-		*/
-		//auto aabb = m_ecsWorld->engine().GetComponent<AABBComponent>(m_playerEntity).aabb;
-		//aether::GEngine->GetInstantRenderer()->DrawAABB({ {aabb.x1(), aabb.y1(), 0}, {aabb.x2(), aabb.y2(), 100.f}}, aether::render::Color::Green, -1);
+		auto aabb = m_ecsWorld->engine().GetComponent<AABBComponent>(m_playerEntity).aabb;
+		aether::GEngine->GetInstantRenderer()->DrawAABB({ {aabb.x1(), aabb.y1(), 0}, {aabb.x2(), aabb.y2(), 100.f}}, aether::render::Color::Green, -1);
 	}
 
 
@@ -186,7 +180,7 @@ namespace enerjim {
 	{
 		m_ecsWorld->step(delta);
 		// DoDirectScrolling();
-		DoTopDownScrolling();
+		//DoTopDownScrolling();
 		// DoPlatformerScrolling(delta);
 	}
 
@@ -222,6 +216,9 @@ namespace enerjim {
 
 		m_topDownScroll->Focus(pos.x + aabb.w() / 2.f, pos.y + aabb.h() / 2.f);
 		//m_topDownScroll->Focus(pc.position.GetX(), pc.position.GetY());
+
+		// set camera Z
+		aether::GEngine->GetCamera(aether::render::CameraFlags::Default)->SetZPosition(-300);
 	}
 	
 	void EnerjimWorld::DoDirectScrolling()
