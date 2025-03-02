@@ -55,11 +55,11 @@ secs::Entity EnerjimFactory::MakePlayer(float x, float y)
 	atrc.stampingAnimation = "stamped";
     */
 
+    /*
     auto& gc = addComponent<GravityComponent>(player);
     gc.gravityFactor = m_config.gravityFactor;
     gc.fallingVelocityCap = m_config.fallingCap;
-
-    addComponent<JumperAgentComponent>(player);
+    */
 
     return player;
 }

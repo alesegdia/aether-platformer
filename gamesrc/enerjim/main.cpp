@@ -7,7 +7,7 @@
 
 int main( int argc, char** argv )
 {
-    return enerjim::createApp(enerjim::EnerjimConfig::instance().windowWidth,
-                    enerjim::EnerjimConfig::instance().windowHeight)
+    return enerjim::createApp(enerjim::EnerjimConfig::instance().GetWindowWidth(),
+                    enerjim::EnerjimConfig::instance().GetWindowHeight())
             ->Exec(aether::core::CommandLineArguments(argc, argv));
 }

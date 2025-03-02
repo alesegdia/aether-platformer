@@ -8,37 +8,19 @@
         "."
     ],
     "fileStates": {
-        "C:/Repos/aether-platformer/assets/jojo/levels/level1.tmx": {
-            "scale": 1.34425,
-            "selectedLayer": 0,
-            "viewCenter": {
-                "x": 399.47926352984933,
-                "y": 159.9404872605542
-            }
-        },
-        "C:/Repos/aether-platformer/assets/jojo/levels/level1.tmx#tiles": {
-            "scaleInDock": 1,
-            "scaleInEditor": 1
-        },
         "images.tsx": {
-            "dynamicWrapping": true,
-            "scaleInDock": 1
+            "dynamicWrapping": true
         },
         "level1.tmx": {
-            "expandedObjectLayers": [
-                8
-            ],
-            "scale": 0.3012,
-            "selectedLayer": 1,
+            "scale": 2,
+            "selectedLayer": -1,
             "viewCenter": {
-                "x": 1613.5458167330676,
-                "y": 946.2151394422311
+                "x": 875,
+                "y": 498
             }
         },
         "tileset.tsx": {
-            "dynamicWrapping": false,
-            "scaleInDock": 1,
-            "scaleInEditor": 1
+            "dynamicWrapping": false
         }
     },
     "last.imagePath": "C:/Users/alejandro.segui/repos/aether-platformer/assets/enerjim",
@@ -51,9 +33,7 @@
     ],
     "project": "enerjim-maps.tiled-project",
     "recentFiles": [
-        "tileset.tsx",
-        "level1.tmx",
-        "C:/Repos/aether-platformer/assets/jojo/levels/level1.tmx"
+        "level1.tmx"
     ],
     "tileset.lastUsedFormat": "tsx",
     "tileset.type": 1

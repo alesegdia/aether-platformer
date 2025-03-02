@@ -17,9 +17,26 @@ public:
         static EnerjimConfig config;
         return config;
     }
+
+	int GetWindowWidth() const
+	{
+		return mWindowWidth;
+	}
+
+	int GetWindowHeight() const
+	{
+		return mWindowHeight;
+	}
+
+	int GetOrthoScale() const
+	{
+		return mOrthoScale;
+	}
     
-    double windowWidth;
-    double windowHeight;
+private:
+    int mWindowWidth;
+    int mWindowHeight;
+    int mOrthoScale;
     
 private:
 
@@ -27,15 +44,15 @@ private:
     {
         std::string error;
         
-        std::ifstream t("assets/jojo/configs.json");
+        std::ifstream t("assets/enerjim/configs.json");
         std::stringstream buffer;
         buffer << t.rdbuf();
-                        
+
         auto result = json11::Json::parse(buffer.str(), error);
         std::cout << error << std::endl;
-        windowWidth = result["windowWidth"].number_value();
-        windowHeight = result["windowHeight"].number_value();   
-
+        mWindowWidth = result["windowWidth"].int_value();
+        mWindowHeight = result["windowHeight"].int_value();   
+        mOrthoScale = result["orthoScale"].int_value();
         /*
         playerSpeed = result["playerHorizontalSpeed"].number_value();
         playerJumpForce = result["playerJumpForce"].number_value();
