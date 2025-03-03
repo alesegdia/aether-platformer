@@ -78,35 +78,15 @@ namespace enerjim {
 
 	int EnerjimWorld::LoadMapFromLua(Tmx::Map& map)
 	{
-		lua_State* L = luaL_newstate();
-		luaL_openlibs(L);
-
-		if (luaL_dofile(L, "assets/enerjim/boot.lua") == LUA_OK)
-		{
-			lua_pop(L, lua_gettop(L));
-		}
-		else
+		if (EnerjimConfig::instance().GetStartingMapPath() == "")
 		{
 			return -1;
 		}
-
-		lua_getglobal(L, "startingMap");
-
-		if (lua_isstring(L, -1))
-		{
-			const char* startingMap = lua_tostring(L, -1);
-			lua_pop(L, 1);
-			printf("Loading map: %s\n", startingMap);
-			map.ParseFile(startingMap);
-		}
 		else
 		{
-			return -1;
+			map.ParseFile(EnerjimConfig::instance().GetStartingMapPath());
+			return 0;
 		}
-
-
-		lua_close(L);
-
 	}
 
 	void EnerjimWorld::Render()
@@ -147,10 +127,17 @@ namespace enerjim {
 
 	void EnerjimWorld::Update(double delta)
 	{
-		m_ecsWorld->step(delta);
-		// DoDirectScrolling();
-		DoTopDownScrolling();
-		// DoPlatformerScrolling(delta);
+		if (m_ecsWorld != nullptr)
+		{
+			m_ecsWorld->step(delta);
+			// DoDirectScrolling();
+			DoTopDownScrolling();
+			// DoPlatformerScrolling(delta);
+		}
+		else
+		{
+			aether::Logger::LogError() << "EnerjimWorld::Update: m_ecsWorld is nullptr";
+		}
 	}
 
 	void EnerjimWorld::DoPlatformerScrolling(float deltaInSeconds)

@@ -46,17 +46,31 @@ void GameplayScreen::Render()
 
 void GameplayScreen::Update(uint64_t delta)
 {
-    m_gameWorld->Update(double(delta));
+	if (m_gameWorld == nullptr)
+	{
+		aether::Logger::LogError() << "GameplayScreen::Update: m_gameWorld is nullptr";
+	}
+	else
+	{
+		m_gameWorld->Update(double(delta));
+	}
 	//aether::render::RenderAABBs();
 	// m_gameWorld->DebugTilemap();
 }
 
 void GameplayScreen::ImGui()
 {
-	auto ecsWorld = m_gameWorld->GetECSWorld();
-	ImGuiECS(ecsWorld);
-	const auto& tcc = ecsWorld.GetComponent<TilemapCollisionComponent>(m_gameWorld->GetPlayerEntity());
-	aether::tilemap::ImGuiDebug(tcc.lastCollisionInfo);
+	if (m_gameWorld->IsWorldInitialized())
+	{
+		auto ecsWorld = m_gameWorld->GetECSWorld();
+		ImGuiECS(ecsWorld);
+		const auto& tcc = ecsWorld.GetComponent<TilemapCollisionComponent>(m_gameWorld->GetPlayerEntity());
+		aether::tilemap::ImGuiDebug(tcc.lastCollisionInfo);
+	}
+	else
+	{
+		ImGui::Text("ecsWorld is nullptr");
+	}
 }
 
 void GameplayScreen::ImGuiECS(const secs::Engine& engine)

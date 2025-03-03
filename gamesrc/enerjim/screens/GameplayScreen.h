@@ -27,7 +27,7 @@ private:
     void ImGuiECS(const secs::Engine& engine);
 
 
-    std::shared_ptr<EnerjimWorld> m_gameWorld;
+    std::shared_ptr<EnerjimWorld> m_gameWorld = nullptr;
 
 };
 

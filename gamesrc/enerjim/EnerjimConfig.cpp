@@ -59,6 +59,8 @@ namespace enerjim {
         aether::lua::LuaState L;
         status = L.LoadFile("assets/enerjim/boot.lua");
 
+        mStartingMapPath = L.GetGlobalString("startingMap", status);
+
         // load vania jumper config
         mVaniaJumperAgentConfig.jumpForce = L.GetGlobalFloat("jumpForce", status);
         mVaniaJumperAgentConfig.walkSpeed = L.GetGlobalFloat("walkSpeed", status);

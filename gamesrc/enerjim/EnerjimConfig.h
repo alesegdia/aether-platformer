@@ -35,6 +35,11 @@ public:
 		return mGravityConfig;
 	}
 
+	const std::string& GetStartingMapPath() const
+	{
+		return mStartingMapPath;
+	}
+
 private:
     EnerjimConfig();
 
@@ -48,6 +53,8 @@ private:
 
     VaniaJumperAgentConfig mVaniaJumperAgentConfig;
     GravityConfig mGravityConfig;
+
+    std::string mStartingMapPath;
 
 };
 

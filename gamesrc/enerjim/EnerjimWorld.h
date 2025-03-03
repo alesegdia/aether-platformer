@@ -22,6 +22,10 @@ public:
     void Render();
     void Update(double delta);
     int LoadMapFromLua(Tmx::Map& map);
+    bool IsWorldInitialized() const
+    {
+        return m_ecsWorld != nullptr;
+    }
     const secs::Engine& GetECSWorld() const;
     void DebugTilemap();
     secs::Entity GetPlayerEntity() const
