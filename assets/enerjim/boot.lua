@@ -5,9 +5,10 @@ orthoScale = 4.0
 
 -- Vania jumper config
 walkSpeed = 2.0
-jumpForce = 4
-coyoteTime = 0.5
+jumpForce = 5
+coyoteTime = 0.2
 numberOfJumps = 1
+inputBufferTime = 0.2
 
 -- Gravity config
 gravityFactor = 0.1

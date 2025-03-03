@@ -17,7 +17,13 @@ namespace {
 
 namespace enerjim {
 
-    int EnerjimConfig::GetWindowWidth() const
+	const enerjim::EnerjimConfig& EnerjimConfig::instance()
+	{
+		static EnerjimConfig config;
+		return config;
+	}
+
+	int EnerjimConfig::GetWindowWidth() const
     {
         return mWindowWidth;
     }
@@ -32,7 +38,22 @@ namespace enerjim {
         return mOrthoScale;
     }
 
-    EnerjimConfig::EnerjimConfig()
+	const VaniaJumperAgentConfig& EnerjimConfig::GetVaniaJumperAgentConfig() const
+	{
+		return mVaniaJumperAgentConfig;
+	}
+
+	const GravityConfig& EnerjimConfig::GetGravityConfig() const
+	{
+		return mGravityConfig;
+	}
+
+	const std::string& EnerjimConfig::GetStartingMapPath() const
+	{
+		return mStartingMapPath;
+	}
+
+	EnerjimConfig::EnerjimConfig()
     {
         LoadLUA();
     }
@@ -52,6 +73,7 @@ namespace enerjim {
         mVaniaJumperAgentConfig.walkSpeed = L.GetGlobalFloat("walkSpeed", status);
         mVaniaJumperAgentConfig.coyoteTime = L.GetGlobalFloat("coyoteTime", status);
         mVaniaJumperAgentConfig.numberOfJumps = L.GetGlobalInt("numberOfJumps", status);
+		mVaniaJumperAgentConfig.inputBufferTime = L.GetGlobalFloat("inputBufferTime", status);
 
         // load gravity config
         mGravityConfig.fallingVelocityCap = L.GetGlobalFloat("fallingCap", status);

@@ -13,32 +13,14 @@ class EnerjimConfig
 {
 public:
     
-    static const EnerjimConfig& instance()
-    {
-        static EnerjimConfig config;
-        return config;
-    }
+    static const EnerjimConfig& instance();
 
 	int GetWindowWidth() const;
-
     int GetWindowHeight() const;
-
     int GetOrthoScale() const;
-    
-	const VaniaJumperAgentConfig& GetVaniaJumperAgentConfig() const
-	{
-		return mVaniaJumperAgentConfig;
-	}
-
-	const GravityConfig& GetGravityConfig() const
-	{
-		return mGravityConfig;
-	}
-
-	const std::string& GetStartingMapPath() const
-	{
-		return mStartingMapPath;
-	}
+	const VaniaJumperAgentConfig& GetVaniaJumperAgentConfig() const;
+	const GravityConfig& GetGravityConfig() const;
+	const std::string& GetStartingMapPath() const;
 
 private:
     EnerjimConfig();
