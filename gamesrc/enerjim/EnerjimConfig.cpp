@@ -34,23 +34,7 @@ namespace enerjim {
 
     EnerjimConfig::EnerjimConfig()
     {
-        LoadJSON();
         LoadLUA();
-    }
-
-    void EnerjimConfig::LoadJSON()
-    {
-        std::string error;
-
-        std::ifstream t("assets/enerjim/configs.json");
-        std::stringstream buffer;
-        buffer << t.rdbuf();
-
-        auto result = json11::Json::parse(buffer.str(), error);
-        std::cout << error << std::endl;
-        mWindowWidth = result["windowWidth"].int_value();
-        mWindowHeight = result["windowHeight"].int_value();
-        mOrthoScale = result["orthoScale"].int_value();
     }
 
     void EnerjimConfig::LoadLUA()
@@ -59,7 +43,9 @@ namespace enerjim {
         aether::lua::LuaState L;
         status = L.LoadFile("assets/enerjim/boot.lua");
 
-        mStartingMapPath = L.GetGlobalString("startingMap", status);
+		mWindowWidth = L.GetGlobalFloat("windowWidth", status);
+		mWindowHeight = L.GetGlobalFloat("windowHeight", status);
+		mOrthoScale = L.GetGlobalFloat("orthoScale", status);
 
         // load vania jumper config
         mVaniaJumperAgentConfig.jumpForce = L.GetGlobalFloat("jumpForce", status);
@@ -70,6 +56,9 @@ namespace enerjim {
         // load gravity config
         mGravityConfig.fallingVelocityCap = L.GetGlobalFloat("fallingCap", status);
         mGravityConfig.gravityFactor = L.GetGlobalFloat("gravityFactor", status);
+
+
+        mStartingMapPath = L.GetGlobalString("startingMap", status);
     }
 
 }

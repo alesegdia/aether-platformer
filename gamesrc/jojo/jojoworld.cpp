@@ -99,7 +99,7 @@ namespace jojo {
 				float(JojoConfig::instance().windowHeight) };
 		auto cam = aether::GEngine->GetCamera(aether::render::CameraFlags::Default);
 		cam->SetOrthographicSize(2.f);
-		cam->SetPosition(100.f, 100.f, -100.f);
+		cam->SetPosition(100.f, 100.f, -500.f);
 
 		m_platformerScroll = std::make_shared<aether::render::PlatformerScroller>(
 					cam, aether::math::Rectf(0, 0, m_tilemap->GetTotalWidthInPixels(), m_tilemap->GetTotalHeightInPixels()),

@@ -43,8 +43,6 @@ public:
 private:
     EnerjimConfig();
 
-    void LoadJSON();
-
     void LoadLUA();
 
     int mWindowWidth;
