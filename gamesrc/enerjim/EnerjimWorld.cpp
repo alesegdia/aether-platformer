@@ -8,45 +8,10 @@
 #include "aether/plugin/platformer/ecs/component/TransformComponent.h"
 #include "aether/plugin/platformer/ecs/component/AABBComponent.h"
 #include "aether/plugin/platformer/ecs/component/RenderComponent.h"
-#include "aether/plugin/platformer/ecs/system/CrazyController/CrazyControllerSystem.h"
+#include "aether/plugin/platformer/ecs/component/VaniaJumper/VaniaJumperAgentComponent.h"
+#include "aether/plugin/platformer/ecs/component/GravityComponent.h"
 
 #include "aether/plugin/platformer/ecs/component/TilemapCollisionComponent.h"
-
-#include "aether/lua/helpers.h"
-
-namespace {
-	
-
-
-	std::shared_ptr<CrazyAgentConfigurationData> GetInitialCrazyAgentConfigurationDataFromLuaFile()
-	{
-		int status;
-		aether::lua::LuaState L;
-		status = L.LoadFile("assets/jojo/boot.lua");
-
-		// load all the data with GetGlobalFloat in the temporary data
-		std::shared_ptr<CrazyAgentConfigurationData> data = std::make_shared<CrazyAgentConfigurationData>();
-		data->walkSpeed = L.GetGlobalFloat("walkSpeed", status);
-		data->walkSpeedIncrement = L.GetGlobalFloat("walkSpeedIncrement", status);
-		data->walkFriction = L.GetGlobalFloat("walkFriction", status);
-		data->dashSpeed = L.GetGlobalFloat("dashSpeed", status);
-		data->dashFriction = L.GetGlobalFloat("dashFriction", status);
-		data->jumpForce = L.GetGlobalFloat("jumpForce", status);
-		data->gravityFactor = L.GetGlobalFloat("gravityFactor", status);
-		data->fallingCap = L.GetGlobalFloat("fallingCap", status);
-		data->dashDuration = L.GetGlobalFloat("dashDuration", status);
-		data->dashJumpForce = L.GetGlobalFloat("dashJumpForce", status);
-		data->dashCooldown = L.GetGlobalFloat("dashCooldown", status);
-
-		data->stampingTime = L.GetGlobalFloat("stampingTime", status);
-		data->coyoteTime = L.GetGlobalFloat("coyoteTime", status);
-		data->stopVelocityThreshold = L.GetGlobalFloat("stopVelocityThreshold", status);
-		data->numberOfJumps = L.GetGlobalInt("numberOfJumps", status);
-
-		return data;
-	}
-
-}
 
 namespace enerjim {
 
@@ -70,12 +35,10 @@ namespace enerjim {
 		collisionTilemap->SetInvertedY(true);
 		collisionTilemapSolver->SetOneWayUp(true);
 
-		m_data = GetInitialCrazyAgentConfigurationDataFromLuaFile();
-
 		// creation
-		m_ecsWorld = std::make_shared<EnerjimECS>(*m_data);
+		m_ecsWorld = std::make_shared<EnerjimECS>();
 		m_ecsWorld->SetTilemapMovementSolver(collisionTilemapSolver);
-		m_factory = std::make_shared<EnerjimFactory>(m_ecsWorld->engine(), playerIndex, *m_data);
+		m_factory = std::make_shared<EnerjimFactory>(m_ecsWorld->engine(), playerIndex);
 		
 		//m_playerEntity = m_factory->makePlayerFreeMover(100, 250);
 		
@@ -186,7 +149,7 @@ namespace enerjim {
 	{
 		m_ecsWorld->step(delta);
 		// DoDirectScrolling();
-		//DoTopDownScrolling();
+		DoTopDownScrolling();
 		// DoPlatformerScrolling(delta);
 	}
 
@@ -223,8 +186,6 @@ namespace enerjim {
 		m_topDownScroll->Focus(pos.x + aabb.w() / 2.f, pos.y + aabb.h() / 2.f);
 		//m_topDownScroll->Focus(pc.position.GetX(), pc.position.GetY());
 
-		// set camera Z
-		aether::GEngine->GetCamera(aether::render::CameraFlags::Default)->SetZPosition(-300);
 	}
 	
 	void EnerjimWorld::DoDirectScrolling()

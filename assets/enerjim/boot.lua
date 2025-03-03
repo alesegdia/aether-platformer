@@ -1,21 +1,17 @@
+-- Viewport config
+windowWidth = 1920,
+windowHeight = 1080,
+orthoScale = 4.0
+
+-- Starting map
 startingMap = "assets/enerjim/level1.tmx"
 
+-- Vania jumper config
 walkSpeed = 2.0
-walkSpeedIncrement = 0.05
-walkFriction = 0.99
+jumpForce = 4
+coyoteTime = 0.5
+numberOfJumps = 1
 
-dashSpeed = 3.0
-dashFriction = 0.95
-
-jumpForce = 2.5
-dashJumpForce = 3.2
+-- Gravity config
 gravityFactor = 0.1
 fallingCap = 3.0
-
-dashDuration = 0.7
-dashCooldown = 1.0
-
-stampingTime = 0.5
-coyoteTime = 0.5
-stopVelocityThreshold = 0.2
-numberOfJumps = 1

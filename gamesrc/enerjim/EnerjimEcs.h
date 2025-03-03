@@ -15,7 +15,7 @@ namespace enerjim {
 class EnerjimECS : public ECSWorld
 {
 public:
-    EnerjimECS(const CrazyAgentConfigurationData& data);
+    EnerjimECS();
 
 	void SetTilemapMovementSolver(const std::shared_ptr<aether::tilemap::TilemapMovementSolver>& tilemapMovementSolver) override;
 

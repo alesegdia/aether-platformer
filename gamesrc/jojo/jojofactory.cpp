@@ -57,8 +57,7 @@ secs::Entity JojoFactory::makePlayerFreeMover(float x, float y)
     atrc.dashAirAnimation = "jumpdash";
 
     auto& gc = addComponent<GravityComponent>(player);
-    gc.gravityFactor = m_config.gravityFactor;
-    gc.fallingVelocityCap = m_config.fallingCap;
+    gc.SetConfig({ m_config.gravityFactor, m_config.fallingCap });
 
     return player;
 }
@@ -93,8 +92,7 @@ secs::Entity JojoFactory::makePlayer(float x, float y)
     atrc.dashAirAnimation = "jumpdash";
 
     auto& gc = addComponent<GravityComponent>(player);
-    gc.gravityFactor = m_config.gravityFactor;
-    gc.fallingVelocityCap = m_config.fallingCap;
+    gc.SetConfig({ m_config.gravityFactor, m_config.fallingCap });
 
 	addComponent<JumperAgentComponent>(player);
 
@@ -129,8 +127,7 @@ secs::Entity JojoFactory::makeCrazyPlayer(float x, float y)
 	atrc.stampingAnimation = "stamped";
 
     auto& gc = addComponent<GravityComponent>(player);
-    gc.gravityFactor = m_config.gravityFactor;
-    gc.fallingVelocityCap = m_config.fallingCap;
+    gc.SetConfig({ m_config.gravityFactor, m_config.fallingCap });
 
     addComponent<JumperAgentComponent>(player);
 

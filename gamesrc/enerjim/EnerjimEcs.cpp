@@ -41,7 +41,7 @@
 namespace enerjim {
 
 
-    EnerjimECS::EnerjimECS(const CrazyAgentConfigurationData& data)
+    EnerjimECS::EnerjimECS()
 {
     pushSystems<
         AnimatorSystem,
@@ -50,10 +50,9 @@ namespace enerjim {
 		FreeMoverControllerSystem,
         PlayerKeyboardControllerSystem,
         CrazyAnimatorSystem,
+        VaniaJumperControllerPlayerSystem,
         VaniaJumperAgentControllerSystem,
-        VaniaJumperAnimatorSystem,
-        VaniaJumperControllerPlayerSystem>();
-	pushSystem<CrazyAgentControllerSystem>(data);
+        VaniaJumperAnimatorSystem>();
     m_aiAgentDumbWalkerSystem = pushSystem<AIAgentDumbWalkerSystem>();
 }
 

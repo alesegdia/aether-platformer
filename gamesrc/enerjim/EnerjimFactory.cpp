@@ -16,13 +16,12 @@
 #include "aether/plugin/platformer/ecs/component/VaniaJumper/VaniaJumperAgentComponent.h"
 #include "aether/plugin/platformer/ecs/component/VaniaJumper/VaniaJumperAnimatorComponent.h"
 
-
+#include "enerjim/EnerjimConfig.h"
 
 namespace enerjim {
 
-EnerjimFactory::EnerjimFactory(secs::Engine &world, int playerIndex, const CrazyAgentConfigurationData& config)
+EnerjimFactory::EnerjimFactory(secs::Engine &world, int playerIndex)
     : BaseEntityFactory(world)
-    , m_config(config)
 {
     aether::render::AsepriteAnimationLoader animloader;
     m_playerAnim = animloader.Load("assets/enerjim/enerjim-anims.json");
@@ -39,25 +38,20 @@ secs::Entity EnerjimFactory::MakePlayer(float x, float y)
     render_comp.sprite->LoadAllAnimations(m_playerAnim);
     render_comp.sprite->PlayAnimation("idle");
     render_comp.currentAnimation = "idle";
+	render_comp.offset = glm::fvec2{ 0, 5 };
 
     addComponent<PlayerComponent>(player);
 
     auto& apc = addComponent<VaniaJumperAgentComponent>(player);
+    apc.SetConfig(EnerjimConfig::instance().GetVaniaJumperAgentConfig());
 
     auto& atrc = addComponent<VaniaJumperAnimatorComponent>(player);
-    /*
-    atrc.groundStandAnimation = "stand";
-    atrc.groundWalkAnimation = "walk";
-    atrc.airAnimation = "jump";
-    atrc.runningAnim = "run";
-    atrc.slowDownAnim = "stop";
-    atrc.dashAirAnimation = "jumpdash";
-	atrc.stampingAnimation = "stamped";
-    */
+    atrc.idleAnim = "idle";
+    atrc.walkAnim = "walk";
+    atrc.jumpAnim = "jumping";
 
     auto& gc = addComponent<GravityComponent>(player);
-    gc.gravityFactor = m_config.gravityFactor;
-    gc.fallingVelocityCap = m_config.fallingCap;
+    gc.SetConfig(EnerjimConfig::instance().GetGravityConfig());
 
     return player;
 }
