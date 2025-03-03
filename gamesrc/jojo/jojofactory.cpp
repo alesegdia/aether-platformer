@@ -30,7 +30,7 @@ secs::Entity JojoFactory::makePlayerFreeMover(float x, float y)
 {
     secs::Entity player = world().GetEntityProcessor().AddEntity();
 
-    addBasicTilemapEntity(player, x, y, 20, 16);
+    addBasicTilemapEntity(player, x, y, 20, 16, 500);
 
     auto& render_comp = addComponent<RenderComponent>(player);
     render_comp.sprite = aether::GEngine->CreateSpriteNode(glm::fvec2{ 32, 32 });
@@ -67,7 +67,7 @@ secs::Entity JojoFactory::makePlayer(float x, float y)
 {
     secs::Entity player = world().GetEntityProcessor().AddEntity();
 
-    addBasicTilemapEntity(player, x, y, 20, 16);
+    addBasicTilemapEntity(player, x, y, 20, 16, 500);
 
     auto& render_comp = addComponent<RenderComponent>(player);
     render_comp.sprite = aether::GEngine->CreateSpriteNode(glm::fvec2{ 32, 32 });
@@ -107,7 +107,7 @@ secs::Entity JojoFactory::makeCrazyPlayer(float x, float y)
 {
     secs::Entity player = world().GetEntityProcessor().AddEntity();
 
-    addBasicTilemapEntity(player, x, y, 8, 16);
+    addBasicTilemapEntity(player, x, y, 8, 16, 500);
 
     auto& render_comp = addComponent<RenderComponent>(player);
     render_comp.sprite = aether::GEngine->CreateSpriteNode(glm::fvec2{ 32, 32 });
@@ -144,7 +144,7 @@ secs::Entity JojoFactory::makeBallEnemy(float x, float y)
 {
     auto entity = world().GetEntityProcessor().AddEntity();
 
-    addBasicTilemapEntity(entity, x, y, 20, 16);
+    addBasicTilemapEntity(entity, x, y, 20, 16, 500);
 
     auto& render_comp = addComponent<RenderComponent>(entity);
     render_comp.currentAnimation = "walk";

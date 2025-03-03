@@ -153,7 +153,7 @@ namespace enerjim {
 		// m_platformerScroll->Focus(pos.GetX(), pos.GetY());
 		m_ecsWorld->render();
 
-		DebugTilemap();
+		//DebugTilemap();
 
 	}
 

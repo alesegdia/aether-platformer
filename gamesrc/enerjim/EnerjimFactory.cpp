@@ -32,7 +32,7 @@ secs::Entity EnerjimFactory::MakePlayer(float x, float y)
 {
     secs::Entity player = world().GetEntityProcessor().AddEntity();
 
-    addBasicTilemapEntity(player, x, y, 8, 16);
+    addBasicTilemapEntity(player, x, y, 8, 16, 500);
 
     auto& render_comp = addComponent<RenderComponent>(player);
     render_comp.sprite = aether::GEngine->CreateSpriteNode(glm::fvec2{ 64, 64 });
@@ -55,11 +55,9 @@ secs::Entity EnerjimFactory::MakePlayer(float x, float y)
 	atrc.stampingAnimation = "stamped";
     */
 
-    /*
     auto& gc = addComponent<GravityComponent>(player);
     gc.gravityFactor = m_config.gravityFactor;
     gc.fallingVelocityCap = m_config.fallingCap;
-    */
 
     return player;
 }
