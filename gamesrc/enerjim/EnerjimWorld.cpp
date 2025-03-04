@@ -45,13 +45,14 @@ namespace enerjim {
 		//m_playerEntity = m_factory->makePlayer(100, 250);
 
 		auto spawn = m_tilemap->GetObjectLayer("entities")->GetObjectByName("playerSpawn");
+		auto layerOrder = m_tilemap->GetLayerOrder("entities");
 		auto objectTilePosition = m_tilemap->GetObjectTilePosition(*spawn);
 		// auto objectLayerIndex = object.tileLayerIndex;
 		auto spawnTile = glm::ivec2{ objectTilePosition.x, m_tilemap->GetHeightInTiles() - objectTilePosition.y };
 		m_playerEntity = m_factory->MakePlayer(spawnTile.x * 32, spawnTile.y * 32); // , objectLayerIndex * 10);
 		// m_playerEntity = m_factory->MakePlayer(100, 100);
 
-		auto tilemapNode = aether::GEngine->CreateTilemapNode(m_tilemap);
+		auto tilemapNode = aether::GEngine->CreateTilemapNode(m_tilemap, 10.f);
 		auto mapHeightInPixels = m_tilemap->GetTotalHeightInPixels();
 
 		auto viewport = aether::math::Vec2f {
