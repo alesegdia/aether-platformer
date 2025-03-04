@@ -5,9 +5,9 @@ orthoScale = 4.0
 
 -- Vania jumper config
 walkSpeed = 2.0
-jumpForce = 2.0
+jumpForce = 2.5
 coyoteTime = 0.2
-numberOfJumps = 3
+numberOfJumps = 5
 inputBufferTime = 0.2
 sustainedJumpTimeThreshold = 0.3
 

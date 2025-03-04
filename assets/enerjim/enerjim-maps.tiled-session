@@ -3,7 +3,7 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "images.tsx",
+    "activeFile": "level1.tmx",
     "expandedProjectPaths": [
         "."
     ],
@@ -14,11 +14,11 @@
             "scaleInEditor": 1
         },
         "level1.tmx": {
-            "scale": 0.5,
-            "selectedLayer": 0,
+            "scale": 4,
+            "selectedLayer": 1,
             "viewCenter": {
-                "x": 404,
-                "y": 1042
+                "x": 231.5,
+                "y": 1507.5
             }
         },
         "tileset.tsx": {
@@ -33,14 +33,14 @@
     "map.width": 100,
     "openFiles": [
         "tileset.tsx",
-        "level1.tmx",
-        "images.tsx"
+        "images.tsx",
+        "level1.tmx"
     ],
     "project": "enerjim-maps.tiled-project",
     "recentFiles": [
         "tileset.tsx",
-        "level1.tmx",
-        "images.tsx"
+        "images.tsx",
+        "level1.tmx"
     ],
     "tileset.lastUsedFormat": "tsx",
     "tileset.type": 1
