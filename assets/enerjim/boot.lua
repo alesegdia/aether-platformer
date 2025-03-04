@@ -1,14 +1,18 @@
 -- Viewport config
-windowWidth = 1920
-windowHeight = 1080
+windowWidth = 800
+windowHeight = 600
 orthoScale = 4.0
 
 -- Vania jumper config
 walkSpeed = 2.0
-jumpForce = 5
+jumpForce = 2.0
 coyoteTime = 0.2
-numberOfJumps = 1
+numberOfJumps = 3
 inputBufferTime = 0.2
+sustainedJumpTimeThreshold = 0.3
+
+-- the jump will be sustained if the jump button is pressed for more than sustainedJumpStartTimeThreshold
+
 
 -- Gravity config
 gravityFactor = 0.1

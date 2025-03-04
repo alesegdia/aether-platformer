@@ -74,6 +74,7 @@ namespace enerjim {
         mVaniaJumperAgentConfig.coyoteTime = L.GetGlobalFloat("coyoteTime", status);
         mVaniaJumperAgentConfig.numberOfJumps = L.GetGlobalInt("numberOfJumps", status);
 		mVaniaJumperAgentConfig.inputBufferTime = L.GetGlobalFloat("inputBufferTime", status);
+		mVaniaJumperAgentConfig.sustainedJumpTimeThreshold = L.GetGlobalFloat("sustainedJumpTimeThreshold", status);
 
         // load gravity config
         mGravityConfig.fallingVelocityCap = L.GetGlobalFloat("fallingCap", status);
