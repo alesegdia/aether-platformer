@@ -15,10 +15,10 @@
         },
         "level1.tmx": {
             "scale": 4,
-            "selectedLayer": 1,
+            "selectedLayer": 4,
             "viewCenter": {
-                "x": 231.5,
-                "y": 1507.5
+                "x": 571.5,
+                "y": 1542.25
             }
         },
         "tileset.tsx": {
