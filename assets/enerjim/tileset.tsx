@@ -101,6 +101,21 @@
    <property name="collision" value="solid"/>
   </properties>
  </tile>
+ <tile id="53">
+  <properties>
+   <property name="collision" value="oneway"/>
+  </properties>
+ </tile>
+ <tile id="54">
+  <properties>
+   <property name="collision" value="oneway"/>
+  </properties>
+ </tile>
+ <tile id="55">
+  <properties>
+   <property name="collision" value="oneway"/>
+  </properties>
+ </tile>
  <wangsets>
   <wangset name="WalkableAreas" type="corner" tile="-1">
    <wangcolor name="Ground" color="#00ff00" tile="-1" probability="1"/>

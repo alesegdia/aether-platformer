@@ -103,14 +103,14 @@ namespace enerjim {
 
 	void EnerjimWorld::DebugTilemap()
 	{
-		auto zOffset = 100;
+		auto zOffset = 400;
 		auto collisionLayer = m_tilemap->GetTileLayer("collision");
 		for (int i = 0; i < m_tilemap->GetWidthInTiles(); i++)
 		{
 			for (int j = 0; j < m_tilemap->GetHeightInTiles(); j++)
 			{
 				auto collisionBehaviour = collisionLayer->GetTileCollisionBehaviour(i, m_tilemap->GetHeightInTiles() - j - 1);
-				if(collisionBehaviour == aether::tilemap::TileCollisionBehaviour::Solid)
+				if(collisionBehaviour == aether::tilemap::TileCollisionBehaviour::Oneway)
 				{
 					float tw = m_tilemap->GetTileWidth();
 					float th = m_tilemap->GetTileHeight();
@@ -139,6 +139,7 @@ namespace enerjim {
 		{
 			aether::Logger::LogError() << "EnerjimWorld::Update: m_ecsWorld is nullptr";
 		}
+		DebugTilemap();
 	}
 
 	void EnerjimWorld::DoPlatformerScrolling(float deltaInSeconds)
