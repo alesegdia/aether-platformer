@@ -101,6 +101,18 @@
    <property name="collision" value="solid"/>
   </properties>
  </tile>
+ <tile id="29">
+  <properties>
+   <property name="collision" value="ramp"/>
+   <property name="slope" value="-1"/>
+  </properties>
+ </tile>
+ <tile id="37">
+  <properties>
+   <property name="collision" value="ramp"/>
+   <property name="slope" value="1"/>
+  </properties>
+ </tile>
  <tile id="53">
   <properties>
    <property name="collision" value="oneway"/>
