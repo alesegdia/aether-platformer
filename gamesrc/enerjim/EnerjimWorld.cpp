@@ -110,7 +110,7 @@ namespace enerjim {
 			for (int j = 0; j < m_tilemap->GetHeightInTiles(); j++)
 			{
 				auto collisionBehaviour = collisionLayer->GetTileCollisionBehaviour(i, m_tilemap->GetHeightInTiles() - j - 1);
-				if(collisionBehaviour == aether::tilemap::TileCollisionBehaviour::Oneway)
+				if(collisionBehaviour.GetType() == aether::tilemap::TileCollisionBehaviourType::Oneway)
 				{
 					float tw = m_tilemap->GetTileWidth();
 					float th = m_tilemap->GetTileHeight();
