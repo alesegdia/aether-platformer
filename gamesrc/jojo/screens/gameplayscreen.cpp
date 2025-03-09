@@ -10,6 +10,8 @@
 
 #include "aether/plugin/platformer/ecs/component/TilemapCollisionComponent.h"
 
+#include "aether/map/ImGuiDebug.h"
+
 
 namespace jojo {
 

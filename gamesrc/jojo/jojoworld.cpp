@@ -13,6 +13,7 @@
 #include "aether/plugin/platformer/ecs/component/TilemapCollisionComponent.h"
 
 #include "aether/lua/helpers.h"
+#include "aether/map/AetherTilemapCollisionQueryInterface.h"
 
 namespace {
 	

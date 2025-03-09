@@ -13,6 +13,8 @@
 
 #include "aether/plugin/platformer/ecs/component/TilemapCollisionComponent.h"
 
+#include "aether/map/AetherTilemapCollisionQueryInterface.h"
+
 namespace enerjim {
 
 	int EnerjimWorld::Init()
