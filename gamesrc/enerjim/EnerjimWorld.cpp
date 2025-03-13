@@ -117,7 +117,7 @@ namespace enerjim {
 					float tw = m_tilemap->GetTileWidth();
 					float th = m_tilemap->GetTileHeight();
 					// draw AABB for tile
-					aether::GEngine->GetInstantRenderer()->DrawAABB({ {i * tw, j * th, zOffset}, {(i+1) * tw, (j+1) * th, zOffset + 10} }, aether::render::Color::Red);
+					aether::GEngine->GetInstantRenderer()->DrawAABB({ {i * tw, j * th, zOffset}, {(i+1) * tw, (j+1) * th, zOffset + 10} }, aether::render::Color::Red, -1);
 
 					//aether::GEngine->GetInstantRenderer()->DrawAABB({ {}, {} }, aether::render::Color::Blue);
 				}
