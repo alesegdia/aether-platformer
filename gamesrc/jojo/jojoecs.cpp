@@ -49,7 +49,7 @@ JojoECS::JojoECS(const CrazyAgentConfigurationData& data)
     m_aiAgentDumbWalkerSystem = pushSystem<AIAgentDumbWalkerSystem>();
 }
 
-void JojoECS::SetTilemapMovementSolver(const std::shared_ptr<aether::tilemap::TilemapMovementSolver>& tilemapMovementSolver)
+void JojoECS::SetTilemapMovementSolver(const std::shared_ptr<aether::tilemap::LegacyTilemapMovementSolver>& tilemapMovementSolver)
 {
     ECSWorld::SetTilemapMovementSolver(tilemapMovementSolver);
     m_aiAgentDumbWalkerSystem->SetTileCollisionQueryInterface(tilemapMovementSolver->GetCollisionQueryInterface());

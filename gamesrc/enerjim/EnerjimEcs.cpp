@@ -56,7 +56,7 @@ namespace enerjim {
     m_aiAgentDumbWalkerSystem = pushSystem<AIAgentDumbWalkerSystem>();
 }
 
-void EnerjimECS::SetTilemapMovementSolver(const std::shared_ptr<aether::tilemap::TilemapMovementSolver>& tilemapMovementSolver)
+void EnerjimECS::SetTilemapMovementSolver(const std::shared_ptr<aether::tilemap::LegacyTilemapMovementSolver>& tilemapMovementSolver)
 {
     ECSWorld::SetTilemapMovementSolver(tilemapMovementSolver);
     m_aiAgentDumbWalkerSystem->SetTileCollisionQueryInterface(tilemapMovementSolver->GetCollisionQueryInterface());

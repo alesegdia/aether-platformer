@@ -33,7 +33,7 @@ namespace enerjim {
 		auto playerIndex = m_tilemap->GetObjectLayer("entities")->GetDepthOrder();
 		auto collisionLayer = m_tilemap->GetTileLayer("collision");
 		auto collisionTilemap = std::make_shared<aether::tilemap::AetherTilemapCollisionQueryInterface>(collisionLayer);
-		auto collisionTilemapSolver = std::make_shared<aether::tilemap::TilemapMovementSolver>(collisionTilemap);
+		auto collisionTilemapSolver = std::make_shared<aether::tilemap::LegacyTilemapMovementSolver>(collisionTilemap);
 		collisionTilemap->SetInvertedY(true);
 		collisionTilemapSolver->SetOneWayUp(true);
 
@@ -124,7 +124,7 @@ namespace enerjim {
 			}
 		}
 		auto aabb = m_ecsWorld->engine().GetComponent<AABBComponent>(m_playerEntity).aabb;
-		aether::GEngine->GetInstantRenderer()->DrawAABB({ {aabb.x1(), aabb.y1(), 0}, {aabb.x2(), aabb.y2(), 100.f}}, aether::render::Color::Green, -1);
+		aether::GEngine->GetInstantRenderer()->DrawAABB({ {aabb.GetX1(), aabb.GetY1(), 0}, {aabb.GetX2(), aabb.GetY2(), 100.f}}, aether::render::Color::Green, -1);
 	}
 
 
@@ -174,7 +174,7 @@ namespace enerjim {
 		auto pos = rendercomp.sprite->GetWorldPosition();
 		auto aabb = aabbc.aabb;
 
-		m_topDownScroll->Focus(pos.x + aabb.w() / 2.f, pos.y + aabb.h() / 2.f);
+		m_topDownScroll->Focus(pos.x + aabb.GetW() / 2.f, pos.y + aabb.GetH() / 2.f);
 		//m_topDownScroll->Focus(pc.position.GetX(), pc.position.GetY());
 
 	}
@@ -188,7 +188,7 @@ namespace enerjim {
 
 		auto pos = rendercomp.sprite->GetWorldPosition();
 		auto aabb = aabbc.aabb;
-		m_directScroller->Focus(pos.x + aabb.w() / 2.f, pos.y + aabb.h() / 2.f);
+		m_directScroller->Focus(pos.x + aabb.GetW() / 2.f, pos.y + aabb.GetH() / 2.f);
 		//m_directScroller->Focus(pos.x, pos.y);
 		//m_directScroller->Focus(aabb.x() + aabb.w() / 2.f, aabb.y() + aabb.h() / 2.f);
 		//m_directScroller->Focus(aabb.x(), aabb.y());

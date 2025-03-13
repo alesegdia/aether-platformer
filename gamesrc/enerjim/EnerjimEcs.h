@@ -17,7 +17,7 @@ class EnerjimECS : public ECSWorld
 public:
     EnerjimECS();
 
-	void SetTilemapMovementSolver(const std::shared_ptr<aether::tilemap::TilemapMovementSolver>& tilemapMovementSolver) override;
+	void SetTilemapMovementSolver(const std::shared_ptr<aether::tilemap::LegacyTilemapMovementSolver>& tilemapMovementSolver) override;
 
 private:
     std::shared_ptr<AIAgentDumbWalkerSystem> m_aiAgentDumbWalkerSystem;
