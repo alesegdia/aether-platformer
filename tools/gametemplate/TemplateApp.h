@@ -1,18 +1,15 @@
 #include <aether/aether.h>
 
-namespace enerjim {
+namespace ##GAMENAME## {
 
 std::shared_ptr<aether::core::Application> createApp(int ww, int wh);
 
-class EnerjimApp : public aether::core::Application
+class ##GAMENAME##App : public aether::core::Application
 {
 public:
-    EnerjimApp(int w, int h);
+    ##GAMENAME##App(int w, int h);
 
-    std::vector<std::string> GetAssetPaths() const override
-    {
-        return { "media/", "assets/" };
-    }
+    std::vector<std::string> GetAssetPaths() const override;
 
 protected:
     int Ready(const aether::core::CommandLineArguments& args) override;

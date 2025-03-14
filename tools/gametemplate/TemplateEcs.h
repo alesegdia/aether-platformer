@@ -10,17 +10,12 @@ class AIAgentDumbWalkerSystem;
 
 class CrazyAgentConfigurationData;
 
-namespace enerjim {
+namespace ##GAMENAME## {
 
-class EnerjimECS : public ECSWorld
+class ##GAMENAME##ECS : public ECSWorld
 {
 public:
-    EnerjimECS();
-
-	void SetTilemapMovementSolver(const std::shared_ptr<aether::tilemap::LegacyTilemapMovementSolver>& tilemapMovementSolver) override;
-
-private:
-    std::shared_ptr<AIAgentDumbWalkerSystem> m_aiAgentDumbWalkerSystem;
+    ##GAMENAME##ECS();
 
 };
 

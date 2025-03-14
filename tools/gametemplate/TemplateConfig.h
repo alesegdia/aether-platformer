@@ -1,38 +1,26 @@
 #pragma once
 
-#include <aether/aether.h>
 
-#include <fstream>
+namespace ##GAMENAME## {
 
-#include "aether/plugin/platformer/ecs/component/VaniaJumper/VaniaJumperAgentComponent.h"
-#include "aether/plugin/platformer/ecs/component/GravityComponent.h"
-
-namespace enerjim {
-
-class EnerjimConfig
+class ##GAMENAME##Config
 {
 public:
-    
-    static const EnerjimConfig& instance();
+    static const ##GAMENAME##Config& instance();
 
 	int GetWindowWidth() const;
     int GetWindowHeight() const;
     int GetOrthoScale() const;
-	const VaniaJumperAgentConfig& GetVaniaJumperAgentConfig() const;
-	const GravityConfig& GetGravityConfig() const;
 	const std::string& GetStartingMapPath() const;
 
 private:
-    EnerjimConfig();
+    ##GAMENAME##Config();
 
     void LoadLUA();
 
     int mWindowWidth;
     int mWindowHeight;
     int mOrthoScale;
-
-    VaniaJumperAgentConfig mVaniaJumperAgentConfig;
-    GravityConfig mGravityConfig;
 
     std::string mStartingMapPath;
 
