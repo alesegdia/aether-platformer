@@ -3,13 +3,13 @@
 #include <secs/secs.h>
 #include "aether/plugin/platformer/core/entityfactory.h"
 
-namespace enerjim {
+namespace ##GAMENAME## {
 
 
-class EnerjimFactory : public BaseEntityFactory
+class ##GAMENAME##Factory : public BaseEntityFactory
 {
 public:
-    EnerjimFactory( secs::Engine& world, int playerIndex);
+    ##GAMENAME##Factory( secs::Engine& world, int playerIndex);
 
     secs::Entity MakePlayer(float x, float y);
 

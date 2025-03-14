@@ -1,7 +1,7 @@
-#include "EnerjimWorld.h"
-#include "EnerjimEcs.h"
-#include "EnerjimFactory.h"
-#include "EnerjimConfig.h"
+#include "##GAMENAME##World.h"
+#include "##GAMENAME##Ecs.h"
+#include "##GAMENAME##Factory.h"
+#include "##GAMENAME##Config.h"
 
 #include "aether/lua/lua.h"
 
@@ -15,9 +15,9 @@
 
 #include "aether/map/AetherTilemapCollisionQueryInterface.h"
 
-namespace enerjim {
+namespace ##GAMENAME## {
 
-	int EnerjimWorld::Init()
+	int ##GAMENAME##World::Init()
 	{
 		Tmx::Map map;
 		int retcode = LoadMapFromLua(map);
@@ -38,9 +38,9 @@ namespace enerjim {
 		collisionTilemapSolver->SetOneWayUp(true);
 
 		// creation
-		m_ecsWorld = std::make_shared<EnerjimECS>();
+		m_ecsWorld = std::make_shared<##GAMENAME##ECS>();
 		m_ecsWorld->SetTilemapMovementSolver(collisionTilemapSolver);
-		m_factory = std::make_shared<EnerjimFactory>(m_ecsWorld->engine(), playerIndex);
+		m_factory = std::make_shared<##GAMENAME##Factory>(m_ecsWorld->engine(), playerIndex);
 		
 		//m_playerEntity = m_factory->makePlayerFreeMover(100, 250);
 		
@@ -58,10 +58,10 @@ namespace enerjim {
 		auto mapHeightInPixels = m_tilemap->GetTotalHeightInPixels();
 
 		auto viewport = aether::math::Vec2f {
-				float(EnerjimConfig::instance().GetWindowWidth()),
-				float(EnerjimConfig::instance().GetWindowHeight()) };
+				float(##GAMENAME##Config::instance().GetWindowWidth()),
+				float(##GAMENAME##Config::instance().GetWindowHeight()) };
 		auto cam = aether::GEngine->GetCamera(aether::render::CameraFlags::Default);
-		cam->SetOrthographicSize(EnerjimConfig::instance().GetOrthoScale());
+		cam->SetOrthographicSize(##GAMENAME##Config::instance().GetOrthoScale());
 		cam->SetPosition(100.f, 100.f, -100.f);
 
 		m_platformerScroll = std::make_shared<aether::render::PlatformerScroller>(
@@ -79,20 +79,20 @@ namespace enerjim {
 		return 0;
 	}
 
-	int EnerjimWorld::LoadMapFromLua(Tmx::Map& map)
+	int ##GAMENAME##World::LoadMapFromLua(Tmx::Map& map)
 	{
-		if (EnerjimConfig::instance().GetStartingMapPath() == "")
+		if (##GAMENAME##Config::instance().GetStartingMapPath() == "")
 		{
 			return -1;
 		}
 		else
 		{
-			map.ParseFile(EnerjimConfig::instance().GetStartingMapPath());
+			map.ParseFile(##GAMENAME##Config::instance().GetStartingMapPath());
 			return 0;
 		}
 	}
 
-	void EnerjimWorld::Render()
+	void ##GAMENAME##World::Render()
 	{
 		auto& pos = m_ecsWorld->engine().GetComponent<TransformComponent>(m_playerEntity).position;
 
@@ -103,7 +103,7 @@ namespace enerjim {
 
 	}
 
-	void EnerjimWorld::DebugTilemap()
+	void ##GAMENAME##World::DebugTilemap()
 	{
 		auto zOffset = 400;
 		auto collisionLayer = m_tilemap->GetTileLayer("collision");
@@ -128,7 +128,7 @@ namespace enerjim {
 	}
 
 
-	void EnerjimWorld::Update(double delta)
+	void ##GAMENAME##World::Update(double delta)
 	{
 		if (m_ecsWorld != nullptr)
 		{
@@ -139,12 +139,12 @@ namespace enerjim {
 		}
 		else
 		{
-			aether::Logger::LogError() << "EnerjimWorld::Update: m_ecsWorld is nullptr";
+			aether::Logger::LogError() << "##GAMENAME##World::Update: m_ecsWorld is nullptr";
 		}
 		DebugTilemap();
 	}
 
-	void EnerjimWorld::DoPlatformerScrolling(float deltaInSeconds)
+	void ##GAMENAME##World::DoPlatformerScrolling(float deltaInSeconds)
 	{
 		auto& pc = m_ecsWorld->engine().GetComponent<TransformComponent>(m_playerEntity);
 		auto& tc = m_ecsWorld->engine().GetComponent<TilemapCollisionComponent>(m_playerEntity);
@@ -164,7 +164,7 @@ namespace enerjim {
 		}
 	}
 
-	void EnerjimWorld::DoTopDownScrolling()
+	void ##GAMENAME##World::DoTopDownScrolling()
 	{
 		auto& pc = m_ecsWorld->engine().GetComponent<TransformComponent>(m_playerEntity);
 		auto& tc = m_ecsWorld->engine().GetComponent<TilemapCollisionComponent>(m_playerEntity);
@@ -179,7 +179,7 @@ namespace enerjim {
 
 	}
 	
-	void EnerjimWorld::DoDirectScrolling()
+	void ##GAMENAME##World::DoDirectScrolling()
 	{
 		auto& pc = m_ecsWorld->engine().GetComponent<TransformComponent>(m_playerEntity);
 		auto& tc = m_ecsWorld->engine().GetComponent<TilemapCollisionComponent>(m_playerEntity);
@@ -194,7 +194,7 @@ namespace enerjim {
 		//m_directScroller->Focus(aabb.x(), aabb.y());
 	}
 
-	const secs::Engine& EnerjimWorld::GetECSWorld() const
+	const secs::Engine& ##GAMENAME##World::GetECSWorld() const
 	{
 		return m_ecsWorld->engine();
 	}

@@ -8,16 +8,16 @@
 class ECSWorld;
 class CrazyAgentConfigurationData;
 
-namespace enerjim {
+namespace ##GAMENAME## {
 
-class EnerjimFactory;
-class EnerjimECS;
+class ##GAMENAME##Factory;
+class ##GAMENAME##ECS;
 
 
-class EnerjimWorld
+class ##GAMENAME##World
 {
 public:
-    EnerjimWorld() = default;
+    ##GAMENAME##World() = default;
     int Init();
     void Render();
     void Update(double delta);
@@ -38,7 +38,7 @@ public:
 	void DoDirectScrolling();
 
 private:
-    std::shared_ptr<EnerjimFactory> m_factory;
+    std::shared_ptr<##GAMENAME##Factory> m_factory;
     std::shared_ptr<ECSWorld> m_ecsWorld = nullptr;
     secs::Entity m_playerEntity;
 	std::shared_ptr<aether::render::PlatformerScroller> m_platformerScroll;

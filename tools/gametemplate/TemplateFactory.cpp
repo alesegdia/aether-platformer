@@ -1,5 +1,5 @@
-#include "EnerjimFactory.h"
-#include "EnerjimConfig.h"
+#include "##GAMENAME##Factory.h"
+#include "##GAMENAME##Config.h"
 
 #include "aether/plugin/platformer/ecs/component/RenderComponent.h"
 #include "aether/plugin/platformer/ecs/component/PlayerComponent.h"
@@ -16,7 +16,7 @@
 #include "aether/plugin/platformer/ecs/component/VaniaJumper/VaniaJumperAgentComponent.h"
 #include "aether/plugin/platformer/ecs/component/VaniaJumper/VaniaJumperAnimatorComponent.h"
 
-#include "enerjim/EnerjimConfig.h"
+#include "##GAMENAME##/##GAMENAME##Config.h"
 
 using OnFinishCallback = std::function<void(float)>;
 using OnStepCallback = std::function<void(float)>;
@@ -76,16 +76,16 @@ private:
 
 };
 
-namespace enerjim {
+namespace ##GAMENAME## {
 
-EnerjimFactory::EnerjimFactory(secs::Engine &world, int playerIndex)
+##GAMENAME##Factory::##GAMENAME##Factory(secs::Engine &world, int playerIndex)
     : BaseEntityFactory(world)
 {
     aether::render::AsepriteAnimationLoader animloader;
-    m_playerAnim = animloader.Load("assets/enerjim/enerjim-anims.json");
+    m_playerAnim = animloader.Load("assets/##GAMENAME##/##GAMENAME##-anims.json");
 }
 
-secs::Entity EnerjimFactory::MakePlayer(float x, float y)
+secs::Entity ##GAMENAME##Factory::MakePlayer(float x, float y)
 {
     secs::Entity player = world().GetEntityProcessor().AddEntity();
 
@@ -101,7 +101,7 @@ secs::Entity EnerjimFactory::MakePlayer(float x, float y)
     addComponent<PlayerComponent>(player);
 
     auto& apc = addComponent<VaniaJumperAgentComponent>(player);
-    apc.SetConfig(EnerjimConfig::instance().GetVaniaJumperAgentConfig());
+    apc.SetConfig(##GAMENAME##Config::instance().GetVaniaJumperAgentConfig());
 
     auto& atrc = addComponent<VaniaJumperAnimatorComponent>(player);
     atrc.idleAnim = "idle";
@@ -109,7 +109,7 @@ secs::Entity EnerjimFactory::MakePlayer(float x, float y)
     atrc.jumpAnim = "jumping";
 
     auto& gc = addComponent<GravityComponent>(player);
-    gc.SetConfig(EnerjimConfig::instance().GetGravityConfig());
+    gc.SetConfig(##GAMENAME##Config::instance().GetGravityConfig());
 
     return player;
 }
