@@ -25,7 +25,7 @@ solution "aether-platformer"
 			-- path.join(AETHER_DIR, "src/main/main.cpp")
 		}
 
-	aetherProject("enerjim")
+		aetherProject("enerjim")
 		includedirs {
 			"../gamesrc/"
 		}
@@ -36,6 +36,17 @@ solution "aether-platformer"
 			"../gamesrc/enerjim/**.h",
 			-- path.join(AETHER_DIR, "src/main/main.cpp")
 	}
+
+	aetherProject("demux")
+		includedirs {
+			"../gamesrc/"
+		}
+		debugdir ("..")
+		targetdir ("../build")
+		files {
+			"../gamesrc/demux/**.cpp",
+			"../gamesrc/demux/**.h",
+		}
 
 		--[[
 	aetherProject("cortex")

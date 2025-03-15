@@ -1,6 +1,6 @@
 #pragma once
 
-#include "##GAMENAME##Config.h"
+#include "DemuxConfig.h"
 #include "aether/lua/helpers.h"
 
 
@@ -8,39 +8,39 @@ namespace {
 
 }
 
-namespace ##GAMENAME## {
+namespace Demux {
 
-	const ##GAMENAME##::##GAMENAME##Config& ##GAMENAME##Config::instance()
+	const Demux::DemuxConfig& DemuxConfig::instance()
 	{
-		static ##GAMENAME##Config config;
+		static DemuxConfig config;
 		return config;
 	}
 
-	int ##GAMENAME##Config::GetWindowWidth() const
+	int DemuxConfig::GetWindowWidth() const
     {
         return mWindowWidth;
     }
 
-    int ##GAMENAME##Config::GetWindowHeight() const
+    int DemuxConfig::GetWindowHeight() const
     {
         return mWindowHeight;
     }
 
-    int ##GAMENAME##Config::GetOrthoScale() const
+    int DemuxConfig::GetOrthoScale() const
     {
         return mOrthoScale;
     }
 
-	##GAMENAME##Config::##GAMENAME##Config()
+	DemuxConfig::DemuxConfig()
     {
         LoadLUA();
     }
 
-    void ##GAMENAME##Config::LoadLUA()
+    void DemuxConfig::LoadLUA()
     {
         int status;
         aether::lua::LuaState L;
-        status = L.LoadFile("assets/##GAMENAME##/boot.lua");
+        status = L.LoadFile("assets/Demux/boot.lua");
 
 		mWindowWidth = L.GetGlobalFloat("windowWidth", status);
 		mWindowHeight = L.GetGlobalFloat("windowHeight", status);

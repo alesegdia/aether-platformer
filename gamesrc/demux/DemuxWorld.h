@@ -6,23 +6,23 @@
 
 class ECSWorld;
 
-namespace ##GAMENAME## {
+namespace Demux {
 
 
-class ##GAMENAME##Factory;
-class ##GAMENAME##ECS;
+class DemuxFactory;
+class DemuxECS;
 
-class ##GAMENAME##World
+class DemuxWorld
 {
 public:
-    ##GAMENAME##World() = default;
+    DemuxWorld() = default;
     int Init();
     void Render();
     void Update(double delta);
     const secs::Engine& GetECSWorld() const;
 
 private:
-    std::shared_ptr<##GAMENAME##Factory> m_factory;
+    std::shared_ptr<DemuxFactory> m_factory;
     std::shared_ptr<ECSWorld> m_ecsWorld = nullptr;
     secs::Entity m_playerEntity;
     std::shared_ptr<aether::tilemap::TileMap> m_tilemap;

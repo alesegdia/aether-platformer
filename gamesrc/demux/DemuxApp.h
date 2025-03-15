@@ -1,13 +1,13 @@
 #include <aether/aether.h>
 
-namespace ##GAMENAME## {
+namespace Demux {
 
 std::shared_ptr<aether::core::Application> createApp(int ww, int wh);
 
-class ##GAMENAME##App : public aether::core::Application
+class DemuxApp : public aether::core::Application
 {
 public:
-    ##GAMENAME##App(int w, int h);
+    DemuxApp(int w, int h);
 
     std::vector<std::string> GetAssetPaths() const override;
 

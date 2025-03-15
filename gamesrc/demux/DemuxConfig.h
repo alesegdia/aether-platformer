@@ -1,19 +1,19 @@
 #pragma once
 
 
-namespace ##GAMENAME## {
+namespace Demux {
 
-class ##GAMENAME##Config
+class DemuxConfig
 {
 public:
-    static const ##GAMENAME##Config& instance();
+    static const DemuxConfig& instance();
 
 	int GetWindowWidth() const;
     int GetWindowHeight() const;
     int GetOrthoScale() const;
 
 private:
-    ##GAMENAME##Config();
+    DemuxConfig();
 
     void LoadLUA();
 

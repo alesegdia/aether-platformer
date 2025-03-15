@@ -3,8 +3,7 @@
 
 namespace ##GAMENAME## {
 
-
-    ##GAMENAME##ECS::##GAMENAME##ECS()
+##GAMENAME##ECS::##GAMENAME##ECS()
 {
     // push systems here
 }

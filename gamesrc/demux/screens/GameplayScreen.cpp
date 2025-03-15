@@ -1,9 +1,9 @@
 #include "gameplayscreen.h"
 
 #include <secs/secs.h>
-#include "##GAMENAME##/##GAMENAME##World.h"
+#include "Demux/DemuxWorld.h"
 
-namespace ##GAMENAME## {
+namespace Demux {
 
 
 GameplayScreen::GameplayScreen()
@@ -13,7 +13,7 @@ GameplayScreen::GameplayScreen()
 
 int GameplayScreen::Load()
 {
-	m_gameWorld.reset(new ##GAMENAME##World());
+	m_gameWorld.reset(new DemuxWorld());
 	m_gameWorld->Init();
 
 	aether::core::get_input_manager().AddEventOnKeyJustPressed("game", aether::core::KeyCode::N1, [this]() {

@@ -6,9 +6,9 @@
 
 class RoomLayoutGameWorld;
 
-namespace ##GAMENAME## {
+namespace Demux {
 
-class ##GAMENAME##World;
+class DemuxWorld;
 
 class GameplayScreen : public aether::core::IScreen
 {
@@ -22,7 +22,7 @@ public:
 	void ImGui() final;
 
 private:
-    std::shared_ptr<##GAMENAME##World> m_gameWorld = nullptr;
+    std::shared_ptr<DemuxWorld> m_gameWorld = nullptr;
 
 };
 
